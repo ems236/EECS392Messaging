@@ -27,4 +27,17 @@ class ConnectionData {
     /* private var connection: SessionToTeacher? <-- Don't know what this should look like */
     
     private init () { _teacherSlide = 0; currentSlide = 0; isLive = true }
+    
+    func submitQuestionToTeacher (header: String, desc: String, slide: Int?) {
+        /* Should transfer this data to the teacher host in a way that the teacher app knows its a question */
+    }
+    
+    func displayQuizFromTeacher (quiz: Quiz) {
+        /* This method should be called by whatever finds out when the teacher gives us info. If it is a quiz, it should create the question objects and overall quiz object to pass in here. */
+    }
 }
+
+/* Placeholders for now */
+class Quiz {}
+
+class Question {}

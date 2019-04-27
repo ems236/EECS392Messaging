@@ -119,6 +119,9 @@
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="submitQuestion:" destination="OP0-bE-IPH" eventType="touchUpInside" id="y5y-Xk-VJU"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -141,6 +144,11 @@
                         <viewLayoutGuide key="safeArea" id="Oy8-8c-Ueu"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Questions" image="Question" landscapeImage="Question" id="Has-a6-Y8Y"/>
+                    <connections>
+                        <outlet property="descriptionField" destination="0XS-TN-OiW" id="bow-D5-21t"/>
+                        <outlet property="headerField" destination="yLL-yL-oKp" id="DKN-My-2Pj"/>
+                        <outlet property="slideField" destination="z4D-WI-6i7" id="EEB-LV-fER"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="-124" y="-447.04433497536945"/>
