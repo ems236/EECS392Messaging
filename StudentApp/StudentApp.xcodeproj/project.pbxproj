@@ -13,6 +13,7 @@
 		7ACF7E5D22741134006B8275 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ACF7E5C22741134006B8275 /* Assets.xcassets */; };
 		7ACF7E6022741134006B8275 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ACF7E5E22741134006B8275 /* LaunchScreen.storyboard */; };
 		7AD55CBE22744DEB00D20C6E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD55CBD22744DEB00D20C6E /* Model.swift */; };
+		7AD55CC0227452AF00D20C6E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD55CBF227452AF00D20C6E /* QuestionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		7ACF7E5F22741134006B8275 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7ACF7E6122741134006B8275 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AD55CBD22744DEB00D20C6E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		7AD55CBF227452AF00D20C6E /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				7ACF7E5522741132006B8275 /* AppDelegate.swift */,
 				7ACF7E5722741132006B8275 /* ViewController.swift */,
 				7ACF7E5922741132006B8275 /* Main.storyboard */,
+				7AD55CBF227452AF00D20C6E /* QuestionViewController.swift */,
 				7AD55CBD22744DEB00D20C6E /* Model.swift */,
 				7ACF7E5C22741134006B8275 /* Assets.xcassets */,
 				7ACF7E5E22741134006B8275 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 			files = (
 				7AD55CBE22744DEB00D20C6E /* Model.swift in Sources */,
 				7ACF7E5822741132006B8275 /* ViewController.swift in Sources */,
+				7AD55CC0227452AF00D20C6E /* QuestionViewController.swift in Sources */,
 				7ACF7E5622741132006B8275 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
