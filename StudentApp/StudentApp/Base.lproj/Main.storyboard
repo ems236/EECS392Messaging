@@ -52,7 +52,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ejl-e1-3ht"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Discussion" image="Discussion_Shaded" landscapeImage="Discussion_Shaded" id="X6L-Lg-KTW"/>
+                    <tabBarItem key="tabBarItem" title="Discussion" image="Discussion" landscapeImage="Discussion" id="X6L-Lg-KTW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ORz-um-7D5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -117,7 +117,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Discussion_Shaded" width="26.666666030883789" height="26.666666030883789"/>
+        <image name="Discussion" width="26.666666030883789" height="26.666666030883789"/>
         <image name="Question" width="26.666666030883789" height="29.333333969116211"/>
         <image name="Slides" width="26.666666030883789" height="26.666666030883789"/>
     </resources>
