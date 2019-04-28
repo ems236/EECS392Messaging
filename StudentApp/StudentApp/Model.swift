@@ -39,19 +39,59 @@ class ConnectionData {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "StartNewQuiz"), object: self, userInfo: ["quiz" : quiz])
     }
     
-    func submitQuizAnswers (answers: Answers) {
+    func submitQuizAnswers (answers: AnswerSheet) {
         /*  */
     }
 }
 
 /* Placeholders for now */
-class Quiz {
-    var questions: [Question]
+fileprivate class QuizBuilder {
+    private var questions: [Question]
     init () {
         questions = [Question]()
     }
     func add(question: Question) {
         questions.append(question)
+    }
+    func build() -> Quiz {
+        return Quiz(self.questions)
+    }
+}
+
+class Quiz {
+    var title: String?
+    var description: String?
+    private let questions: [Question]
+    private var curr_question: Int
+    fileprivate init (_ questions: [Question]) {
+        self.questions = questions
+        self.curr_question = -1 // the index starts at -1 for the initial call to next getting question 1
+    }
+    /* for testing */
+    convenience init () {
+        self.init([Question(name: "Test Question")])
+        self.title = "Test Quiz"
+        self.description = "There is 1 question on this quiz"
+    }
+    
+    // keeps the index from going past count so that it can pong between -1 and count, both represent nil
+    private func incrementIndex() {
+        curr_question = min(questions.count,curr_question+1)
+    }
+    
+    // keeps the index from going past -1 so that it can pong between -1 and count, both represent nil
+    private func decrementIndex() {
+        curr_question = max(-1,curr_question-1)
+    }
+    
+    func next () -> Question? {
+        incrementIndex()
+        return curr_question < questions.count ? questions[curr_question] : nil
+    }
+    
+    func prev () -> Question? {
+        decrementIndex()
+        return curr_question >= 0 ? questions[curr_question] : nil
     }
 }
 
@@ -62,4 +102,4 @@ class Question {
     }
 }
 
-class Answers {}
+class AnswerSheet {}
