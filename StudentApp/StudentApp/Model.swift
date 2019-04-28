@@ -9,6 +9,8 @@
 import Foundation
 
 class ConnectionData {
+    //what exactly is the purpose of having a private instance with a getter?
+    //Just a java habit?
     private static let SHARED_INSTANCE = ConnectionData()
     static func instance() -> ConnectionData { return SHARED_INSTANCE }
     
