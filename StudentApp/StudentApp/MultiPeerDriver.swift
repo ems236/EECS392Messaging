@@ -11,6 +11,21 @@ import MultipeerConnectivity
 
 class MultiPeerDriver : NSObject
 {
+    private override init()
+    {
+        print("Called init")
+        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: TEACHERSERVICE)
+        
+        super.init()
+        
+        serviceBrowser.delegate = self
+        serviceBrowser.startBrowsingForPeers()
+        print("Browsing")
+    }
+    
+    deinit {
+        serviceBrowser.stopBrowsingForPeers()
+    }
     static let multipeerdriver = MultiPeerDriver()
     
     private let TEACHERSERVICE = "eecs392-final"
@@ -26,20 +41,6 @@ class MultiPeerDriver : NSObject
         session.delegate = self
         return session
     }()
-    
-    private override init()
-    {
-        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: TEACHERSERVICE)
-        
-        super.init()
-        
-        serviceBrowser.delegate = self
-        serviceBrowser.startBrowsingForPeers()
-    }
-    
-    deinit {
-        serviceBrowser.stopBrowsingForPeers()
-    }
     
     func connectToPeer(_ peer: MCPeerID)
     {
@@ -58,12 +59,19 @@ extension MultiPeerDriver : MCNearbyServiceBrowserDelegate
         
         //teacherPeerId = peerID
         //browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
-        //print("Inviting teacher")
+        print("Inviting teacher")
+        print("Discovered")
+        var peerInfo = [String : MCPeerID]()
+        peerInfo["peer"] = peerID
+        NotificationCenter.default.post(name: .discoveredTeacher, object: nil, userInfo: peerInfo)
         print("discovered teacher")
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID)
     {
+        var peerInfo = [String : MCPeerID]()
+        peerInfo["peer"] = peerID
+        NotificationCenter.default.post(name: .lostTeacher, object: nil, userInfo: peerInfo)
         print("Lost connection to teacher?")
     }
 }
