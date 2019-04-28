@@ -20,8 +20,8 @@
 		7AD55CC0227452AF00D20C6E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD55CBF227452AF00D20C6E /* QuestionViewController.swift */; };
 		7AD55CC22274E57C00D20C6E /* StudentTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD55CC12274E57C00D20C6E /* StudentTabBarController.swift */; };
 		7AD55CC422754F9000D20C6E /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD55CC322754F9000D20C6E /* QuizViewController.swift */; };
-		7AD55CC622762A2800D20C6E /* ContentTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD55CC522762A2800D20C6E /* ContentTemplates.swift */; };
-		7AD55CC8227632CD00D20C6E /* QuizContentTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD55CC7227632CD00D20C6E /* QuizContentTemplate.xib */; };
+		7AD55CD02276611300D20C6E /* ContentTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD55CCF2276611300D20C6E /* ContentTemplates.swift */; };
+		7AD55CD22276611A00D20C6E /* QuizContentTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD55CD12276611A00D20C6E /* QuizContentTemplate.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,8 +40,8 @@
 		7AD55CBF227452AF00D20C6E /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		7AD55CC12274E57C00D20C6E /* StudentTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTabBarController.swift; sourceTree = "<group>"; };
 		7AD55CC322754F9000D20C6E /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
-		7AD55CC522762A2800D20C6E /* ContentTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTemplates.swift; sourceTree = "<group>"; };
-		7AD55CC7227632CD00D20C6E /* QuizContentTemplate.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuizContentTemplate.xib; sourceTree = "<group>"; };
+		7AD55CCF2276611300D20C6E /* ContentTemplates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTemplates.swift; sourceTree = "<group>"; };
+		7AD55CD12276611A00D20C6E /* QuizContentTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuizContentTemplate.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +77,8 @@
 				7ACF7E5522741132006B8275 /* AppDelegate.swift */,
 				7ACF7E5722741132006B8275 /* ViewController.swift */,
 				7ACF7E5922741132006B8275 /* Main.storyboard */,
-				7AD55CC522762A2800D20C6E /* ContentTemplates.swift */,
+				7AD55CD12276611A00D20C6E /* QuizContentTemplate.xib */,
+				7AD55CCF2276611300D20C6E /* ContentTemplates.swift */,
 				7AD55CC322754F9000D20C6E /* QuizViewController.swift */,
 				7AD55CC12274E57C00D20C6E /* StudentTabBarController.swift */,
 				7AD55CBF227452AF00D20C6E /* QuestionViewController.swift */,
@@ -86,13 +87,9 @@
 				7ACF7E5E22741134006B8275 /* LaunchScreen.storyboard */,
 				7ACF7E6122741134006B8275 /* Info.plist */,
 				6CD82A0A22753E1B0076E35F /* MultiPeerDriver.swift */,
-<<<<<<< HEAD
-				7AD55CC7227632CD00D20C6E /* QuizContentTemplate.xib */,
-=======
 				6CD82A0E227628050076E35F /* Notifications.swift */,
 				6CD82A10227629040076E35F /* AvailableRoomsTableVC.swift */,
 				6CD82A1222762FC80076E35F /* RoomCell.swift */,
->>>>>>> 50206f733563a07d01b89a4db6d1407ab22ccd3a
 			);
 			path = StudentApp;
 			sourceTree = "<group>";
@@ -156,7 +153,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AD55CC8227632CD00D20C6E /* QuizContentTemplate.xib in Resources */,
+				7AD55CD22276611A00D20C6E /* QuizContentTemplate.xib in Resources */,
 				7ACF7E6022741134006B8275 /* LaunchScreen.storyboard in Resources */,
 				7ACF7E5D22741134006B8275 /* Assets.xcassets in Resources */,
 				7ACF7E5B22741132006B8275 /* Main.storyboard in Resources */,
@@ -176,9 +173,9 @@
 				7AD55CBE22744DEB00D20C6E /* Model.swift in Sources */,
 				7ACF7E5822741132006B8275 /* ViewController.swift in Sources */,
 				7AD55CC422754F9000D20C6E /* QuizViewController.swift in Sources */,
-				7AD55CC622762A2800D20C6E /* ContentTemplates.swift in Sources */,
 				7AD55CC0227452AF00D20C6E /* QuestionViewController.swift in Sources */,
 				6CD82A0B22753E1B0076E35F /* MultiPeerDriver.swift in Sources */,
+				7AD55CD02276611300D20C6E /* ContentTemplates.swift in Sources */,
 				6CD82A1322762FC80076E35F /* RoomCell.swift in Sources */,
 				7ACF7E5622741132006B8275 /* AppDelegate.swift in Sources */,
 			);
