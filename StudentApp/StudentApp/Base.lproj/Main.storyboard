@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N62-tk-ayN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N62-tk-ayN">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -178,13 +178,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="JUm-5y-mMg">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RoomCell" id="JUm-5y-mMg" customClass="RoomCell" customModule="StudentApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JUm-5y-mMg" id="RC3-YG-waO">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ioa-zU-vcT">
+                                            <rect key="frame" x="16" y="12" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWV-xJ-JcD">
+                                            <rect key="frame" x="296" y="10" width="41" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Join"/>
+                                            <connections>
+                                                <action selector="Join:" destination="JUm-5y-mMg" eventType="touchUpInside" id="oIc-SC-xVg"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="Title" destination="Ioa-zU-vcT" id="npa-Tv-AjD"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -201,13 +221,13 @@
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="3Wr-s2-xhe" userLabel="Settings"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="NCm-oP-OWe" kind="show" id="HTO-QA-cXR"/>
                         <segue destination="Dd4-P5-WF2" kind="show" id="FjT-lk-NMe"/>
+                        <segue destination="NCm-oP-OWe" kind="show" identifier="JoinRoom" id="8LB-Yb-tge"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VUb-tN-2ui" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2845" y="-78"/>
+            <point key="canvasLocation" x="-2845.5999999999999" y="-78.325123152709367"/>
         </scene>
         <!--Quiz View Controller-->
         <scene sceneID="63o-hN-2pe">
@@ -341,12 +361,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Discussion" width="26.666666030883789" height="26.666666030883789"/>
-        <image name="Question" width="26.666666030883789" height="29.333333969116211"/>
-        <image name="Slides" width="26.666666030883789" height="26.666666030883789"/>
+        <image name="Discussion" width="19.200000762939453" height="19.200000762939453"/>
+        <image name="Question" width="19.200000762939453" height="21.120000839233398"/>
+        <image name="Slides" width="19.200000762939453" height="19.200000762939453"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MO6-oB-ogx"/>
-        <segue reference="HTO-QA-cXR"/>
+        <segue reference="FjT-lk-NMe"/>
+        <segue reference="8LB-Yb-tge"/>
     </inferredMetricsTieBreakers>
 </document>

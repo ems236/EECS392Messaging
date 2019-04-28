@@ -11,6 +11,8 @@ import MultipeerConnectivity
 
 class MultiPeerDriver : NSObject
 {
+    static let multipeerdriver = MultiPeerDriver()
+    
     private let TEACHERSERVICE = "eecs392-final"
     private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     private let serviceBrowser : MCNearbyServiceBrowser
@@ -25,7 +27,7 @@ class MultiPeerDriver : NSObject
         return session
     }()
     
-    override init()
+    private override init()
     {
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: TEACHERSERVICE)
         
@@ -38,6 +40,13 @@ class MultiPeerDriver : NSObject
     deinit {
         serviceBrowser.stopBrowsingForPeers()
     }
+    
+    func connectToPeer(_ peer: MCPeerID)
+    {
+        teacherPeerId = peer
+        serviceBrowser.invitePeer(peer, to: session, withContext: nil, timeout: 10)
+        print("Attempting to connect to peer")
+    }
 }
 
 //SERVICE BROWSER DELEGATE
@@ -45,9 +54,12 @@ extension MultiPeerDriver : MCNearbyServiceBrowserDelegate
 {
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?)
     {
-        teacherPeerId = peerID
-        browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
-        print("Inviting teacher")
+        //Found teacher
+        
+        //teacherPeerId = peerID
+        //browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
+        //print("Inviting teacher")
+        print("discovered teacher")
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID)
