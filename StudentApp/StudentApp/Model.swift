@@ -36,10 +36,30 @@ class ConnectionData {
     
     func displayQuizFromTeacher (quiz: Quiz) {
         /* This method should be called by whatever finds out when the teacher gives us info. If it is a quiz, it should create the question objects and overall quiz object to pass in here. */
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "StartNewQuiz"), object: self, userInfo: ["quiz" : quiz])
+    }
+    
+    func submitQuizAnswers (answers: Answers) {
+        /*  */
     }
 }
 
 /* Placeholders for now */
-class Quiz {}
+class Quiz {
+    var questions: [Question]
+    init () {
+        questions = [Question]()
+    }
+    func add(question: Question) {
+        questions.append(question)
+    }
+}
 
-class Question {}
+class Question {
+    var name: String
+    init (name: String) {
+        self.name = name
+    }
+}
+
+class Answers {}
