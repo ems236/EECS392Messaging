@@ -7,6 +7,7 @@
 //
 
 import Foundation
+//import MultipeerConnectivity
 
 class ConnectionData {
     //what exactly is the purpose of having a private instance with a getter?
@@ -94,6 +95,18 @@ class Quiz {
         return curr_question >= 0 ? questions[curr_question] : nil
     }
 }
+
+/*
+class Room
+{
+    var name: String
+    var peer: MCPeerID
+    init(name: String, peer: MCPeerID)
+    {
+        self.name = name
+        self.peer = peer
+    }
+}*/
 
 class Question {
     var name: String

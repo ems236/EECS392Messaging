@@ -11,20 +11,23 @@ import MultipeerConnectivity
 
 class MultiPeerDriver : NSObject
 {
-    private let TEACHERSERVICE = "multipeer-student-teacher"
+    static let multipeerdriver = MultiPeerDriver()
+    
+    private let TEACHERSERVICE = "eecs392-final"
     private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     private let serviceBrowser : MCNearbyServiceBrowser
     
     private var teacherPeerId : MCPeerID? = nil
     
     //Lazy so you don't have to initialize it or make it null
+    //student will only ever have 1 session
     lazy var session : MCSession = {
         let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: .required)
         session.delegate = self
         return session
     }()
     
-    override init()
+    private override init()
     {
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: TEACHERSERVICE)
         
@@ -37,6 +40,13 @@ class MultiPeerDriver : NSObject
     deinit {
         serviceBrowser.stopBrowsingForPeers()
     }
+    
+    func connectToPeer(_ peer: MCPeerID)
+    {
+        teacherPeerId = peer
+        serviceBrowser.invitePeer(peer, to: session, withContext: nil, timeout: 10)
+        print("Attempting to connect to peer")
+    }
 }
 
 //SERVICE BROWSER DELEGATE
@@ -44,8 +54,12 @@ extension MultiPeerDriver : MCNearbyServiceBrowserDelegate
 {
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?)
     {
-        teacherPeerId = peerID
-        browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
+        //Found teacher
+        
+        //teacherPeerId = peerID
+        //browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
+        //print("Inviting teacher")
+        print("discovered teacher")
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID)
@@ -62,10 +76,12 @@ extension MultiPeerDriver : MCSessionDelegate
             if state == .connected
             {
                 serviceBrowser.stopBrowsingForPeers()
+                print("Stopping browsing")
             }
             else if state == .notConnected
             {
                 serviceBrowser.startBrowsingForPeers()
+                print("Browsing for teacher again")
             }
             //Handle teacher connect here
         }

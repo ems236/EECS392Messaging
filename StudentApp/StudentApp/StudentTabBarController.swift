@@ -11,6 +11,7 @@ import UIKit
 class StudentTabBarController: UITabBarController {
 
     private weak var model: ConnectionData!
+    private var driver = MultiPeerDriver.multipeerdriver
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
