@@ -11,23 +11,49 @@ import MultipeerConnectivity
 
 class MultiPeerDriver : NSObject
 {
-    private let TEACHERSERVICE = "multipeer-student-teacher"
+    private let SESSIONMAX = 8
+    
+    private let TEACHERSERVICE = "eecs392-final"
     private let myPeerID = MCPeerID(displayName: "teacher")
     private let serviceAdvertiser : MCNearbyServiceAdvertiser
     
     private var connectedSessions = [MCSession]()
     
-    lazy var session : MCSession = {
-        let session = MCSession(peer: self.myPeerID, securityIdentity: nil, encryptionPreference: .required)
-        session.delegate = self
-        return session
-    }()
+    func findEmptySession() -> MCSession
+    {
+        for session in connectedSessions
+        {
+            if session.connectedPeers.count < SESSIONMAX
+            {
+                return session
+            }
+        }
+        
+        let newSession = makeSession()
+        connectedSessions.append(newSession)
+        return newSession
+    }
+    
+    func makeSession() -> MCSession
+    {
+        let newSession = MCSession(peer: self.myPeerID, securityIdentity: nil, encryptionPreference: .required)
+        newSession.delegate = self
+        return newSession
+    }
+    
+    //lazy var session : MCSession = {
+    //    let session = MCSession(peer: self.myPeerID, securityIdentity: nil, encryptionPreference: .required)
+    //    session.delegate = self
+    //    return session
+    //}()
     
     override init()
     {
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerID, discoveryInfo: nil, serviceType: TEACHERSERVICE)
         super.init()
         serviceAdvertiser.delegate = self
+        serviceAdvertiser.startAdvertisingPeer()
+        print("Advertising")
     }
 }
 
@@ -35,7 +61,8 @@ extension MultiPeerDriver : MCNearbyServiceAdvertiserDelegate
 {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         //Should be a little smarter and fill the sessions array
-        invitationHandler(true, self.session)
+        invitationHandler(true, findEmptySession())
+        print("Connected")
     }
 }
 
