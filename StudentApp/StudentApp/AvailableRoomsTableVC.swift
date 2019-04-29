@@ -70,6 +70,14 @@ class AvailableRoomsTableVC: UITableViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(lostRoom(_:)), name: .lostTeacher, object: nil)
 
+        print("Encoding/Decoding")
+        //var testEncoding = MessageCoder()
+        //var testQuiz = Quiz()
+        
+        //var data = testEncoding.encodeMessage(testQuiz, type: .quiz)?.advanced(by: 1)
+        //let jsonString = String(data: data!, encoding: .utf8)
+        //print(jsonString)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

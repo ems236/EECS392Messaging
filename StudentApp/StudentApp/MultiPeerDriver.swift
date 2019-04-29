@@ -20,6 +20,8 @@ class MultiPeerDriver : NSObject
         
         serviceBrowser.delegate = self
         serviceBrowser.startBrowsingForPeers()
+        
+        messageCoder.delegate = self
         print("Browsing")
     }
     
@@ -31,6 +33,7 @@ class MultiPeerDriver : NSObject
     private let TEACHERSERVICE = "eecs392-final"
     private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     private let serviceBrowser : MCNearbyServiceBrowser
+    private let messageCoder = MessageCoder()
     
     private var teacherPeerId : MCPeerID? = nil
     
@@ -137,5 +140,26 @@ extension MultiPeerDriver : MCSessionDelegate
         {
             //Handle message here
         }
+    }
+}
+
+extension MultiPeerDriver : MessegeReceiverDelegate
+{
+    func receiveQuiz(_ quiz: Quiz) {
+        NotificationCenter.default.post(name: .quizReceived, object: nil, userInfo: nil)
+    }
+    
+    func receiveDiscussionPost(_ message: Any) {
+        NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: nil)
+    }
+    
+    func receiveAnswers(_ answers: Answer) {
+        //Student doesn't do this.
+        return
+    }
+    
+    func receiveQuestionPost(_ question: Any) {
+        //Student doesn't do this.
+        return
     }
 }
