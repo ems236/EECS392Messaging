@@ -91,14 +91,14 @@ extension MultiPeerDriver : MCSessionDelegate
 
 extension MultiPeerDriver : MessegeReceiverDelegate
 {
-    func receiveDiscussionPost(_ message: Any) {
+    func receiveDiscussionPost(_ message: DiscussionPost) {
     }
     
     func receiveAnswers(_ answers: Answer) {
         return
     }
     
-    func receiveQuestionPost(_ question: Any) {
+    func receiveQuestionPost(_ question: TeacherQuestion) {
         return
     }
     

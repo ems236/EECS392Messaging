@@ -82,6 +82,9 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="Cnn-Uv-X4i"/>
                     <navigationItem key="navigationItem" id="nkW-oE-zEc"/>
+                    <connections>
+                        <segue destination="6pG-ay-8XY" kind="show" id="bgP-Pz-fwc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rpb-vP-cCm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -192,6 +195,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WVc-Cr-ZW7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3210" y="834"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="3l3-Jt-1ZX">
+            <objects>
+                <viewController id="6pG-ay-8XY" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vS4-p8-nyI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Uo4-4t-MmO"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="41t-8k-5zh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3209" y="69"/>
         </scene>
         <!--QuizQuestionResult-->
         <scene sceneID="TVB-jr-VL8">
