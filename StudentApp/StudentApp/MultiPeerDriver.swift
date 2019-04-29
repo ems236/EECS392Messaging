@@ -27,14 +27,23 @@ class MultiPeerDriver : NSObject
         serviceBrowser.stopBrowsingForPeers()
     }
     static let multipeerdriver = MultiPeerDriver()
+    let encoder = JSONEncoder()
+    let decoder = JSONDecoder()
     
-    private let DELIMITER = "\\/&"
     private let TEACHERSERVICE = "eecs392-final"
     private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     private let serviceBrowser : MCNearbyServiceBrowser
     
     private var teacherPeerId : MCPeerID? = nil
     
+    enum MessageTypes: UInt8
+    {
+        case error = 0
+        case quiz = 1
+        case answers = 2
+        case question = 3
+        case message = 4
+    }
     //Lazy so you don't have to initialize it or make it null
     //student will only ever have 1 session
     lazy var session : MCSession = {
@@ -48,6 +57,55 @@ class MultiPeerDriver : NSObject
         teacherPeerId = peer
         serviceBrowser.invitePeer(peer, to: session, withContext: nil, timeout: 10)
         print("Attempting to connect to peer")
+    }
+    
+    class TempQuestion : Codable
+    {
+        var text : String
+        init(_ text : String)
+        {
+            self.text = text;
+        }
+    }
+    
+    func encodeMessage<T : Encodable>(_ object: T, type: MessageTypes) -> Data?
+    {
+        let jsonMaybe = try? encoder.encode(object)
+        if let json = jsonMaybe
+        {
+            var data = uint8ToData(type.rawValue)
+            data.append(json)
+            return data
+        }
+        return nil
+    }
+    
+    func decodeMessage(_ message: Data)
+    {
+        //read fist byte
+        guard let typeEnum = MessageTypes(rawValue: [UInt8](message).first ?? 0)
+        else
+        {
+            return
+        }
+        
+        switch typeEnum {
+        case .message:
+            print("received message")
+        case .quiz:
+            print("received quiz")
+        default:
+            return
+        }
+        
+        
+        
+    }
+    
+    func uint8ToData(_ value: UInt8) -> Data
+    {
+        var copy = value
+        return Data(bytes: &copy, count: MemoryLayout.size(ofValue: copy))
     }
 }
 
@@ -73,6 +131,7 @@ extension MultiPeerDriver : MCNearbyServiceBrowserDelegate
         var peerInfo = [String : MCPeerID]()
         peerInfo["peer"] = peerID
         NotificationCenter.default.post(name: .lostTeacher, object: nil, userInfo: peerInfo)
+        teacherPeerId = nil
         print("Lost connection to teacher?")
     }
 }
