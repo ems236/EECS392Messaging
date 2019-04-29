@@ -172,7 +172,7 @@
         <!--Available Rooms-->
         <scene sceneID="0df-Np-Zf7">
             <objects>
-                <tableViewController id="mwM-QK-aOh" userLabel="Available Rooms" sceneMemberID="viewController">
+                <tableViewController id="mwM-QK-aOh" userLabel="Available Rooms" customClass="AvailableRoomsTableVC" customModule="StudentApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="p4K-tQ-uNm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -400,7 +400,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="295" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+<<<<<<< HEAD
                         <viewLayoutGuide key="safeArea" id="PEL-0O-cWU"/>
+=======
+                        <viewLayoutGuide key="safeArea" id="rA5-9q-BcJ"/>
+>>>>>>> 147c9fd6e662face1c3b018fd8ed4d66e6fe0940
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tDY-96-5v7" userLabel="First Responder" sceneMemberID="firstResponder"/>

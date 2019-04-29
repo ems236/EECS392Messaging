@@ -87,6 +87,24 @@ extension MultiPeerDriver : MCSessionDelegate
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         print("Resource finished")
     }
+}
+
+extension MultiPeerDriver : MessegeReceiverDelegate
+{
+    func receiveDiscussionPost(_ message: Any) {
+    }
     
+    func receiveAnswers(_ answers: Answer) {
+        return
+    }
     
+    func receiveQuestionPost(_ question: Any) {
+        return
+    }
+    
+    func receiveQuiz(_ quiz: Quiz) {
+        //Teacher does not do this.
+        //NotificationCenter.default.post(name: .quizReceived, object: nil, userInfo: nil)
+        return
+    }
 }

@@ -59,7 +59,7 @@ fileprivate class QuizBuilder {
     }
 }
 
-class Quiz {
+class Quiz : Codable {
     var title: String?
     var description: String?
     private let questions: [Question]
@@ -116,10 +116,26 @@ class Room
     }
 }*/
 
-class Question {
+class Question : Codable {
     var name: String
+    var answers: [Answer] = [Answer]()
     init (name: String) {
         self.name = name
+        //self.answers = answers
+    }
+}
+
+class Answer : Codable
+{
+    var isCorrect : Bool
+    var text : String
+    var letter : String
+    
+    init(isCorrect: Bool, text: String, letter: String)
+    {
+        self.isCorrect = isCorrect
+        self.text = text
+        self.letter = letter
     }
 }
 

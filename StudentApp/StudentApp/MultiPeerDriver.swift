@@ -11,11 +11,29 @@ import MultipeerConnectivity
 
 class MultiPeerDriver : NSObject
 {
+    private override init()
+    {
+        print("Called init")
+        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: TEACHERSERVICE)
+        
+        super.init()
+        
+        serviceBrowser.delegate = self
+        serviceBrowser.startBrowsingForPeers()
+        
+        messageCoder.delegate = self
+        print("Browsing")
+    }
+    
+    deinit {
+        serviceBrowser.stopBrowsingForPeers()
+    }
     static let multipeerdriver = MultiPeerDriver()
     
     private let TEACHERSERVICE = "eecs392-final"
     private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     private let serviceBrowser : MCNearbyServiceBrowser
+    private let messageCoder = MessageCoder()
     
     private var teacherPeerId : MCPeerID? = nil
     
@@ -27,26 +45,23 @@ class MultiPeerDriver : NSObject
         return session
     }()
     
-    private override init()
-    {
-        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: TEACHERSERVICE)
-        
-        super.init()
-        
-        serviceBrowser.delegate = self
-        serviceBrowser.startBrowsingForPeers()
-    }
-    
-    deinit {
-        serviceBrowser.stopBrowsingForPeers()
-    }
-    
     func connectToPeer(_ peer: MCPeerID)
     {
         teacherPeerId = peer
         serviceBrowser.invitePeer(peer, to: session, withContext: nil, timeout: 10)
         print("Attempting to connect to peer")
     }
+    
+    class TempQuestion : Codable
+    {
+        var text : String
+        init(_ text : String)
+        {
+            self.text = text;
+        }
+    }
+    
+    
 }
 
 //SERVICE BROWSER DELEGATE
@@ -58,12 +73,20 @@ extension MultiPeerDriver : MCNearbyServiceBrowserDelegate
         
         //teacherPeerId = peerID
         //browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
-        //print("Inviting teacher")
+        print("Inviting teacher")
+        print("Discovered")
+        var peerInfo = [String : MCPeerID]()
+        peerInfo["peer"] = peerID
+        NotificationCenter.default.post(name: .discoveredTeacher, object: nil, userInfo: peerInfo)
         print("discovered teacher")
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID)
     {
+        var peerInfo = [String : MCPeerID]()
+        peerInfo["peer"] = peerID
+        NotificationCenter.default.post(name: .lostTeacher, object: nil, userInfo: peerInfo)
+        teacherPeerId = nil
         print("Lost connection to teacher?")
     }
 }
@@ -117,5 +140,26 @@ extension MultiPeerDriver : MCSessionDelegate
         {
             //Handle message here
         }
+    }
+}
+
+extension MultiPeerDriver : MessegeReceiverDelegate
+{
+    func receiveQuiz(_ quiz: Quiz) {
+        NotificationCenter.default.post(name: .quizReceived, object: nil, userInfo: nil)
+    }
+    
+    func receiveDiscussionPost(_ message: Any) {
+        NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: nil)
+    }
+    
+    func receiveAnswers(_ answers: Answer) {
+        //Student doesn't do this.
+        return
+    }
+    
+    func receiveQuestionPost(_ question: Any) {
+        //Student doesn't do this.
+        return
     }
 }
