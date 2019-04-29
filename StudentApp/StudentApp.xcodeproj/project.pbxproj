@@ -11,6 +11,7 @@
 		6CD82A0F227628050076E35F /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A0E227628050076E35F /* Notifications.swift */; };
 		6CD82A11227629040076E35F /* AvailableRoomsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A10227629040076E35F /* AvailableRoomsTableVC.swift */; };
 		6CD82A1322762FC80076E35F /* RoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A1222762FC80076E35F /* RoomCell.swift */; };
+		6CD82A1722769ABC0076E35F /* MessegeCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A1622769ABC0076E35F /* MessegeCoder.swift */; };
 		7ACF7E5622741132006B8275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF7E5522741132006B8275 /* AppDelegate.swift */; };
 		7ACF7E5822741132006B8275 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF7E5722741132006B8275 /* ViewController.swift */; };
 		7ACF7E5B22741132006B8275 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ACF7E5922741132006B8275 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		6CD82A0E227628050076E35F /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		6CD82A10227629040076E35F /* AvailableRoomsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableRoomsTableVC.swift; sourceTree = "<group>"; };
 		6CD82A1222762FC80076E35F /* RoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCell.swift; sourceTree = "<group>"; };
+		6CD82A1622769ABC0076E35F /* MessegeCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessegeCoder.swift; sourceTree = "<group>"; };
 		7ACF7E5222741132006B8275 /* StudentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ACF7E5522741132006B8275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ACF7E5722741132006B8275 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				6CD82A0E227628050076E35F /* Notifications.swift */,
 				6CD82A10227629040076E35F /* AvailableRoomsTableVC.swift */,
 				6CD82A1222762FC80076E35F /* RoomCell.swift */,
+				6CD82A1622769ABC0076E35F /* MessegeCoder.swift */,
 			);
 			path = StudentApp;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				6CD82A0F227628050076E35F /* Notifications.swift in Sources */,
 				7AD55CC22274E57C00D20C6E /* StudentTabBarController.swift in Sources */,
 				6CD82A11227629040076E35F /* AvailableRoomsTableVC.swift in Sources */,
+				6CD82A1722769ABC0076E35F /* MessegeCoder.swift in Sources */,
 				7AD55CBE22744DEB00D20C6E /* Model.swift in Sources */,
 				7ACF7E5822741132006B8275 /* ViewController.swift in Sources */,
 				7AD55CC422754F9000D20C6E /* QuizViewController.swift in Sources */,
