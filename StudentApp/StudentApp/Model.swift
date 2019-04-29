@@ -63,7 +63,7 @@ class Quiz {
     var title: String?
     var description: String?
     private let questions: [Question]
-    private var curr_question: Int
+     var curr_question: Int
     fileprivate init (_ questions: [Question]) {
         self.questions = questions
         self.curr_question = -1 // the index starts at -1 for the initial call to next getting question 1
@@ -76,23 +76,31 @@ class Quiz {
     }
     
     // keeps the index from going past count so that it can pong between -1 and count, both represent nil
-    private func incrementIndex() {
+    private func incrementIndex() -> Int {
         curr_question = min(questions.count,curr_question+1)
+        return curr_question
     }
     
     // keeps the index from going past -1 so that it can pong between -1 and count, both represent nil
-    private func decrementIndex() {
+    private func decrementIndex() -> Int {
         curr_question = max(-1,curr_question-1)
+        return curr_question
+    }
+    
+    private func peek(at index: Int) -> Question? {
+        return 0 <= index && index < questions.count ? questions[curr_question] : nil
     }
     
     func next () -> Question? {
-        incrementIndex()
-        return curr_question < questions.count ? questions[curr_question] : nil
+        return peek(at: incrementIndex())
+    }
+    
+    func curr () -> Question? {
+        return peek(at: curr_question)
     }
     
     func prev () -> Question? {
-        decrementIndex()
-        return curr_question >= 0 ? questions[curr_question] : nil
+        return peek(at: decrementIndex())
     }
 }
 

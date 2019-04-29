@@ -9,29 +9,28 @@
 import UIKit
 
 // Referenced code from https://www.youtube.com/watch?v=r5SKUXSuDOw
-class QuizContentTemplate: UIView {
+
+class ContentTemplate: UIView {
     
     var view: UIView!
-    var nibName: String = "QuizContentTemplate"
-    @IBOutlet weak var descriptionText: UITextView!
+    var nibName: String!
     
-    override init(frame: CGRect) {
-        // Properties
+    override required init(frame: CGRect) {
         super.init(frame: frame)
-        
         setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        // Properties
         super.init(coder: aDecoder)
-        
         setup()
     }
     
+    func TemplateNibName() -> String { fatalError("Must Override") }
+    
     private func setup() {
-        view = loadViewFromNib()
+        self.nibName = TemplateNibName()
         
+        view = loadViewFromNib()
         view.frame = self.bounds
         view.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleWidth.rawValue | UIView.AutoresizingMask.flexibleHeight.rawValue)
         
@@ -43,5 +42,29 @@ class QuizContentTemplate: UIView {
         let nib = UINib(nibName: self.nibName, bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
+    }
+}
+
+class QuizContentTemplate: ContentTemplate {
+    @IBOutlet weak var descriptionText: UITextView!
+    
+    override func TemplateNibName() -> String {
+        return "QuizContentTemplate"
+    }
+}
+
+class QuestionContentTemplate: ContentTemplate { }
+
+class QuestionShortAnswerTemplate: QuestionContentTemplate {
+    
+    override func TemplateNibName() -> String {
+        return "QuestionShortAnswerTemplate"
+    }
+}
+
+class QuestionMultipleChoiceTemplate: QuestionContentTemplate {
+    
+    override func TemplateNibName() -> String {
+        return "QuestionMultipleChoiceTemplate"
     }
 }

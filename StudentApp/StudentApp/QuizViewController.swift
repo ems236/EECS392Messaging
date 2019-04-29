@@ -10,22 +10,14 @@ import UIKit
 
 class QuizViewController: UIViewController {
     
-    weak var quiz: Quiz?
+    var quiz: Quiz?
     @IBOutlet weak var quizView: UIView!
     private weak var prev_question: Question?
     private weak var curr_question: Question?
     private weak var next_question: Question?
     
-    //private weak var contentQuizView: QuizDescriptionContentView!
     private var contentQuizView: QuizContentTemplate!
-    //private weak var contentQuestionView: QuestionContentView!
-    //@IBOutlet var contentQuizView: UIView!
-//    @IBOutlet weak var quizDescription: UITextView! {
-//        didSet {
-//            quizDescription.clearsOnInsertion = true
-//        }
-//    }
-    
+    private var contentQuestionViews: [QuestionContentTemplate]!
     
     // Content in content view
     @IBOutlet weak var titleCard: UILabel!
@@ -35,7 +27,6 @@ class QuizViewController: UIViewController {
     private var radius: CGFloat!
     
     override func viewDidLoad() {
-        print("presented!")
         super.viewDidLoad()
         radius = quizView.frame.width/15
         initDisplay()
@@ -51,25 +42,50 @@ class QuizViewController: UIViewController {
         updateDisplay()
     }
     
+    @IBAction func buttonClick(_ sender: UIButton) {
+        switch (sender) {
+        case submitButton:
+            if let _ = next_question {
+                loadNextQuestion()
+                updateDisplay()
+            } else {
+                // Quiz is done
+                quiz = nil
+                self.dismiss(animated: true, completion: nil)
+            }
+        default:
+            return
+        }
+    }
+    
     private func loadNextQuestion() {
-        if let q = quiz, next_question != nil {
-            prev_question = curr_question
-            curr_question = next_question
+        if let q = quiz {
+            if next_question != nil {
+                prev_question = curr_question
+                curr_question = next_question
+            }
             next_question = q.next()
         }
     }
     
     private func loadPrevQuestion() {
-        if let q = quiz, curr_question != nil {
-            next_question = curr_question
-            curr_question = prev_question
+        if let q = quiz {
+            if curr_question != nil {
+                next_question = curr_question
+                curr_question = prev_question
+            }
             prev_question = q.prev()
         }
     }
     
     private func updateDisplay() {
+        print(quiz!.curr_question)
         if let _ = curr_question {
             // display a question
+            for view in containerView.subviews {
+                view.removeFromSuperview()
+            }
+            containerView.addSubview(contentQuestionViews[0].view)
         } else {
             // display the quiz description
             if let q = quiz {
@@ -79,6 +95,7 @@ class QuizViewController: UIViewController {
                 }
                 containerView.addSubview(contentQuizView.view)
                 contentQuizView.descriptionText.text = q.description ?? "No Description"
+                submitButton.setTitle("First Question", for: .normal)
             }
         }
     }
@@ -86,15 +103,14 @@ class QuizViewController: UIViewController {
     
     
     
+    
     private func loadQuizDisplay() {
         contentQuizView = QuizContentTemplate(frame: containerView.bounds)
-        //contentQuizView = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuizContentTemplate") as! QuizDescriptionContentView)
-        //contentQuizView.loadView()
     }
     
     private func loadQuestionDisplay() {
-        //contentQuestionView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuestionContentTemplate") as? QuestionContentView
-        //contentQuestionView.loadView()
+        contentQuestionViews = [QuestionContentTemplate]()
+        contentQuestionViews.append(QuestionShortAnswerTemplate(frame: containerView.bounds))
     }
     
 
