@@ -114,7 +114,7 @@ extension MultiPeerDriver : MCSessionDelegate
         // == works intelligently in swift
         if let teacher = teacherPeerId, peerID == teacher
         {
-            //Handle message here
+            messageCoder.decodeMessage(data)
         }
     }
     
@@ -146,11 +146,15 @@ extension MultiPeerDriver : MCSessionDelegate
 extension MultiPeerDriver : MessegeReceiverDelegate
 {
     func receiveQuiz(_ quiz: Quiz) {
-        NotificationCenter.default.post(name: .quizReceived, object: nil, userInfo: nil)
+        var quizInfo = [String : Quiz]()
+        quizInfo["quiz"] = quiz
+        NotificationCenter.default.post(name: .quizReceived, object: nil, userInfo: quizInfo)
     }
     
-    func receiveDiscussionPost(_ message: Any) {
-        NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: nil)
+    func receiveDiscussionPost(_ message: DiscussionPost) {
+        var messageInfo = [String : DiscussionPost]()
+        messageInfo["post"] = message
+        NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: messageInfo)
     }
     
     func receiveAnswers(_ answers: Answer) {
@@ -158,7 +162,7 @@ extension MultiPeerDriver : MessegeReceiverDelegate
         return
     }
     
-    func receiveQuestionPost(_ question: Any) {
+    func receiveQuestionPost(_ question: TeacherQuestion) {
         //Student doesn't do this.
         return
     }

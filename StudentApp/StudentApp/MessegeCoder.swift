@@ -21,8 +21,8 @@ protocol MessegeReceiverDelegate
 {
     func receiveQuiz(_ quiz: Quiz)
     func receiveAnswers(_ answers: Answer)
-    func receiveDiscussionPost(_ message: Any)
-    func receiveQuestionPost(_ question: Any)
+    func receiveDiscussionPost(_ message: DiscussionPost)
+    func receiveQuestionPost(_ question: TeacherQuestion)
 }
 
 class MessageCoder

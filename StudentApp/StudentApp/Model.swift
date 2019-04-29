@@ -136,3 +136,6 @@ class Answer : Codable
 }
 
 class AnswerSheet {}
+
+class DiscussionPost : Codable {}
+class TeacherQuestion : Codable {}
