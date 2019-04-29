@@ -28,6 +28,7 @@ class MultiPeerDriver : NSObject
     }
     static let multipeerdriver = MultiPeerDriver()
     
+    private let DELIMITER = "\\/&"
     private let TEACHERSERVICE = "eecs392-final"
     private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     private let serviceBrowser : MCNearbyServiceBrowser
