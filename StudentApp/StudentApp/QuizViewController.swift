@@ -79,7 +79,6 @@ class QuizViewController: UIViewController {
     }
     
     private func updateDisplay() {
-        print(quiz!.curr_question)
         if let _ = curr_question {
             // display a question
             for view in containerView.subviews {

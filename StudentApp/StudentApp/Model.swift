@@ -63,7 +63,7 @@ class Quiz : Codable {
     var title: String?
     var description: String?
     private let questions: [Question]
-     var curr_question: Int
+    private var curr_question: Int
     fileprivate init (_ questions: [Question]) {
         self.questions = questions
         self.curr_question = -1 // the index starts at -1 for the initial call to next getting question 1
@@ -93,10 +93,6 @@ class Quiz : Codable {
     
     func next () -> Question? {
         return peek(at: incrementIndex())
-    }
-    
-    func curr () -> Question? {
-        return peek(at: curr_question)
     }
     
     func prev () -> Question? {
