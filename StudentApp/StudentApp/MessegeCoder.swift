@@ -17,11 +17,21 @@ enum MessageTypes: UInt8
     case message = 4
 }
 
+protocol MessegeReceiverDelegate
+{
+    func receiveQuiz(_ quiz: Quiz)
+    func receiveAnswers(_ answers: Answer)
+    func receiveDiscussionPost(_ message: Any)
+    func receiveQuestionPost(_ question: Any)
+}
+
 class MessageCoder
 {
-    static let encoder = JSONEncoder()
-    static let decoder = JSONDecoder()
-    static func encodeMessage<T : Encodable>(_ object: T, type: MessageTypes) -> Data?
+    let encoder = JSONEncoder()
+    let decoder = JSONDecoder()
+    var delegate: MessegeReceiverDelegate? = nil
+    
+    func encodeMessage<T : Encodable>(_ object: T, type: MessageTypes) -> Data?
     {
         let jsonMaybe = try? encoder.encode(object)
         if let json = jsonMaybe
@@ -33,7 +43,7 @@ class MessageCoder
         return nil
     }
 
-    static func decodeMessage(_ message: Data)
+    func decodeMessage(_ message: Data)
     {
         //read fist byte
         guard let typeEnum = MessageTypes(rawValue: [UInt8](message).first ?? 0)
@@ -42,17 +52,32 @@ class MessageCoder
             return
         }
         
+        let messageBody = message.advanced(by: 1)
+        
         switch typeEnum {
         case .message:
-            print("received message")
+            print("Received message")
+            //delegate?.receiveDiscussionPost(<#T##message: Any##Any#>)
         case .quiz:
+            if let quiz = try? decoder.decode(Quiz.self, from: messageBody)
+            {
+                delegate?.receiveQuiz(quiz)
+            }
             print("received quiz")
+        case .answers:
+            print("answers")
+        case .question:
+            print("Question received")
+            //if let question = try? decoder.decode(<#T##type: Decodable.Protocol##Decodable.Protocol#>, from: <#T##Data#>)
+            //{
+                //delegate?.
+            //}
         default:
             return
         }
     }
 
-    static func uint8ToData(_ value: UInt8) -> Data
+    func uint8ToData(_ value: UInt8) -> Data
     {
         var copy = value
         return Data(bytes: &copy, count: MemoryLayout.size(ofValue: copy))
