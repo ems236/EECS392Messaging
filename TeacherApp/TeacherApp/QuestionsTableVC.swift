@@ -10,7 +10,24 @@ import UIKit
 
 class QuestionsTableVC: UITableViewController {
 
-    var questions = [TeacherQuestion]()
+    //var questions = [TeacherQuestion]()
+    var questions = [TeacherQuestion.testQuestion(), TeacherQuestion.testQuestion(), TeacherQuestion.testQuestion()]
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let id = segue.identifier
+        {
+            switch id
+            {
+            case "ShowQuestion":
+                //print("Gothere")
+                let PostVC = segue.destination as! QuestionPostVC
+                PostVC.question = sender as! TeacherQuestion
+            default: break
+            }
+        }
+    }
+    
+    //Create a segue for the save btn
+    @IBAction func deleteQuestionUnwind(segue:UIStoryboardSegue) {}
     
     @objc
     func questionPosted(_ notification: Notification)
@@ -27,6 +44,7 @@ class QuestionsTableVC: UITableViewController {
         if let index = questions.lastIndex(of: question)
         {
             questions.remove(at: index)
+            tableView.reloadData()
         }
     }
     
@@ -53,15 +71,22 @@ class QuestionsTableVC: UITableViewController {
         return questions.count
     }
 
-    /*
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Show loading probably
+        
+        self.performSegue(withIdentifier: "ShowQuestion", sender: questions[indexPath.row])
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath) as? QuestionPostCell
+        else
+        {
+            fatalError("Bad Cell")
+        }
+        
+        cell.setQuestion(questions[indexPath.row])
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -102,10 +127,7 @@ class QuestionsTableVC: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
+    
     */
 
 }

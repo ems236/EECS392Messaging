@@ -10,6 +10,11 @@ import Foundation
 
 class TeacherQuestion : Codable, Equatable
 {
+    static func testQuestion() -> TeacherQuestion
+    {
+        return TeacherQuestion(head: "My head", body: "Whoa that's a lot of text wowee this is a long question come on student I'm teaching here calm down")
+    }
+    
     static func == (lhs: TeacherQuestion, rhs: TeacherQuestion) -> Bool {
         return lhs.header == rhs.header && lhs.body == rhs.body
     }
