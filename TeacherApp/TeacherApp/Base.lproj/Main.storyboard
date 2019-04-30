@@ -117,18 +117,53 @@
                     <view key="view" contentMode="scaleToFill" id="C0M-WS-AWV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="27L-tK-Wqy">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQu-Ri-k0o">
+                                        <rect key="frame" x="0.0" y="0.0" width="88" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYv-CT-gor">
+                                                <rect key="frame" x="0.0" y="0.0" width="42" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIm-5i-eWm">
+                                                <rect key="frame" x="42" y="0.0" width="46" height="30"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXo-FS-FjB">
+                                        <rect key="frame" x="0.0" y="30" width="375" height="524"/>
+                                        <connections>
+                                            <segue destination="uR4-Gn-5t4" kind="embed" id="5OX-i4-clE"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="27L-tK-Wqy" firstAttribute="centerY" secondItem="8Ma-c6-dik" secondAttribute="centerY" id="Bx0-SA-t8a"/>
+                            <constraint firstItem="27L-tK-Wqy" firstAttribute="height" secondItem="8Ma-c6-dik" secondAttribute="height" id="OGv-nU-RzQ"/>
+                            <constraint firstItem="27L-tK-Wqy" firstAttribute="centerX" secondItem="8Ma-c6-dik" secondAttribute="centerX" id="amt-c8-yTl"/>
+                            <constraint firstItem="27L-tK-Wqy" firstAttribute="width" secondItem="8Ma-c6-dik" secondAttribute="width" id="ylO-Jb-mjw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8Ma-c6-dik"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="ovA-ed-45M"/>
                     <navigationItem key="navigationItem" id="O7o-8h-lqy"/>
                     <connections>
-                        <segue destination="uR4-Gn-5t4" kind="show" id="eOK-PG-Ptj"/>
+                        <segue destination="JeC-t2-EWd" kind="show" id="0Ru-sq-noU"/>
+                        <segue destination="VKK-K5-0Zb" kind="show" id="Bz8-rC-pvS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PuG-IE-XvO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2106" y="835"/>
+            <point key="canvasLocation" x="2104.8000000000002" y="834.33283358320841"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="7Vx-pz-Oos">
@@ -189,7 +224,7 @@
             <objects>
                 <tableViewController id="uR4-Gn-5t4" userLabel="QuizQuestions" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="JRZ-z4-k2T">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -207,14 +242,10 @@
                             <outlet property="delegate" destination="uR4-Gn-5t4" id="dYH-fx-liQ"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <segue destination="JeC-t2-EWd" kind="show" id="Isd-QE-mSD"/>
-                        <segue destination="VKK-K5-0Zb" kind="show" id="erO-Dz-vn5"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WVc-Cr-ZW7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3210" y="834"/>
+            <point key="canvasLocation" x="2105" y="1724"/>
         </scene>
         <!--QuestionDetail-->
         <scene sceneID="3l3-Jt-1ZX">
@@ -319,7 +350,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqy-5j-zgH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4021" y="407"/>
+            <point key="canvasLocation" x="3209" y="833"/>
         </scene>
         <!--QuizQuestionEdit-->
         <scene sceneID="U5U-Ca-srz">
@@ -334,7 +365,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jcp-1D-HEd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4020" y="1168"/>
+            <point key="canvasLocation" x="3209" y="1630"/>
         </scene>
     </scenes>
 </document>
