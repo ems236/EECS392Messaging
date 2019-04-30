@@ -10,15 +10,12 @@ import UIKit
 
 class QuizQuestionsTableVC: UITableViewController {
 
-    var segueDelegate : ChildSegueDelegate?
+    var parentDelegate: ChildTableSelectDelegate?
     var isposted = false
-    var quiz: Quiz! = Quiz.emptyQuiz()
+    var quiz = Quiz.emptyQuiz()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Got to table")
-        let newview = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 200, height: 200)))
-        view.addSubview(newview)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -35,16 +32,15 @@ class QuizQuestionsTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        //print(quiz.questions.count)
-        //return quiz.questions.count
-        print("Returning 10")
-        return 10
+        print(quiz.questions.count)
+        return quiz.questions.count
+        //print("Returning 10")
+        //return 10
     }
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let identifier = isposted ? "QuizQuestionAnswers" : "QuizQuestionEdit"
-        segueDelegate?.segueFromChild(identifier: identifier, sender: quiz.questions[indexPath.row])
+        parentDelegate?.selectedRow(data: quiz.questions[indexPath.row])
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -54,7 +50,7 @@ class QuizQuestionsTableVC: UITableViewController {
             fatalError("Bad Cell")
         }
         
-        //cell.setQuestion(quiz.questions[indexPath.row])
+        cell.setQuestion(quiz.questions[indexPath.row])
         return cell
     }
 

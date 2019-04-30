@@ -68,6 +68,18 @@ class Quiz : Codable {
 class Question : Codable {
     var name: String
     var answers: [Answer] = [Answer]()
+    
+    func getAnswer(_ index: Int) -> Answer?
+    {
+        if index < answers.count && index >= 0
+        {
+            return answers[index]
+        }
+        else
+        {
+            return nil
+        }
+    }
     init (name: String) {
         self.name = name
         //self.answers = answers
