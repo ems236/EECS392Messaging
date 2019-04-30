@@ -15,6 +15,13 @@ class QuizQuestionCell: UITableViewCell {
         // Initialization code
     }
 
+    @IBOutlet weak var QuestionLabel: UILabel!
+    
+    func setQuestion(_ question: Question)
+    {
+        QuestionLabel.text = question.name
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

@@ -12,11 +12,13 @@ class QuizQuestionsTableVC: UITableViewController {
 
     var segueDelegate : ChildSegueDelegate?
     var isposted = false
-    var quiz : Quiz!
+    var quiz: Quiz! = Quiz.emptyQuiz()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("Got to table")
+        let newview = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 200, height: 200)))
+        view.addSubview(newview)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -33,7 +35,10 @@ class QuizQuestionsTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return quiz.questions.count
+        //print(quiz.questions.count)
+        //return quiz.questions.count
+        print("Returning 10")
+        return 10
     }
 
     

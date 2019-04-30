@@ -11,6 +11,7 @@ import UIKit
 class QuizVC: UIViewController, ChildSegueDelegate {
 
     var quiz = Quiz.emptyQuiz()
+    //var results = [Answer]()
     var questionTable : QuizQuestionsTableVC!
     var quizPosted = false
     
@@ -24,13 +25,15 @@ class QuizVC: UIViewController, ChildSegueDelegate {
             switch (id)
             {
             case "ChildQuizTable":
-                questionTable = segue.destination as! QuizQuestionsTableVC
-                questionTable.segueDelegate = self
-                questionTable.quiz = quiz
+                //questionTable = segue.destination as! QuizQuestionsTableVC
+                print("Found embedded")
             case "QuizQuestionEdit":
-                print("Edit Question")
+                let QuestionEditVC = segue.destination as! EditQuizQuestionVC
+                QuestionEditVC.question = sender as! Question
             case "QuizQuestionAnswers":
-                print("answers")
+                let QuestionResultsVC = segue.destination as! QuizQuestionResultsVC
+                QuestionResultsVC.question = sender as! Question
+                //QuestionResultsVC.answers =
             default: break
             }
         }
@@ -54,6 +57,12 @@ class QuizVC: UIViewController, ChildSegueDelegate {
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        //questionTable.segueDelegate = self
+        //questionTable.quiz = quiz
+        //questionTable.tableView.reloadData()
+        print("loaded data")
+        //print(questionTable.quiz)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(answerReceived(_:)), name: .answerSubmitted, object: nil)
     }
     

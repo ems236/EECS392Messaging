@@ -10,6 +10,7 @@ import UIKit
 
 class QuizQuestionResultsVC: UIViewController {
 
+    var question: Question!
     override func viewDidLoad() {
         super.viewDidLoad()
 

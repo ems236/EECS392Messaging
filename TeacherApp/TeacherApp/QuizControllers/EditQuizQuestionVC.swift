@@ -10,7 +10,9 @@ import UIKit
 
 class EditQuizQuestionVC: UIViewController {
 
-    override func viewDidLoad() {
+    var question: Question!
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
