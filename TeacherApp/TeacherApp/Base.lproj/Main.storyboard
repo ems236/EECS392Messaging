@@ -113,7 +113,7 @@
         <!--QuizController-->
         <scene sceneID="qwc-yg-tWA">
             <objects>
-                <viewController id="vk9-9N-bfA" userLabel="QuizController" sceneMemberID="viewController">
+                <viewController id="vk9-9N-bfA" userLabel="QuizController" customClass="QuizVC" customModule="TeacherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C0M-WS-AWV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -139,7 +139,7 @@
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXo-FS-FjB">
                                         <rect key="frame" x="0.0" y="30" width="375" height="524"/>
                                         <connections>
-                                            <segue destination="uR4-Gn-5t4" kind="embed" id="5OX-i4-clE"/>
+                                            <segue destination="uR4-Gn-5t4" kind="embed" identifier="ChildQuizTable" id="5OX-i4-clE"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
@@ -157,8 +157,8 @@
                     <tabBarItem key="tabBarItem" title="Item 1" id="ovA-ed-45M"/>
                     <navigationItem key="navigationItem" id="O7o-8h-lqy"/>
                     <connections>
-                        <segue destination="JeC-t2-EWd" kind="show" id="0Ru-sq-noU"/>
-                        <segue destination="VKK-K5-0Zb" kind="show" id="Bz8-rC-pvS"/>
+                        <segue destination="JeC-t2-EWd" kind="show" identifier="QuizQuestionAnswer" id="0Ru-sq-noU"/>
+                        <segue destination="VKK-K5-0Zb" kind="show" identifier="QuizQuestionEdit" id="Bz8-rC-pvS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PuG-IE-XvO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -222,7 +222,7 @@
         <!--QuizQuestions-->
         <scene sceneID="UpL-hh-H9x">
             <objects>
-                <tableViewController id="uR4-Gn-5t4" userLabel="QuizQuestions" sceneMemberID="viewController">
+                <tableViewController id="uR4-Gn-5t4" userLabel="QuizQuestions" customClass="QuizQuestionsTableVC" customModule="TeacherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="JRZ-z4-k2T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -340,7 +340,7 @@
         <!--QuizQuestionResult-->
         <scene sceneID="TVB-jr-VL8">
             <objects>
-                <viewController id="JeC-t2-EWd" userLabel="QuizQuestionResult" sceneMemberID="viewController">
+                <viewController id="JeC-t2-EWd" userLabel="QuizQuestionResult" customClass="QuizQuestionResultsVC" customModule="TeacherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mqJ-CC-dzf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -355,15 +355,20 @@
         <!--QuizQuestionEdit-->
         <scene sceneID="U5U-Ca-srz">
             <objects>
-                <viewController id="VKK-K5-0Zb" userLabel="QuizQuestionEdit" sceneMemberID="viewController">
+                <viewController id="VKK-K5-0Zb" userLabel="QuizQuestionEdit" customClass="EditQuizQuestionVC" customModule="TeacherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V2V-mC-eK4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="p3b-BK-G7z"/>
                     </view>
+                    <connections>
+                        <segue destination="D2f-H0-Yu5" kind="unwind" unwindAction="deleteQuizQuestionWithSegue:" id="9uD-Sm-8jf"/>
+                        <segue destination="D2f-H0-Yu5" kind="unwind" unwindAction="saveQuizQuestionWithSegue:" id="01I-Az-RAK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jcp-1D-HEd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="D2f-H0-Yu5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3209" y="1630"/>
         </scene>

@@ -25,12 +25,18 @@ fileprivate class QuizBuilder {
 class Quiz : Codable {
     var title: String?
     var description: String?
-    private let questions: [Question]
+    var questions: [Question]
     private var curr_question: Int
     fileprivate init (_ questions: [Question]) {
         self.questions = questions
         self.curr_question = -1 // the index starts at -1 for the initial call to next getting question 1
     }
+    
+    static func emptyQuiz() -> Quiz
+    {
+        return Quiz([Question]())
+    }
+    
     /* for testing */
     convenience init () {
         self.init([Question(name: "Test Question")])
