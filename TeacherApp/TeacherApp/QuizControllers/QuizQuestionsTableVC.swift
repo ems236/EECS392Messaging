@@ -40,7 +40,7 @@ class QuizQuestionsTableVC: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        parentDelegate?.selectedRow(data: quiz.questions[indexPath.row])
+        parentDelegate?.selectedRow(data: quiz.questions[indexPath.row], index: indexPath.row)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

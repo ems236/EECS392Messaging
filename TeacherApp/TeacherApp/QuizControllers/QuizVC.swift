@@ -14,6 +14,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     //var results = [Answer]()
     var questionTable : QuizQuestionsTableVC!
     var quizPosted = false
+    var selectedIndex = -1
     
     //Create a segue for the save btn
     @IBAction func deleteQuizQuestion(segue:UIStoryboardSegue) {}
@@ -29,7 +30,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
                 //print("Found embedded")
             case "QuizQuestionEdit":
                 let QuestionEditVC = segue.destination as! EditQuizQuestionVC
-                QuestionEditVC.question = sender as! Question
+                QuestionEditVC.question = sender as? Question
             case "QuizQuestionAnswers":
                 let QuestionResultsVC = segue.destination as! QuizQuestionResultsVC
                 QuestionResultsVC.question = sender as! Question
@@ -37,6 +38,24 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
             default: break
             }
         }
+    }
+    
+    func deleteSelectedQuestion()
+    {
+        quiz.questions.remove(at: selectedIndex)
+        questionTable.tableView.reloadData()
+    }
+    
+    func addQuestion(_ question: Question)
+    {
+        quiz.questions.append(question)
+        questionTable.tableView.reloadData()
+    }
+    
+    func editQuestion(_ new: Question)
+    {
+        quiz.questions[selectedIndex] = new
+        questionTable.tableView.reloadData()
     }
     
     @objc
@@ -63,11 +82,17 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(answerReceived(_:)), name: .answerSubmitted, object: nil)
     }
     
-    func selectedRow(data: Any) {
+    func selectedRow(data: Any, index: Int)
+    {
+        selectedIndex = index
         let identifier = quizPosted ? "QuizQuestionAnswers" : "QuizQuestionEdit"
         self.performSegue(withIdentifier: identifier, sender: data)
     }
 
+    @IBAction func NewQuestion(_ sender: Any)
+    {
+        self.performSegue(withIdentifier: "QuizQuestionEdit", sender: nil)
+    }
     /*
     // MARK: - Navigation
 

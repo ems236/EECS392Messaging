@@ -90,12 +90,10 @@ class Answer : Codable
 {
     var isCorrect : Bool
     var text : String
-    var letter : String
     
-    init(isCorrect: Bool, text: String, letter: String)
+    init(isCorrect: Bool, text: String)
     {
         self.isCorrect = isCorrect
         self.text = text
-        self.letter = letter
     }
 }

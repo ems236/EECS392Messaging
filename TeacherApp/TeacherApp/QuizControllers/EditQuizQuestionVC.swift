@@ -8,37 +8,15 @@
 
 import UIKit
 
-class EditQuizQuestionVC: UIViewController {
+class EditQuizQuestionVC: UIViewController
+{
 
     var question: Question?
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        if let id = segue.identifier{
-            switch (id)
-            {
-            case "":
-                print("ayy lmao")
-            default: break
-            }
-        }
-    }
-    
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
-        
-        QuestionText.text = question?.name
-        AText.text = question?.getAnswer(0)?.text
-        BText.text = question?.getAnswer(1)?.text
-        CText.text = question?.getAnswer(2)?.text
-        DText.text = question?.getAnswer(3)?.text
-        
-        //Select Picker answer
-        AnswerPicker.text = question?.answers.first(where: {$0.isCorrect})?.text
-        
-        // Do any additional setup after loading the view.
-    }
+    var answersFields = [UITextField?]()
+    var answerPicker = UIPickerView()
+    var selectedAnswer = -1
+    var fieldToValue : [UITextField : Int]!
+    var letters = ["A", "B", "C", "D"]
     
     @IBAction func SaveClick(_ sender: Any) {
     }
@@ -50,9 +28,10 @@ class EditQuizQuestionVC: UIViewController {
     @IBOutlet weak var CText: UITextField!
     @IBOutlet weak var DText: UITextField!
     
+    
     @IBOutlet weak var QuestionText: UITextField!
     
-    @IBOutlet weak var AnswerPicker: UITextField!
+    @IBOutlet weak var AnswerPickerField: UITextField!
     
     @IBAction func ClearA(_ sender: Any) {
     }
@@ -66,14 +45,133 @@ class EditQuizQuestionVC: UIViewController {
     
     @IBAction func ClearD(_ sender: Any) {
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let id = segue.identifier{
+            switch (id)
+            {
+            case "QuizQuestionSave":
+                let quizController = segue.destination as! QuizVC
+                if let toReplace = question
+                {
+                    quizController.editQuestion(buildQuestionInForm())
+                }
+                else
+                {
+                    quizController.addQuestion(buildQuestionInForm())
+                }
+            case "QuizQuestionDelete":
+                if let toDelete = question
+                {
+                    let quizController = segue.destination as! QuizVC
+                    quizController.deleteSelectedQuestion()
+                }
+            default: break
+            }
+        }
     }
-    */
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        
+        QuestionText.text = question?.name
+        AText.text = question?.getAnswer(0)?.text
+        BText.text = question?.getAnswer(1)?.text
+        CText.text = question?.getAnswer(2)?.text
+        DText.text = question?.getAnswer(3)?.text
+        
+        QuestionText.delegate = self
+        AText.delegate = self
+        BText.delegate = self
+        CText.delegate = self
+        DText.delegate = self
+        
+        //Select Picker answer
+        if let answer = question?.answers.firstIndex(where: {$0.isCorrect})
+        {
+            //When coming in, all are fields are nonempty if answer exists
+            answerPicker.selectRow(answer, inComponent: 0, animated: false)
+        }
+        
+        
+        answersFields = [AText, BText, CText, DText]
+        fieldToValue = [
+            AText: 0
+            , BText: 1
+            , CText: 2
+            , DText: 3
+        ]
+        answerPicker.delegate = self
+        AnswerPickerField.inputView = answerPicker
+        // Do any additional setup after loading the view.
+    }
+    
+    func getNonEmptyAnswers() -> [UITextField?]
+    {
+        return answersFields.filter({$0?.text != ""})
+    }
+    
+    func buildQuestionInForm() -> Question
+    {
+        var initialName = ""
+        if let name = QuestionText.text
+        {
+            initialName = name
+        }
+        let newQuestion = Question(name: initialName)
+        for field in getNonEmptyAnswers()
+        {
+            var isCorrect = false
+            if let num = fieldToValue[field!]
+            {
+                isCorrect = num == selectedAnswer
+            }
+            newQuestion.answers.append(Answer(isCorrect: isCorrect, text: (field?.text)!))
+        }
+        return newQuestion
+    }
+}
 
+extension EditQuizQuestionVC: UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //textField.resignFirstResponder()  //if desired
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+    }
+}
+
+extension EditQuizQuestionVC: UIPickerViewDataSource
+{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
+    {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    {
+        return getNonEmptyAnswers().count
+    }
+}
+
+extension EditQuizQuestionVC: UIPickerViewDelegate
+{
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        selectedAnswer = fieldToValue[getNonEmptyAnswers()[row]!]!
+        self.view.endEditing(true)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    {
+        return letters[fieldToValue[getNonEmptyAnswers()[row]!]!]
+    }
 }

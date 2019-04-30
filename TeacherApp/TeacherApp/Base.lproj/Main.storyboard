@@ -160,7 +160,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="ovA-ed-45M"/>
                     <navigationItem key="navigationItem" title="Quiz" id="O7o-8h-lqy">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="m9A-Ia-Qqe" userLabel="New"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="m9A-Ia-Qqe" userLabel="New">
+                            <connections>
+                                <action selector="NewQuestion:" destination="vk9-9N-bfA" id="W4Q-rs-5ry"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="JeC-t2-EWd" kind="show" identifier="QuizQuestionAnswer" id="0Ru-sq-noU"/>
@@ -744,13 +748,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="AText" destination="nv4-n9-FS9" id="7x9-Zb-dIb"/>
-                        <outlet property="AnswerPicker" destination="nze-dn-fvJ" id="as8-gd-Gqx"/>
+                        <outlet property="AnswerPickerField" destination="nze-dn-fvJ" id="Y3c-WG-xis"/>
                         <outlet property="BText" destination="DUd-m5-HG4" id="5pZ-eM-GaU"/>
                         <outlet property="CText" destination="Wve-G3-qIG" id="nTw-9g-Aer"/>
                         <outlet property="DText" destination="9Of-uq-QBH" id="4jT-Lv-SEc"/>
                         <outlet property="QuestionText" destination="vhS-Jc-i7G" id="czC-Yj-opd"/>
-                        <segue destination="D2f-H0-Yu5" kind="unwind" unwindAction="deleteQuizQuestionWithSegue:" id="9uD-Sm-8jf"/>
-                        <segue destination="D2f-H0-Yu5" kind="unwind" unwindAction="saveQuizQuestionWithSegue:" id="01I-Az-RAK"/>
+                        <segue destination="D2f-H0-Yu5" kind="unwind" identifier="QuizQuestionDelete" unwindAction="deleteQuizQuestionWithSegue:" id="9uD-Sm-8jf"/>
+                        <segue destination="D2f-H0-Yu5" kind="unwind" identifier="QuizQuestionSave" unwindAction="saveQuizQuestionWithSegue:" id="01I-Az-RAK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jcp-1D-HEd" userLabel="First Responder" sceneMemberID="firstResponder"/>

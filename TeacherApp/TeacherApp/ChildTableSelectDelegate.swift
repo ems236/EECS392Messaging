@@ -10,5 +10,5 @@ import Foundation
 
 protocol ChildTableSelectDelegate
 {
-    func selectedRow(data: Any)
+    func selectedRow(data: Any, index: Int)
 }
