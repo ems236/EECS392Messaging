@@ -18,9 +18,13 @@ class EditQuizQuestionVC: UIViewController
     var fieldToValue : [UITextField : Int]!
     var letters = ["A", "B", "C", "D"]
     
-    @IBAction func SaveClick(_ sender: Any) {
+    @IBAction func SaveClick(_ sender: Any)
+    {
+        performSegue(withIdentifier: "QuizQuestionSave", sender: nil)
     }
-    @IBAction func DeleteClick(_ sender: Any) {
+    @IBAction func DeleteClick(_ sender: Any)
+    {
+        performSegue(withIdentifier: "QuizQuestionDelete", sender: nil)
     }
     
     @IBOutlet weak var AText: UITextField!
@@ -33,17 +37,24 @@ class EditQuizQuestionVC: UIViewController
     
     @IBOutlet weak var AnswerPickerField: UITextField!
     
-    @IBAction func ClearA(_ sender: Any) {
+    @IBAction func ClearA(_ sender: Any)
+    {
+        AText.text = ""
     }
     
-    @IBAction func ClearB(_ sender: Any) {
+    @IBAction func ClearB(_ sender: Any)
+    {
+        BText.text = ""
     }
     
-    @IBAction func ClearC(_ sender: Any) {
+    @IBAction func ClearC(_ sender: Any)
+    {
+        CText.text = ""
     }
     
-    
-    @IBAction func ClearD(_ sender: Any) {
+    @IBAction func ClearD(_ sender: Any)
+    {
+        DText.text = ""
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -53,16 +64,19 @@ class EditQuizQuestionVC: UIViewController
             {
             case "QuizQuestionSave":
                 let quizController = segue.destination as! QuizVC
-                if let toReplace = question
+                if let newQuestion = buildQuestionInForm()
                 {
-                    quizController.editQuestion(buildQuestionInForm())
-                }
-                else
-                {
-                    quizController.addQuestion(buildQuestionInForm())
+                    if let _ = question
+                    {
+                        quizController.editQuestion(newQuestion)
+                    }
+                    else
+                    {
+                        quizController.addQuestion(newQuestion)
+                    }
                 }
             case "QuizQuestionDelete":
-                if let toDelete = question
+                if let _ = question
                 {
                     let quizController = segue.destination as! QuizVC
                     quizController.deleteSelectedQuestion()
@@ -115,13 +129,9 @@ class EditQuizQuestionVC: UIViewController
         return answersFields.filter({$0?.text != ""})
     }
     
-    func buildQuestionInForm() -> Question
+    func buildQuestionInForm() -> Question?
     {
-        var initialName = ""
-        if let name = QuestionText.text
-        {
-            initialName = name
-        }
+        let initialName = ""
         let newQuestion = Question(name: initialName)
         for field in getNonEmptyAnswers()
         {
@@ -132,7 +142,28 @@ class EditQuizQuestionVC: UIViewController
             }
             newQuestion.answers.append(Answer(isCorrect: isCorrect, text: (field?.text)!))
         }
+        
+        if isForminValid()
+        {
+            return nil
+        }
+        
+        if newQuestion.answers.first(where: {$0.isCorrect}) == nil
+        {
+            newQuestion.answers[0].isCorrect = true
+        }
         return newQuestion
+    }
+    
+    func isForminValid() -> Bool
+    {
+        return getNonEmptyAnswers().count == 0 || QuestionText.text == nil
+    }
+    
+    
+    func getLetterFromSelectedRow(row: Int) -> String
+    {
+        return letters[fieldToValue[getNonEmptyAnswers()[row]!]!]
     }
 }
 
@@ -167,11 +198,12 @@ extension EditQuizQuestionVC: UIPickerViewDelegate
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         selectedAnswer = fieldToValue[getNonEmptyAnswers()[row]!]!
+        AnswerPickerField.text = getLetterFromSelectedRow(row: row)
         self.view.endEditing(true)
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
-        return letters[fieldToValue[getNonEmptyAnswers()[row]!]!]
+        return getLetterFromSelectedRow(row: row)
     }
 }

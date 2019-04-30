@@ -11,6 +11,8 @@ import UIKit
 class QuizQuestionResultsVC: UIViewController {
 
     var question: Question!
+    var answers = [QuestionAnswer]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

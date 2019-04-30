@@ -39,7 +39,8 @@ class QuizQuestionsTableVC: UITableViewController {
     }
 
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
         parentDelegate?.selectedRow(data: quiz.questions[indexPath.row], index: indexPath.row)
     }
     

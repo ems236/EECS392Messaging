@@ -12,6 +12,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     
     var quiz = Quiz.emptyQuiz()
     //var results = [Answer]()
+    var studentAnswers = [StudentAnswer]()
     var questionTable : QuizQuestionsTableVC!
     var quizPosted = false
     var selectedIndex = -1
@@ -34,10 +35,23 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
             case "QuizQuestionAnswers":
                 let QuestionResultsVC = segue.destination as! QuizQuestionResultsVC
                 QuestionResultsVC.question = sender as! Question
-                //QuestionResultsVC.answers =
+                QuestionResultsVC.answers = studentAnswers.map({QuestionAnswer(name: $0.displayName, answerIndex: $0.answers[selectedIndex] ?? 0)})
             default: break
             }
         }
+    }
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        quiz.questions.append(Question(name: "My new Question"))
+        quiz.questions.append(Question(name: "My second Question"))
+ 
+        questionTable.parentDelegate = self
+        questionTable.quiz = quiz
+        questionTable.tableView.reloadData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(answerReceived(_:)), name: .answerSubmitted, object: nil)
     }
     
     func deleteSelectedQuestion()
@@ -61,25 +75,10 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     @objc
     func answerReceived(_ notification:Notification)
     {
-        if quizPosted, let dict = notification.userInfo as? [String : Answer], let answer = dict["answer"]
+        if quizPosted, let dict = notification.userInfo as? [String : StudentAnswer], let answer = dict["answer"]
         {
             print(answer)
         }
-    }
-    
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
-        quiz.questions.append(Question(name: "My new Question"))
-        quiz.questions.append(Question(name: "My second Question"))
-        // Do any additional setup after loading the view.
-        questionTable.parentDelegate = self
-        questionTable.quiz = quiz
-        questionTable.tableView.reloadData()
-        //print("loaded data")
-        //print(questionTable.quiz)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(answerReceived(_:)), name: .answerSubmitted, object: nil)
     }
     
     func selectedRow(data: Any, index: Int)
@@ -93,14 +92,23 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     {
         self.performSegue(withIdentifier: "QuizQuestionEdit", sender: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBOutlet var AddButton: UIBarButtonItem!
+    @IBOutlet weak var ActionButton: UIButton!
+    
+    @IBAction func ActionButtonClick(_ sender: Any)
+    {
+        quizPosted = !quizPosted
+        if quizPosted
+        {
+            ActionButton.setTitle("Reset Quiz", for: .normal)
+            self.navigationItem.rightBarButtonItem = nil
+        }
+        else
+        {
+            ActionButton.setTitle("Post Quiz", for: .normal)
+            self.navigationItem.rightBarButtonItem = AddButton
+        }
     }
-    */
-
+    @IBOutlet weak var StatusLabel: UILabel!
 }

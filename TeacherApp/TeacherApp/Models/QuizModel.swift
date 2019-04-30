@@ -97,3 +97,33 @@ class Answer : Codable
         self.text = text
     }
 }
+
+class StudentAnswer : Codable
+{
+    var displayName : String
+    var answers = [Int : Int]()
+    
+    init(name: String, questionIndeces: [Int], answerIndeces: [Int])
+    {
+        self.displayName = name
+        if questionIndeces.count == answerIndeces.count
+        {
+            for i in 1 ..< questionIndeces.count
+            {
+                answers[questionIndeces[i]] = answerIndeces[i]
+            }
+        }
+    }
+}
+
+class QuestionAnswer
+{
+    var name : String
+    var answerIndex : Int
+    
+    init(name: String, answerIndex: Int)
+    {
+        self.name = name
+        self.answerIndex = answerIndex
+    }
+}
