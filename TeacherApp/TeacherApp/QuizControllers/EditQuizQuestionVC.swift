@@ -22,6 +22,7 @@ class EditQuizQuestionVC: UIViewController
     {
         performSegue(withIdentifier: "QuizQuestionSave", sender: nil)
     }
+    
     @IBAction func DeleteClick(_ sender: Any)
     {
         performSegue(withIdentifier: "QuizQuestionDelete", sender: nil)
@@ -66,6 +67,7 @@ class EditQuizQuestionVC: UIViewController
                 let quizController = segue.destination as! QuizVC
                 if let newQuestion = buildQuestionInForm()
                 {
+                    print(newQuestion.name)
                     if let _ = question
                     {
                         quizController.editQuestion(newQuestion)
@@ -132,8 +134,7 @@ class EditQuizQuestionVC: UIViewController
     
     func buildQuestionInForm() -> Question?
     {
-        let initialName = ""
-        let newQuestion = Question(name: initialName)
+        let newQuestion = Question(name: "")
         for field in getNonEmptyAnswers()
         {
             var isCorrect = false
@@ -146,9 +147,10 @@ class EditQuizQuestionVC: UIViewController
         
         if isForminValid()
         {
+            print("invalid forms")
             return nil
         }
-        
+        newQuestion.name = QuestionText.text!
         if newQuestion.answers.first(where: {$0.isCorrect}) == nil
         {
             newQuestion.answers[0].isCorrect = true
@@ -195,7 +197,6 @@ extension EditQuizQuestionVC: UIPickerViewDataSource
 
 extension EditQuizQuestionVC: UIPickerViewDelegate
 {
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         selectedAnswer = fieldToValue[getNonEmptyAnswers()[row]!]!

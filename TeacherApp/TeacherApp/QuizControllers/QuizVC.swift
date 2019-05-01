@@ -43,7 +43,6 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
                 QuestionResultsVC.question = sender as! Question
                 QuestionResultsVC.answers = makeAnswersArray(questionIndex: selectedIndex)
                 QuestionResultsVC.questionIndex = selectedIndex
-                print("Made Answers")
             default: break
             }
         }
@@ -85,19 +84,25 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     
     func deleteSelectedQuestion()
     {
+        print("deleting")
         quiz.questions.remove(at: selectedIndex)
+        questionTable.quiz = quiz
         questionTable.tableView.reloadData()
     }
     
     func addQuestion(_ question: Question)
     {
+        print("Adding")
         quiz.questions.append(question)
+        questionTable.quiz = quiz
         questionTable.tableView.reloadData()
     }
     
     func editQuestion(_ new: Question)
     {
+        print("Editting")
         quiz.questions[selectedIndex] = new
+        questionTable.quiz = quiz
         questionTable.tableView.reloadData()
     }
     
