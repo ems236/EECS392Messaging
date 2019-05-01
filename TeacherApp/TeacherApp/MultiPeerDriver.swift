@@ -20,9 +20,22 @@ class MultiPeerDriver : NSObject
     private let serviceAdvertiser : MCNearbyServiceAdvertiser
     
     private var connectedSessions = [MCSession]()
+    private let messagecoder = MessageCoder()
     
+    //These will be sent a quiz if one is posted
+    private var newPeers = [MCPeerID]()
+    private var currentQuiz: Data? = nil
     
-    func findEmptySession() -> MCSession
+    private override init()
+    {
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerID, discoveryInfo: nil, serviceType: TEACHERSERVICE)
+        super.init()
+        serviceAdvertiser.delegate = self
+        serviceAdvertiser.startAdvertisingPeer()
+        print("Advertising")
+    }
+    
+    private func findEmptySession() -> MCSession
     {
         for session in connectedSessions
         {
@@ -37,7 +50,7 @@ class MultiPeerDriver : NSObject
         return newSession
     }
     
-    func makeSession() -> MCSession
+    private func makeSession() -> MCSession
     {
         let newSession = MCSession(peer: self.myPeerID, securityIdentity: nil, encryptionPreference: .required)
         newSession.delegate = self
@@ -54,14 +67,72 @@ class MultiPeerDriver : NSObject
         return peers
     }
     
-    private override init()
+    private func sendDataGenericError(session: MCSession, data: Data, peers: [MCPeerID]) -> Bool
     {
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerID, discoveryInfo: nil, serviceType: TEACHERSERVICE)
-        super.init()
-        serviceAdvertiser.delegate = self
-        serviceAdvertiser.startAdvertisingPeer()
-        print("Advertising")
+        do
+        {
+            try session.send(data, toPeers: peers, with: .reliable)
+        }
+        catch
+        {
+            //Make a UI alert or something
+            print("Failed to send message")
+            return false
+        }
+        return true
     }
+    
+    private func broadcastData(data: Data) -> Bool
+    {
+        for session in connectedSessions
+        {
+            if !sendDataGenericError(session: session, data: data, peers: session.connectedPeers)
+            {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func postQuiz(_ quiz: Quiz) -> Bool
+    {
+        if let encodedQuiz = messagecoder.encodeMessage(quiz, type: .quiz)
+        {
+            //Give up on everything on an error
+            if !broadcastData(data: encodedQuiz)
+            {
+                return false
+            }
+            //Reset new peers and current quiz
+            newPeers = [MCPeerID]()
+            currentQuiz = encodedQuiz
+            return true
+        }
+        else
+        {
+            //Make a UI alert or something
+            print("Failed to encode quiz")
+            return false
+        }
+    }
+    
+    func resetQuiz()
+    {
+        currentQuiz = nil
+    }
+    
+    /*
+    func findSessionWithPeer(_ peer: MCPeerID) -> MCSession?
+    {
+        for session in connectedSessions
+        {
+            if session.connectedPeers.contains(peer)
+            {
+                return session
+            }
+        }
+        return nil
+    }*/
 }
 
 extension MultiPeerDriver : MCNearbyServiceAdvertiserDelegate
@@ -69,6 +140,7 @@ extension MultiPeerDriver : MCNearbyServiceAdvertiserDelegate
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         //Should be a little smarter and fill the sessions array
         invitationHandler(true, findEmptySession())
+        newPeers.append(peerID)
         NotificationCenter.default.post(name: .studentJoined, object: nil, userInfo: ["peer": peerID])
         print("Connected")
     }
@@ -76,7 +148,15 @@ extension MultiPeerDriver : MCNearbyServiceAdvertiserDelegate
 
 extension MultiPeerDriver : MCSessionDelegate
 {
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState)
+    {
+        //Send quiz to newly connected peer if possible
+        if state == .connected, let peerIndex = newPeers.firstIndex(of: peerID), let quizData = currentQuiz
+        {
+            newPeers.remove(at: peerIndex)
+            //Don't need to do anything with the status bool
+            sendDataGenericError(session: session, data: quizData, peers: [peerID])
+        }
         print("State changed")
     }
     

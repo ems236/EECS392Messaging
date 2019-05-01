@@ -38,6 +38,8 @@ class EditQuizQuestionVC: UIViewController
     
     @IBOutlet weak var AnswerPickerField: UITextField!
     
+    
+    //If you can make the sender a text field for a button action that would be cool
     @IBAction func ClearA(_ sender: Any)
     {
         AText.text = ""

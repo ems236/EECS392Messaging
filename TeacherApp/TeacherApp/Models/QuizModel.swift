@@ -44,26 +44,6 @@ class Quiz : Codable
         self.title = "Test Quiz"
         self.description = "There is 1 question on this quiz"
     }
-    
-    // keeps the index from going past count so that it can pong between -1 and count, both represent nil
-    private func incrementIndex() {
-        curr_question = min(questions.count,curr_question+1)
-    }
-    
-    // keeps the index from going past -1 so that it can pong between -1 and count, both represent nil
-    private func decrementIndex() {
-        curr_question = max(-1,curr_question-1)
-    }
-    
-    func next () -> Question? {
-        incrementIndex()
-        return curr_question < questions.count ? questions[curr_question] : nil
-    }
-    
-    func prev () -> Question? {
-        decrementIndex()
-        return curr_question >= 0 ? questions[curr_question] : nil
-    }
 }
 
 class Question : Codable

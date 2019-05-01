@@ -71,6 +71,10 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         
         studentAnswers = [answers1, answers2, answers3]
         
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        TitleText.delegate = self
+        
+        
         questionTable.parentDelegate = self
         questionTable.quiz = quiz
         questionTable.tableView.reloadData()
@@ -163,6 +167,43 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         StatusLabel.text = String(submitted) + " / " + String(totalConnected) + " Submitted"
     }
     
+    func postQuiz()
+    {
+        ActionButton.setTitle("Reset Quiz", for: .normal)
+        self.navigationItem.rightBarButtonItem = nil
+        submitted = 0
+        quizPeers = multipeerdriver.getConnectedPeers()
+        totalConnected = quizPeers.count
+        TitleText.isEnabled = false
+        
+        
+        if let title = TitleText.text, title != ""
+        {
+            quiz.title = title
+        }
+        else
+        {
+            quiz.title = "New Quiz"
+        }
+        
+        //Reset quiz on error
+        if !multipeerdriver.postQuiz(quiz)
+        {
+            resetQuiz()
+        }
+    }
+    
+    func resetQuiz()
+    {
+        ActionButton.setTitle("Post Quiz", for: .normal)
+        self.navigationItem.rightBarButtonItem = AddButton
+        submitted = 0
+        quizPeers = [MCPeerID]()
+        totalConnected = 0
+        
+        multipeerdriver.resetQuiz()
+    }
+    
     @IBAction func NewQuestion(_ sender: Any)
     {
         self.performSegue(withIdentifier: "QuizQuestionEdit", sender: nil)
@@ -176,22 +217,28 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         quizPosted = !quizPosted
         if quizPosted
         {
-            ActionButton.setTitle("Reset Quiz", for: .normal)
-            self.navigationItem.rightBarButtonItem = nil
-            submitted = 0
-            quizPeers = multipeerdriver.getConnectedPeers()
-            totalConnected = quizPeers.count
+            postQuiz()
         }
         else
         {
-            ActionButton.setTitle("Post Quiz", for: .normal)
-            self.navigationItem.rightBarButtonItem = AddButton
-            submitted = 0
-            quizPeers = [MCPeerID]()
-            totalConnected = 0
+            resetQuiz()
         }
         
         updateLabel()
     }
     @IBOutlet weak var StatusLabel: UILabel!
+    @IBOutlet weak var TitleText: UITextField!
+}
+
+extension QuizVC: UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+    }
 }

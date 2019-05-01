@@ -121,29 +121,65 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HHD-S1-uHQ" userLabel="Controls">
                                 <rect key="frame" x="0.0" y="64" width="375" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHI-4d-Hdb" userLabel="ResponseCount">
-                                        <rect key="frame" x="15" y="39.5" width="150" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTL-Wp-QAY" userLabel="Post">
-                                        <rect key="frame" x="210" y="35" width="150" height="30"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="ActionButtonClick:" destination="vk9-9N-bfA" eventType="touchUpInside" id="O2E-WU-4ti"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="VFe-2M-Fcb">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="Q6S-T9-2ep">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="45.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHI-4d-Hdb" userLabel="ResponseCount">
+                                                        <rect key="frame" x="0.0" y="0.0" width="165" height="45.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTL-Wp-QAY" userLabel="Post">
+                                                        <rect key="frame" x="210" y="0.0" width="165" height="45.5"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <action selector="ActionButtonClick:" destination="vk9-9N-bfA" eventType="touchUpInside" id="O2E-WU-4ti"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="xTL-Wp-QAY" firstAttribute="width" secondItem="FHI-4d-Hdb" secondAttribute="width" id="uZH-Ww-7PO"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="Oj4-uZ-DD1">
+                                                <rect key="frame" x="0.0" y="54.5" width="375" height="45.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quiz Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBJ-7v-Fix">
+                                                        <rect key="frame" x="0.0" y="0.0" width="119" height="45.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lj6-ak-3Eq">
+                                                        <rect key="frame" x="137" y="0.0" width="238" height="45.5"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="QBJ-7v-Fix" firstAttribute="width" secondItem="Lj6-ak-3Eq" secondAttribute="width" multiplier="0.5" id="aaw-gt-nJE"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Q6S-T9-2ep" firstAttribute="height" secondItem="Oj4-uZ-DD1" secondAttribute="height" id="Nri-CR-fq3"/>
+                                            <constraint firstItem="Oj4-uZ-DD1" firstAttribute="width" secondItem="VFe-2M-Fcb" secondAttribute="width" id="YqM-1e-tvR"/>
+                                            <constraint firstItem="Q6S-T9-2ep" firstAttribute="width" secondItem="VFe-2M-Fcb" secondAttribute="width" id="bgz-4T-Swi"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="02Z-EF-1CT"/>
-                                    <constraint firstItem="FHI-4d-Hdb" firstAttribute="width" secondItem="HHD-S1-uHQ" secondAttribute="width" multiplier="0.4" id="9tZ-F3-Vvd"/>
-                                    <constraint firstItem="xTL-Wp-QAY" firstAttribute="centerY" secondItem="HHD-S1-uHQ" secondAttribute="centerY" id="A21-IV-hzg"/>
-                                    <constraint firstItem="FHI-4d-Hdb" firstAttribute="centerY" secondItem="HHD-S1-uHQ" secondAttribute="centerY" id="QTd-PP-JcH"/>
-                                    <constraint firstItem="xTL-Wp-QAY" firstAttribute="width" secondItem="HHD-S1-uHQ" secondAttribute="width" multiplier="0.4" id="Rd0-W2-mpf"/>
-                                    <constraint firstItem="FHI-4d-Hdb" firstAttribute="leading" secondItem="HHD-S1-uHQ" secondAttribute="leading" constant="15" id="bOS-M0-IOf"/>
-                                    <constraint firstAttribute="trailing" secondItem="xTL-Wp-QAY" secondAttribute="trailing" constant="15" id="uUj-SL-8Ap"/>
+                                    <constraint firstItem="VFe-2M-Fcb" firstAttribute="width" secondItem="HHD-S1-uHQ" secondAttribute="width" id="1OV-83-Voq"/>
+                                    <constraint firstItem="VFe-2M-Fcb" firstAttribute="top" secondItem="HHD-S1-uHQ" secondAttribute="top" id="AgM-UZ-G3Z"/>
+                                    <constraint firstAttribute="trailing" secondItem="VFe-2M-Fcb" secondAttribute="trailing" id="g6L-XO-ddb"/>
+                                    <constraint firstItem="VFe-2M-Fcb" firstAttribute="height" secondItem="HHD-S1-uHQ" secondAttribute="height" id="kMg-Ml-wI3"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRb-de-c9G" userLabel="TableContainer">
@@ -177,6 +213,7 @@
                         <outlet property="ActionButton" destination="xTL-Wp-QAY" id="cDo-kD-t53"/>
                         <outlet property="AddButton" destination="m9A-Ia-Qqe" id="tVX-tn-WQd"/>
                         <outlet property="StatusLabel" destination="FHI-4d-Hdb" id="dXl-Ul-EdK"/>
+                        <outlet property="TitleText" destination="Lj6-ak-3Eq" id="jRQ-es-hDW"/>
                         <segue destination="JeC-t2-EWd" kind="show" identifier="QuizQuestionAnswers" id="0Ru-sq-noU"/>
                         <segue destination="VKK-K5-0Zb" kind="show" identifier="QuizQuestionEdit" id="Bz8-rC-pvS"/>
                     </connections>
