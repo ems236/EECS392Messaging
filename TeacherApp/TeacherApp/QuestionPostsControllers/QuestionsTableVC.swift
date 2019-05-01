@@ -35,7 +35,9 @@ class QuestionsTableVC: UITableViewController {
         if let dict = notification.userInfo as? [String : TeacherQuestion], let question = dict[NotificationUserData.questionPosted.rawValue]
         {
             questions.append(question)
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     

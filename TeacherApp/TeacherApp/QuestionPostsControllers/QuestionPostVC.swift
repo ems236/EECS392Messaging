@@ -34,9 +34,14 @@ class QuestionPostVC: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
+        HeadLabel.text = question.header
+        BodyLabel.text = question.body
+        
+        BodyLabel.sizeToFit()
+        HeadLabel.sizeToFit()
         // Do any additional setup after loading the view.
     }
     

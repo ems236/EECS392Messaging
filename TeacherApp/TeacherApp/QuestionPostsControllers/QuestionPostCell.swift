@@ -22,7 +22,7 @@ class QuestionPostCell: UITableViewCell {
     func setQuestion(_ question: TeacherQuestion)
     {
         TitleLabel.text = question.header
-        TitleLabel.text = question.body
+        TextLabel.text = question.body
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
