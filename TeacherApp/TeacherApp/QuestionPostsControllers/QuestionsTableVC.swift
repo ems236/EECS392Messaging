@@ -32,7 +32,7 @@ class QuestionsTableVC: UITableViewController {
     @objc
     func questionPosted(_ notification: Notification)
     {
-        if let dict = notification.userInfo as? [String : TeacherQuestion], let question = dict["question"]
+        if let dict = notification.userInfo as? [NotificationUserData : TeacherQuestion], let question = dict[.questionPosted]
         {
             questions.append(question)
         }

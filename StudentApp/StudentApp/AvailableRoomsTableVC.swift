@@ -21,18 +21,10 @@ class AvailableRoomsTableVC: UITableViewController {
     
     @objc func foundRoom(_ notification: Notification)
     {
-        if let data = notification.userInfo as? [String: MCPeerID]
+        if let data = notification.userInfo as? [NotificationUserData: MCPeerID], let peer = data[.peerChange]
         {
-            if let peer = data["peer"]
-            {
-                availableRooms.append(peer)
-                tableView.reloadData()
-                //Refresh table data
-            }
-            else
-            {
-                print("Invalid data")
-            }
+            availableRooms.append(peer)
+            tableView.reloadData()
         }
         
         else
@@ -43,18 +35,11 @@ class AvailableRoomsTableVC: UITableViewController {
     
     @objc func lostRoom(_ notification: Notification)
     {
-        if let data = notification.userInfo as? [String: MCPeerID]
+        if let data = notification.userInfo as? [NotificationUserData: MCPeerID], let peer = data[.peerChange], let index = availableRooms.lastIndex(of: peer)
         {
-            if let peer = data["peer"], let index = availableRooms.lastIndex(of: peer)
-            {
-                availableRooms.remove(at: index)
-                tableView.reloadData()
-                //Refresh table
-            }
-            else
-            {
-                print("Invalid data")
-            }
+            availableRooms.remove(at: index)
+            tableView.reloadData()
+            //Refresh table
         }
             
         else

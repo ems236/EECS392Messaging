@@ -75,9 +75,7 @@ extension MultiPeerDriver : MCNearbyServiceBrowserDelegate
         //browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
         print("Inviting teacher")
         print("Discovered")
-        var peerInfo = [String : MCPeerID]()
-        peerInfo["peer"] = peerID
-        NotificationCenter.default.post(name: .discoveredTeacher, object: nil, userInfo: peerInfo)
+        NotificationCenter.default.post(name: .discoveredTeacher, object: nil, userInfo: [NotificationUserData.peerChange: peerID])
         print("discovered teacher")
     }
     
@@ -85,7 +83,7 @@ extension MultiPeerDriver : MCNearbyServiceBrowserDelegate
     {
         var peerInfo = [String : MCPeerID]()
         peerInfo["peer"] = peerID
-        NotificationCenter.default.post(name: .lostTeacher, object: nil, userInfo: peerInfo)
+        NotificationCenter.default.post(name: .lostTeacher, object: nil, userInfo: [NotificationUserData.peerChange: peerID])
         teacherPeerId = nil
         print("Lost connection to teacher?")
     }
@@ -114,7 +112,7 @@ extension MultiPeerDriver : MCSessionDelegate
         // == works intelligently in swift
         if let teacher = teacherPeerId, peerID == teacher
         {
-            messageCoder.decodeMessage(data, peer: peerID)
+            messageCoder.decodeMessage(data)
         }
     }
     
@@ -145,16 +143,14 @@ extension MultiPeerDriver : MCSessionDelegate
 
 extension MultiPeerDriver : MessegeReceiverDelegate
 {
-    func receiveQuiz(_ quiz: Quiz) {
-        var quizInfo = [String : Quiz]()
-        quizInfo["quiz"] = quiz
-        NotificationCenter.default.post(name: .quizReceived, object: nil, userInfo: quizInfo)
+    func receiveQuiz(_ quiz: Quiz)
+    {
+        NotificationCenter.default.post(name: .quizReceived, object: nil, userInfo: [NotificationUserData.quizReceived : quiz])
     }
     
-    func receiveDiscussionPost(_ message: DiscussionPost) {
-        var messageInfo = [String : DiscussionPost]()
-        messageInfo["post"] = message
-        NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: messageInfo)
+    func receiveDiscussionPost(_ message: DiscussionPost)
+    {
+        NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: [NotificationUserData.messageReceived: message])
     }
     
     func receiveAnswers(_ answers: StudentAnswer) {

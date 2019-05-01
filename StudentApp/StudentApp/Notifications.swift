@@ -17,3 +17,12 @@ extension Notification.Name {
     static let questionPosted = Notification.Name("questionReceived")
     static let studentJoined = Notification.Name("newStudent")
 }
+
+enum NotificationUserData: String
+{
+    case peerChange = "peer"
+    case quizReceived = "quiz"
+    case answersReceived = "answers"
+    case messageReceived = "message"
+    case questionPosted = "question"
+}

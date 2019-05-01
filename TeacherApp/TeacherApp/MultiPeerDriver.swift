@@ -141,7 +141,7 @@ extension MultiPeerDriver : MCNearbyServiceAdvertiserDelegate
         //Should be a little smarter and fill the sessions array
         invitationHandler(true, findEmptySession())
         newPeers.append(peerID)
-        NotificationCenter.default.post(name: .studentJoined, object: nil, userInfo: ["peer": peerID])
+        NotificationCenter.default.post(name: .studentJoined, object: nil, userInfo: [NotificationUserData.peerChange: peerID])
         print("Connected")
     }
 }
@@ -160,7 +160,9 @@ extension MultiPeerDriver : MCSessionDelegate
         print("State changed")
     }
     
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID)
+    {
+        messagecoder.decodeMessage(data)
         print("Message received")
     }
     
@@ -179,15 +181,21 @@ extension MultiPeerDriver : MCSessionDelegate
 
 extension MultiPeerDriver : MessegeReceiverDelegate
 {
-    func receiveDiscussionPost(_ message: DiscussionPost) {
+    func receiveDiscussionPost(_ message: DiscussionPost)
+    {
+        NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: [NotificationUserData.messageReceived: message])
+        return
     }
     
     func receiveAnswers(_ answers: StudentAnswer)
     {
+        NotificationCenter.default.post(name: .answerSubmitted, object: nil, userInfo: [NotificationUserData.answersReceived: answers])
         return
     }
     
-    func receiveQuestionPost(_ question: TeacherQuestion) {
+    func receiveQuestionPost(_ question: TeacherQuestion)
+    {
+        NotificationCenter.default.post(name: .questionPosted , object: nil, userInfo: [NotificationUserData.questionPosted: question])
         return
     }
     

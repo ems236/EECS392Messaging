@@ -113,7 +113,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     @objc
     func answerReceived(_ notification:Notification)
     {
-        if quizPosted, let dict = notification.userInfo as? [String : StudentAnswer], let answer = dict["answer"]
+        if quizPosted, let dict = notification.userInfo as? [NotificationUserData : StudentAnswer], let answer = dict[.answersReceived]
         {
             studentAnswers.append(answer)
             submitted = submitted + 1
@@ -124,7 +124,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     @objc
     func newPeer(_ notification: Notification)
     {
-        if quizPosted, let dict = notification.userInfo as? [String : MCPeerID], let peer = dict["peer"], quizPeers.contains(peer)
+        if quizPosted, let dict = notification.userInfo as? [NotificationUserData : MCPeerID], let peer = dict[.peerChange], quizPeers.contains(peer)
         {
             quizPeers.append(peer)
             totalConnected = quizPeers.count

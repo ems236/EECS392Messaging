@@ -20,15 +20,15 @@ class StudentTabBarController: UITabBarController {
         NotificationCenter.default.addObserver(self, selector: quizSelector, name: NSNotification.Name(rawValue: "StartNewQuiz"), object: model)
     }
     
-    @objc func handleNotificationStartNewQuiz(_ notification: Notification) {
-        if let userInfo = notification.userInfo {
-            if let q = userInfo["quiz"] as? QuizViewModel? {
-                //let message = (quiz) ? "Dealer Won" : "You Won!"
-                let alert = UIAlertController(title: "Quiz!", message: "The instructor has sent you a quiz.", preferredStyle: .alert)
-                let alertAction = UIAlertAction(title: "Start Quiz", style: .default, handler:({(_: UIAlertAction) -> Void in self.start(quiz: q)}))
-                alert.addAction(alertAction)
-                present(alert, animated: true, completion: nil)
-            }
+    @objc func handleNotificationStartNewQuiz(_ notification: Notification)
+    {
+        if let userInfo = notification.userInfo, let q = userInfo[NotificationUserData.quizReceived] as? QuizViewModel?
+        {
+            //let message = (quiz) ? "Dealer Won" : "You Won!"
+            let alert = UIAlertController(title: "Quiz!", message: "The instructor has sent you a quiz.", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Start Quiz", style: .default, handler:({(_: UIAlertAction) -> Void in self.start(quiz: q)}))
+            alert.addAction(alertAction)
+            present(alert, animated: true, completion: nil)
         }
     }
     

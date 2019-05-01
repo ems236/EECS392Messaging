@@ -44,7 +44,7 @@ class MessageCoder
         return nil
     }
 
-    func decodeMessage(_ message: Data, peer: MCPeerID)
+    func decodeMessage(_ message: Data)
     {
         //read fist byte
         guard let typeEnum = MessageTypes(rawValue: [UInt8](message).first ?? 0)

@@ -43,7 +43,7 @@ class QuizQuestionResultsVC: UIViewController {
     @objc
     func answerReceived(_ notification:Notification)
     {
-        if let dict = notification.userInfo as? [String : StudentAnswer], let answer = dict["answer"], answer.answers.count > questionIndex
+        if let dict = notification.userInfo as? [NotificationUserData : StudentAnswer], let answer = dict[.answersReceived], answer.answers.count > questionIndex
         {
             let newAnswer = QuestionAnswer(name: answer.displayName, answerIndex: answer.answers[questionIndex])
             answers[newAnswer.answerIndex].append(newAnswer)
