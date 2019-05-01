@@ -134,8 +134,9 @@ extension MultiPeerDriver : MCSessionDelegate
             }
             else if state == .notConnected
             {
+                print("Posting notification for teacher disconnect")
+                NotificationCenter.default.post(name: .teacherDisconnect, object: nil)
                 serviceBrowser.startBrowsingForPeers()
-                //NEED TO UNWIND TO ROOM SELECT PAGE.
                 print("Browsing for teacher again")
             }
             //Handle teacher connect here

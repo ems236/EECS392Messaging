@@ -12,12 +12,15 @@ import MultipeerConnectivity
 class AvailableRoomsTableVC: UITableViewController {
 
     private let driver = MultiPeerDriver.multipeerdriver
-    private var availableRooms = [MCPeerID]()
+    var availableRooms = [MCPeerID]()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
+    
+    //An unwind segue for when the teacher disconnects
+    @IBAction func disconnectedFromTeacher(segue:UIStoryboardSegue) {}
     
     @objc func foundRoom(_ notification: Notification)
     {
@@ -65,7 +68,7 @@ class AvailableRoomsTableVC: UITableViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(lostRoom(_:)), name: .lostTeacher, object: nil)
 
-        print("Encoding/Decoding")
+        //print("Encoding/Decoding")
         //var testEncoding = MessageCoder()
         //var testQuiz = Quiz()
         
@@ -78,6 +81,12 @@ class AvailableRoomsTableVC: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        self.tableView.reloadData()
+        print("Gothere")
     }
 
     // MARK: - Table view data source

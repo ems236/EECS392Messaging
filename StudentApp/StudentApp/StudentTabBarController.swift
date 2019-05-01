@@ -13,11 +13,31 @@ class StudentTabBarController: UITabBarController {
     private weak var model: ConnectionData!
     private var driver = MultiPeerDriver.multipeerdriver
     
-    required init?(coder aDecoder: NSCoder) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let id = segue.identifier{
+            switch (id)
+            {
+            case "TeacherDisconnect":
+                let roomsVC = segue.destination as! AvailableRoomsTableVC
+                roomsVC.availableRooms.removeAll()
+            default: break
+            }
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
         super.init(coder: aDecoder)
         
         let quizSelector : Selector = #selector(handleNotificationStartNewQuiz(_:))
         NotificationCenter.default.addObserver(self, selector: quizSelector, name: NSNotification.Name(rawValue: "StartNewQuiz"), object: model)
+        NotificationCenter.default.addObserver(self, selector: #selector(teacherDisconnect(_:)), name: .teacherDisconnect, object: nil)
+    }
+    
+    @objc func teacherDisconnect(_ notification: Notification)
+    {
+        self.performSegue(withIdentifier: "TeacherDisconnect", sender: nil)
     }
     
     @objc func handleNotificationStartNewQuiz(_ notification: Notification)
