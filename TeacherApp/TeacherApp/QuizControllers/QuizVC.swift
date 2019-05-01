@@ -36,6 +36,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
                 let QuestionResultsVC = segue.destination as! QuizQuestionResultsVC
                 QuestionResultsVC.question = sender as! Question
                 QuestionResultsVC.answers = studentAnswers.map({QuestionAnswer(name: $0.displayName, answerIndex: $0.answers[selectedIndex] ?? 0)})
+                QuestionResultsVC.questionIndex = selectedIndex
             default: break
             }
         }
@@ -50,6 +51,8 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         questionTable.parentDelegate = self
         questionTable.quiz = quiz
         questionTable.tableView.reloadData()
+        
+        ActionButton.setTitle("Post Quiz", for: .normal)
         
         NotificationCenter.default.addObserver(self, selector: #selector(answerReceived(_:)), name: .answerSubmitted, object: nil)
     }
