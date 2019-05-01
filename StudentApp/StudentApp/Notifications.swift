@@ -15,4 +15,5 @@ extension Notification.Name {
     static let answerSubmitted = Notification.Name("answerReceived")
     static let messageReceived = Notification.Name("messageReceived")
     static let questionPosted = Notification.Name("questionReceived")
+    static let studentJoined = Notification.Name("newStudent")
 }

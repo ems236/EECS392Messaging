@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class QuizVC: UIViewController, ChildTableSelectDelegate {
     
@@ -16,6 +17,11 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     var questionTable : QuizQuestionsTableVC!
     var quizPosted = false
     var selectedIndex = -1
+    
+    let multipeerdriver = MultiPeerDriver.instance
+    var quizPeers = [MCPeerID]()
+    var totalConnected = 0
+    var submitted = 0
     
     //Create a segue for the save btn
     @IBAction func deleteQuizQuestion(segue:UIStoryboardSegue) {}
@@ -71,8 +77,10 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         questionTable.tableView.reloadData()
         
         ActionButton.setTitle("Post Quiz", for: .normal)
+        updateLabel()
         
         NotificationCenter.default.addObserver(self, selector: #selector(answerReceived(_:)), name: .answerSubmitted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(newPeer(_:)), name: .studentJoined, object: nil)
     }
     
     func deleteSelectedQuestion()
@@ -98,7 +106,20 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     {
         if quizPosted, let dict = notification.userInfo as? [String : StudentAnswer], let answer = dict["answer"]
         {
-            print(answer)
+            studentAnswers.append(answer)
+            submitted = submitted + 1
+            updateLabel()
+        }
+    }
+    
+    @objc
+    func newPeer(_ notification: Notification)
+    {
+        if quizPosted, let dict = notification.userInfo as? [String : MCPeerID], let peer = dict["peer"], quizPeers.contains(peer)
+        {
+            quizPeers.append(peer)
+            totalConnected = quizPeers.count
+            updateLabel()
         }
     }
     
@@ -124,7 +145,17 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
             sortedanswers[answer.answerIndex].append(answer)
         }
         
+        for i in 0 ..< sortedanswers.count
+        {
+            sortedanswers[i].sort(by: {$0.name > $1.name})
+        }
+        
         return sortedanswers
+    }
+    
+    func updateLabel()
+    {
+        StatusLabel.text = String(submitted) + " / " + String(totalConnected) + " Submitted"
     }
     
     @IBAction func NewQuestion(_ sender: Any)
@@ -142,12 +173,20 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         {
             ActionButton.setTitle("Reset Quiz", for: .normal)
             self.navigationItem.rightBarButtonItem = nil
+            submitted = 0
+            quizPeers = multipeerdriver.getConnectedPeers()
+            totalConnected = quizPeers.count
         }
         else
         {
             ActionButton.setTitle("Post Quiz", for: .normal)
             self.navigationItem.rightBarButtonItem = AddButton
+            submitted = 0
+            quizPeers = [MCPeerID]()
+            totalConnected = 0
         }
+        
+        updateLabel()
     }
     @IBOutlet weak var StatusLabel: UILabel!
 }

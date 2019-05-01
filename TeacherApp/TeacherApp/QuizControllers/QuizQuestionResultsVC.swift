@@ -47,6 +47,7 @@ class QuizQuestionResultsVC: UIViewController {
         {
             let newAnswer = QuestionAnswer(name: answer.displayName, answerIndex: answer.answers[questionIndex])
             answers[newAnswer.answerIndex].append(newAnswer)
+            answers[newAnswer.answerIndex].sort(by: {$0.name > $1.name})
             answerTable.answers = answers
             answerTable.tableView.reloadData()
         }

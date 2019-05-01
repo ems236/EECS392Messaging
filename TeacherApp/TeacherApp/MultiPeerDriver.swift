@@ -11,6 +11,8 @@ import MultipeerConnectivity
 
 class MultiPeerDriver : NSObject
 {
+    static let instance = MultiPeerDriver()
+    
     private let SESSIONMAX = 8
     
     private let TEACHERSERVICE = "eecs392-final"
@@ -18,6 +20,7 @@ class MultiPeerDriver : NSObject
     private let serviceAdvertiser : MCNearbyServiceAdvertiser
     
     private var connectedSessions = [MCSession]()
+    
     
     func findEmptySession() -> MCSession
     {
@@ -41,13 +44,17 @@ class MultiPeerDriver : NSObject
         return newSession
     }
     
-    //lazy var session : MCSession = {
-    //    let session = MCSession(peer: self.myPeerID, securityIdentity: nil, encryptionPreference: .required)
-    //    session.delegate = self
-    //    return session
-    //}()
+    func getConnectedPeers() -> [MCPeerID]
+    {
+        var peers = [MCPeerID]()
+        for session in connectedSessions
+        {
+            peers.append(contentsOf: session.connectedPeers)
+        }
+        return peers
+    }
     
-    override init()
+    private override init()
     {
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerID, discoveryInfo: nil, serviceType: TEACHERSERVICE)
         super.init()
@@ -62,6 +69,7 @@ extension MultiPeerDriver : MCNearbyServiceAdvertiserDelegate
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         //Should be a little smarter and fill the sessions array
         invitationHandler(true, findEmptySession())
+        NotificationCenter.default.post(name: .studentJoined, object: nil, userInfo: ["peer": peerID])
         print("Connected")
     }
 }
