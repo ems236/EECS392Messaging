@@ -10,7 +10,7 @@ import UIKit
 
 class QuizViewController: UIViewController {
     
-    var quiz: Quiz?
+    var quiz: QuizViewModel?
     @IBOutlet weak var quizView: UIView!
     private weak var prev_question: Question?
     private weak var curr_question: Question?

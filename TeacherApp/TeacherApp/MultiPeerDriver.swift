@@ -102,7 +102,8 @@ extension MultiPeerDriver : MessegeReceiverDelegate
     func receiveDiscussionPost(_ message: DiscussionPost) {
     }
     
-    func receiveAnswers(_ answers: Answer) {
+    func receiveAnswers(_ answers: StudentAnswer)
+    {
         return
     }
     
@@ -112,7 +113,6 @@ extension MultiPeerDriver : MessegeReceiverDelegate
     
     func receiveQuiz(_ quiz: Quiz) {
         //Teacher does not do this.
-        //NotificationCenter.default.post(name: .quizReceived, object: nil, userInfo: nil)
         return
     }
 }

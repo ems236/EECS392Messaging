@@ -22,7 +22,7 @@ class StudentTabBarController: UITabBarController {
     
     @objc func handleNotificationStartNewQuiz(_ notification: Notification) {
         if let userInfo = notification.userInfo {
-            if let q = userInfo["quiz"] as? Quiz? {
+            if let q = userInfo["quiz"] as? QuizViewModel? {
                 //let message = (quiz) ? "Dealer Won" : "You Won!"
                 let alert = UIAlertController(title: "Quiz!", message: "The instructor has sent you a quiz.", preferredStyle: .alert)
                 let alertAction = UIAlertAction(title: "Start Quiz", style: .default, handler:({(_: UIAlertAction) -> Void in self.start(quiz: q)}))
@@ -33,10 +33,10 @@ class StudentTabBarController: UITabBarController {
     }
     
     @IBAction func testQuiz(_ sender: UIBarButtonItem) {
-        model.displayQuizFromTeacher(quiz: Quiz())
+        model.displayQuizFromTeacher(quiz: QuizViewModel())
     }
     
-    private func start(quiz: Quiz?) {
+    private func start(quiz: QuizViewModel?) {
         let viewController:QuizViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuizViewController") as! QuizViewController
         viewController.modalPresentationStyle = UIModalPresentationStyle.custom
         viewController.quiz = quiz

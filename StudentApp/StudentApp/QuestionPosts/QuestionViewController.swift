@@ -18,9 +18,6 @@ class QuestionViewController: UIViewController, UITextFieldDelegate, UITextViewD
     @IBOutlet weak var descriptionField: UITextView! {
         didSet { descriptionField.delegate = self }
     }
-    @IBOutlet weak var slideField: UITextField! {
-        didSet { slideField.delegate = self }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +46,9 @@ class QuestionViewController: UIViewController, UITextFieldDelegate, UITextViewD
         let (isValid,message) = isValidSubmission()
         print("isValid: \(isValid)")
         print("message: \(message)")
-        if isValid {
-            model.submitQuestionToTeacher(header: headerField.text!, desc: descriptionField.text!, slide: Int(slideField.text ?? ""))
+        if isValid
+        {
+            model.submitQuestionToTeacher(header: headerField.text!, desc: descriptionField.text!)
         }
         // display popup with message as its text
         displayPopup(title: isValid ? "Success!" : "Can't send message!", message: message, handler: isValid ? clearAllText(_:) : nil)
@@ -59,7 +57,6 @@ class QuestionViewController: UIViewController, UITextFieldDelegate, UITextViewD
     private func clearAllText(_: UIAlertAction) {
         headerField.text = ""
         descriptionField.text = ""
-        slideField.text = ""
     }
     
     private func displayPopup(title: String, message: String, handler: ((UIAlertAction) -> Void)?) {
@@ -75,17 +72,12 @@ class QuestionViewController: UIViewController, UITextFieldDelegate, UITextViewD
         
         checks.append(isTextEmptyWithErrorMsg(text: headerField.text, name: "header"))
         checks.append(isTextEmptyWithErrorMsg(text: descriptionField.text, name: "description"))
-        checks.append((isSlideFieldValid(slide: slideField), "Slide must be an Integer."))
         
         return formattedIssueMessage(checks: checks, ifValid: "Your question is being sent to the instructor.\n")
     }
     
     private func isTextEmptyWithErrorMsg(text: String?, name: String) -> (isntEmpty: Bool, errorMsg: String) {
         return (text == nil || text!.isEmpty, "There needs to be a \(name).")
-    }
-    
-    private func isSlideFieldValid(slide: UITextField) -> Bool {
-        return slide.text != nil && !slide.text!.isEmpty && Int(slide.text!) == nil
     }
     
     private func formattedIssueMessage(checks: [(isInvalid:Bool, errorMsg:String)], ifValid validMsg: String) -> (isValid: Bool, message: String) {
@@ -109,15 +101,4 @@ class QuestionViewController: UIViewController, UITextFieldDelegate, UITextViewD
     private func formattedIssueMessage(message: String, issues: Int, current: String) -> String {
         return current + (issues > 1 ? "\n" : "") + "\(issues). " + message
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

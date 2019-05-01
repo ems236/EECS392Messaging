@@ -1,8 +1,8 @@
 //
 //  QuizModel.swift
-//  TeacherApp
+//  StudentApp
 //
-//  Created by Ellis Saupe on 4/28/19.
+//  Created by Ellis Saupe on 5/1/19.
 //  Copyright © 2019 Jackson Nelson-Gal + Ellis Saupe. All rights reserved.
 //
 
@@ -17,8 +17,9 @@ fileprivate class QuizBuilder {
     func add(question: Question) {
         questions.append(question)
     }
-    func build() -> Quiz {
-        return Quiz(self.questions)
+    func build() -> QuizViewModel
+    {
+        return QuizViewModel(self.questions)
     }
 }
 
@@ -27,17 +28,24 @@ class Quiz : Codable
     var title: String?
     var description: String?
     var questions: [Question]
+    
+    init(title: String, description: String, questions: [Question])
+    {
+        self.title = title
+        self.description = description
+        self.questions = questions
+    }
+}
+
+class QuizViewModel : Codable {
+    var title: String?
+    var description: String?
+    private var questions: [Question]
     private var curr_question: Int
     fileprivate init (_ questions: [Question]) {
         self.questions = questions
         self.curr_question = -1 // the index starts at -1 for the initial call to next getting question 1
     }
-    
-    static func emptyQuiz() -> Quiz
-    {
-        return Quiz([Question]())
-    }
-    
     /* for testing */
     convenience init () {
         self.init([Question(name: "Test Question")])
@@ -46,43 +54,45 @@ class Quiz : Codable
     }
     
     // keeps the index from going past count so that it can pong between -1 and count, both represent nil
-    private func incrementIndex() {
+    private func incrementIndex() -> Int {
         curr_question = min(questions.count,curr_question+1)
+        return curr_question
     }
     
     // keeps the index from going past -1 so that it can pong between -1 and count, both represent nil
-    private func decrementIndex() {
+    private func decrementIndex() -> Int {
         curr_question = max(-1,curr_question-1)
+        return curr_question
+    }
+    
+    private func peek(at index: Int) -> Question? {
+        return 0 <= index && index < questions.count ? questions[curr_question] : nil
     }
     
     func next () -> Question? {
-        incrementIndex()
-        return curr_question < questions.count ? questions[curr_question] : nil
+        return peek(at: incrementIndex())
     }
     
     func prev () -> Question? {
-        decrementIndex()
-        return curr_question >= 0 ? questions[curr_question] : nil
+        return peek(at: decrementIndex())
     }
 }
 
-class Question : Codable
-{
+/*
+ class Room
+ {
+ var name: String
+ var peer: MCPeerID
+ init(name: String, peer: MCPeerID)
+ {
+ self.name = name
+ self.peer = peer
+ }
+ }*/
+
+class Question : Codable {
     var name: String
     var answers: [Answer] = [Answer]()
-    
-    func getAnswer(_ index: Int) -> Answer?
-    {
-        if index < answers.count && index >= 0
-        {
-            return answers[index]
-        }
-        else
-        {
-            return nil
-        }
-    }
-    
     init (name: String) {
         self.name = name
         //self.answers = answers
@@ -101,6 +111,7 @@ class Answer : Codable
     }
 }
 
+//Maintains a list of answer indeces to pass to json
 class StudentAnswer : Codable
 {
     var displayName : String
@@ -113,14 +124,3 @@ class StudentAnswer : Codable
     }
 }
 
-class QuestionAnswer
-{
-    var name : String
-    var answerIndex : Int
-    
-    init(name: String, answerIndex: Int)
-    {
-        self.name = name
-        self.answerIndex = answerIndex
-    }
-}

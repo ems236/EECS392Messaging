@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MultipeerConnectivity
 
 enum MessageTypes: UInt8
 {
@@ -20,7 +21,7 @@ enum MessageTypes: UInt8
 protocol MessegeReceiverDelegate
 {
     func receiveQuiz(_ quiz: Quiz)
-    func receiveAnswers(_ answers: Answer)
+    func receiveAnswers(_ answers: StudentAnswer)
     func receiveDiscussionPost(_ message: DiscussionPost)
     func receiveQuestionPost(_ question: TeacherQuestion)
 }
@@ -43,7 +44,7 @@ class MessageCoder
         return nil
     }
 
-    func decodeMessage(_ message: Data)
+    func decodeMessage(_ message: Data, peer: MCPeerID)
     {
         //read fist byte
         guard let typeEnum = MessageTypes(rawValue: [UInt8](message).first ?? 0)
@@ -65,6 +66,10 @@ class MessageCoder
             }
             print("received quiz")
         case .answers:
+            if let answers = try? decoder.decode(StudentAnswer.self, from: messageBody)
+            {
+                delegate?.receiveAnswers(answers)
+            }
             print("answers")
         case .question:
             print("Question received")
