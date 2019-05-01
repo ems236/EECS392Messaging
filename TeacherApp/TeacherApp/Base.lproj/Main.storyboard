@@ -469,14 +469,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cx1-mR-vBe">
-                                            <rect key="frame" x="21" y="11" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cx1-mR-vBe">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="cx1-mR-vBe" secondAttribute="trailing" constant="15" id="5wM-lg-TPe"/>
+                                        <constraint firstItem="cx1-mR-vBe" firstAttribute="leading" secondItem="TpP-NI-lfr" secondAttribute="leading" constant="15" id="8KN-gk-R8s"/>
+                                        <constraint firstItem="cx1-mR-vBe" firstAttribute="height" secondItem="TpP-NI-lfr" secondAttribute="height" id="Quv-Tq-QNH"/>
+                                        <constraint firstItem="cx1-mR-vBe" firstAttribute="centerY" secondItem="TpP-NI-lfr" secondAttribute="centerY" id="efV-XY-1KD"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="NameLabel" destination="cx1-mR-vBe" id="F9f-h7-2UW"/>

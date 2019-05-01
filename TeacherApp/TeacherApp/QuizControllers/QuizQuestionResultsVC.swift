@@ -12,7 +12,7 @@ class QuizQuestionResultsVC: UIViewController {
 
     var question: Question!
     var questionIndex: Int!
-    var answers = [QuestionAnswer]()
+    var answers = [[QuestionAnswer]]()
     var answerTable : QuizAnswerTableVC!
     
     
@@ -35,10 +35,6 @@ class QuizQuestionResultsVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(answerReceived(_:)), name: .answerSubmitted, object: nil)
         
-        answers.sort
-        {
-            return $0.answerIndex < $1.answerIndex
-        }
         answerTable.answers = answers
         answerTable.correctAnswer = question.answers.firstIndex(where: {$0.isCorrect}) ?? -1
         answerTable.tableView.reloadData()
@@ -47,16 +43,16 @@ class QuizQuestionResultsVC: UIViewController {
     @objc
     func answerReceived(_ notification:Notification)
     {
-        if let dict = notification.userInfo as? [String : StudentAnswer], let answer = dict["answer"], let  _ = answer.answers[questionIndex]
+        if let dict = notification.userInfo as? [String : StudentAnswer], let answer = dict["answer"], answer.answers.count > questionIndex
         {
-            let newAnswer = QuestionAnswer(name: answer.displayName, answerIndex: answer.answers[questionIndex]!)
-            insertSortedAnswer(answer: newAnswer)
+            let newAnswer = QuestionAnswer(name: answer.displayName, answerIndex: answer.answers[questionIndex])
+            answers[newAnswer.answerIndex].append(newAnswer)
             answerTable.answers = answers
             answerTable.tableView.reloadData()
         }
     }
     
-    func insertSortedAnswer(answer: QuestionAnswer)
+    /*func insertSortedAnswer(answer: QuestionAnswer)
     {
         for i in answer.answerIndex ... 0
         {
@@ -67,7 +63,7 @@ class QuizQuestionResultsVC: UIViewController {
             }
         }
         answers.insert(answer, at: 0)
-    }
+    }*/
 
     /*
     // MARK: - Navigation

@@ -109,6 +109,7 @@ class EditQuizQuestionVC: UIViewController
         {
             //When coming in, all are fields are nonempty if answer exists
             answerPicker.selectRow(answer, inComponent: 0, animated: false)
+            AnswerPickerField.text = letters[answer]
         }
         
         

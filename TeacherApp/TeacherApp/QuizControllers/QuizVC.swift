@@ -35,8 +35,9 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
             case "QuizQuestionAnswers":
                 let QuestionResultsVC = segue.destination as! QuizQuestionResultsVC
                 QuestionResultsVC.question = sender as! Question
-                QuestionResultsVC.answers = studentAnswers.map({QuestionAnswer(name: $0.displayName, answerIndex: $0.answers[selectedIndex] ?? 0)})
+                QuestionResultsVC.answers = makeAnswersArray(questionIndex: selectedIndex)
                 QuestionResultsVC.questionIndex = selectedIndex
+                print("Made Answers")
             default: break
             }
         }
@@ -45,9 +46,26 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        quiz.questions.append(Question(name: "My new Question"))
-        quiz.questions.append(Question(name: "My second Question"))
- 
+        
+        let testQuestion1 = Question(name: "A question")
+        testQuestion1.answers.append(Answer(isCorrect: false, text: "You idiot"))
+        testQuestion1.answers.append(Answer(isCorrect: true, text: "Smartboi"))
+        
+        let testQuestion2 = Question(name: "A question")
+        testQuestion2.answers.append(Answer(isCorrect: true, text: "Smartboi"))
+        testQuestion2.answers.append(Answer(isCorrect: false, text: "You idiot"))
+        testQuestion2.answers.append(Answer(isCorrect: false, text: "You idiot"))
+        testQuestion2.answers.append(Answer(isCorrect: false, text: "You idiot"))
+        
+        quiz.questions.append(testQuestion1)
+        quiz.questions.append(testQuestion2)
+        
+        let answers1 = StudentAnswer(name: "Bobbert", answerIndeces: [1, 3])
+        let answers2 = StudentAnswer(name: "Boblin", answerIndeces: [0, 2])
+        let answers3 = StudentAnswer(name: "alan", answerIndeces: [1, 0])
+        
+        studentAnswers = [answers1, answers2, answers3]
+        
         questionTable.parentDelegate = self
         questionTable.quiz = quiz
         questionTable.tableView.reloadData()
@@ -91,6 +109,24 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         self.performSegue(withIdentifier: identifier, sender: data)
     }
 
+    func makeAnswersArray(questionIndex: Int) -> [[QuestionAnswer]]
+    {
+        var sortedanswers = [[QuestionAnswer]]()
+        let answers = studentAnswers.map({QuestionAnswer(name: $0.displayName, answerIndex: $0.answers[questionIndex])})
+        
+        for _ in 0 ..< quiz.questions[questionIndex].answers.count
+        {
+            sortedanswers.append([QuestionAnswer]())
+        }
+        
+        for answer in answers
+        {
+            sortedanswers[answer.answerIndex].append(answer)
+        }
+        
+        return sortedanswers
+    }
+    
     @IBAction func NewQuestion(_ sender: Any)
     {
         self.performSegue(withIdentifier: "QuizQuestionEdit", sender: nil)

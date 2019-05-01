@@ -101,18 +101,12 @@ class Answer : Codable
 class StudentAnswer : Codable
 {
     var displayName : String
-    var answers = [Int : Int]()
+    var answers = [Int]()
     
-    init(name: String, questionIndeces: [Int], answerIndeces: [Int])
+    init(name: String, answerIndeces: [Int])
     {
         self.displayName = name
-        if questionIndeces.count == answerIndeces.count
-        {
-            for i in 1 ..< questionIndeces.count
-            {
-                answers[questionIndeces[i]] = answerIndeces[i]
-            }
-        }
+        answers = answerIndeces
     }
 }
 
