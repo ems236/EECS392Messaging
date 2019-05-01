@@ -57,8 +57,11 @@ class MessageCoder
         
         switch typeEnum {
         case .message:
-            print("Received message")
-            //delegate?.receiveDiscussionPost(<#T##message: Any##Any#>)
+            print("Received message post")
+            if let post = try? decoder.decode(DiscussionPost.self, from: messageBody)
+            {
+                delegate?.receiveDiscussionPost(post)
+            }
         case .quiz:
             if let quiz = try? decoder.decode(Quiz.self, from: messageBody)
             {
@@ -73,10 +76,11 @@ class MessageCoder
             print("answers")
         case .question:
             print("Question received")
-            //if let question = try? decoder.decode(<#T##type: Decodable.Protocol##Decodable.Protocol#>, from: <#T##Data#>)
-            //{
-                //delegate?.
-            //}
+            if let question = try? decoder.decode(TeacherQuestion.self, from: messageBody)
+            {
+                print("Decoded question")
+                delegate?.receiveQuestionPost(question)
+            }
         default:
             return
         }

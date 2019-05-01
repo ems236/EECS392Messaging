@@ -22,7 +22,7 @@ class StudentTabBarController: UITabBarController {
     
     @objc func handleNotificationStartNewQuiz(_ notification: Notification)
     {
-        if let userInfo = notification.userInfo, let q = userInfo[NotificationUserData.quizReceived] as? QuizViewModel?
+        if let userInfo = notification.userInfo, let q = userInfo[NotificationUserData.quizReceived.rawValue] as? QuizViewModel?
         {
             //let message = (quiz) ? "Dealer Won" : "You Won!"
             let alert = UIAlertController(title: "Quiz!", message: "The instructor has sent you a quiz.", preferredStyle: .alert)

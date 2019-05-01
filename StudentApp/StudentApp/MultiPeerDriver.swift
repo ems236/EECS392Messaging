@@ -42,6 +42,7 @@ class MultiPeerDriver : NSObject
     lazy var session : MCSession = {
         let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: .required)
         session.delegate = self
+        print(session.connectedPeers)
         return session
     }()
     
@@ -50,6 +51,38 @@ class MultiPeerDriver : NSObject
         teacherPeerId = peer
         serviceBrowser.invitePeer(peer, to: session, withContext: nil, timeout: 10)
         print("Attempting to connect to peer")
+    }
+    
+    func postQuestion(_ question: TeacherQuestion) -> Bool
+    {
+        if let questionData = messageCoder.encodeMessage(question, type: .question)
+        {
+            return sendDataGenericError(data: questionData)
+        }
+        else
+        {
+            print("Failed to Encode")
+            return false
+        }
+    }
+    
+    private func sendDataGenericError(data: Data) -> Bool
+    {
+        if let teacherPeer = teacherPeerId
+        {
+            do
+            {
+                try session.send(data, toPeers: [teacherPeer], with: .reliable)
+            }
+            catch
+            {
+                print("Failed to send")
+                return false
+            }
+            return true
+        }
+        return false
+            
     }
     
     class TempQuestion : Codable
@@ -75,7 +108,7 @@ extension MultiPeerDriver : MCNearbyServiceBrowserDelegate
         //browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
         print("Inviting teacher")
         print("Discovered")
-        NotificationCenter.default.post(name: .discoveredTeacher, object: nil, userInfo: [NotificationUserData.peerChange: peerID])
+        NotificationCenter.default.post(name: .discoveredTeacher, object: nil, userInfo: [NotificationUserData.peerChange.rawValue: peerID])
         print("discovered teacher")
     }
     
@@ -83,7 +116,7 @@ extension MultiPeerDriver : MCNearbyServiceBrowserDelegate
     {
         var peerInfo = [String : MCPeerID]()
         peerInfo["peer"] = peerID
-        NotificationCenter.default.post(name: .lostTeacher, object: nil, userInfo: [NotificationUserData.peerChange: peerID])
+        NotificationCenter.default.post(name: .lostTeacher, object: nil, userInfo: [NotificationUserData.peerChange.rawValue: peerID])
         teacherPeerId = nil
         print("Lost connection to teacher?")
     }
@@ -102,6 +135,7 @@ extension MultiPeerDriver : MCSessionDelegate
             else if state == .notConnected
             {
                 serviceBrowser.startBrowsingForPeers()
+                //NEED TO UNWIND TO ROOM SELECT PAGE.
                 print("Browsing for teacher again")
             }
             //Handle teacher connect here
@@ -145,12 +179,12 @@ extension MultiPeerDriver : MessegeReceiverDelegate
 {
     func receiveQuiz(_ quiz: Quiz)
     {
-        NotificationCenter.default.post(name: .quizReceived, object: nil, userInfo: [NotificationUserData.quizReceived : quiz])
+        NotificationCenter.default.post(name: .quizReceived, object: nil, userInfo: [NotificationUserData.quizReceived.rawValue : quiz])
     }
     
     func receiveDiscussionPost(_ message: DiscussionPost)
     {
-        NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: [NotificationUserData.messageReceived: message])
+        NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: [NotificationUserData.messageReceived.rawValue: message])
     }
     
     func receiveAnswers(_ answers: StudentAnswer) {

@@ -32,11 +32,11 @@ class QuestionsTableVC: UITableViewController {
     @objc
     func questionPosted(_ notification: Notification)
     {
-        if let dict = notification.userInfo as? [NotificationUserData : TeacherQuestion], let question = dict[.questionPosted]
+        if let dict = notification.userInfo as? [String : TeacherQuestion], let question = dict[NotificationUserData.questionPosted.rawValue]
         {
             questions.append(question)
+            tableView.reloadData()
         }
-        tableView.reloadData()
     }
     
     func deleteQuestion(_ question: TeacherQuestion)

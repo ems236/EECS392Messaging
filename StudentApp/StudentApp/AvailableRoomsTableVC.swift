@@ -21,21 +21,31 @@ class AvailableRoomsTableVC: UITableViewController {
     
     @objc func foundRoom(_ notification: Notification)
     {
-        if let data = notification.userInfo as? [NotificationUserData: MCPeerID], let peer = data[.peerChange]
+        if let data = notification.userInfo as? [String: MCPeerID]/*, let peer = data[.peerChange]*/
         {
-            availableRooms.append(peer)
-            tableView.reloadData()
+            if let peer = data[NotificationUserData.peerChange.rawValue]
+            {
+                availableRooms.append(peer)
+                tableView.reloadData()
+            }
+            
+            //print("No peer")
         }
         
         else
         {
+            if let data = notification.userInfo
+            {
+                print("Failed cast")
+                print(data)
+            }
             print("No data")
         }
     }
     
     @objc func lostRoom(_ notification: Notification)
     {
-        if let data = notification.userInfo as? [NotificationUserData: MCPeerID], let peer = data[.peerChange], let index = availableRooms.lastIndex(of: peer)
+        if let data = notification.userInfo as? [String: MCPeerID], let peer = data[NotificationUserData.peerChange.rawValue], let index = availableRooms.lastIndex(of: peer)
         {
             availableRooms.remove(at: index)
             tableView.reloadData()

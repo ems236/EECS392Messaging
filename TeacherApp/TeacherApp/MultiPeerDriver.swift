@@ -30,6 +30,9 @@ class MultiPeerDriver : NSObject
     {
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerID, discoveryInfo: nil, serviceType: TEACHERSERVICE)
         super.init()
+        
+        messagecoder.delegate = self
+        
         serviceAdvertiser.delegate = self
         serviceAdvertiser.startAdvertisingPeer()
         print("Advertising")
@@ -141,7 +144,7 @@ extension MultiPeerDriver : MCNearbyServiceAdvertiserDelegate
         //Should be a little smarter and fill the sessions array
         invitationHandler(true, findEmptySession())
         newPeers.append(peerID)
-        NotificationCenter.default.post(name: .studentJoined, object: nil, userInfo: [NotificationUserData.peerChange: peerID])
+        NotificationCenter.default.post(name: .studentJoined, object: nil, userInfo: [NotificationUserData.peerChange.rawValue: peerID])
         print("Connected")
     }
 }
@@ -183,19 +186,20 @@ extension MultiPeerDriver : MessegeReceiverDelegate
 {
     func receiveDiscussionPost(_ message: DiscussionPost)
     {
-        NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: [NotificationUserData.messageReceived: message])
+        NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: [NotificationUserData.messageReceived.rawValue: message])
         return
     }
     
     func receiveAnswers(_ answers: StudentAnswer)
     {
-        NotificationCenter.default.post(name: .answerSubmitted, object: nil, userInfo: [NotificationUserData.answersReceived: answers])
+        NotificationCenter.default.post(name: .answerSubmitted, object: nil, userInfo: [NotificationUserData.answersReceived.rawValue: answers])
         return
     }
     
     func receiveQuestionPost(_ question: TeacherQuestion)
     {
-        NotificationCenter.default.post(name: .questionPosted , object: nil, userInfo: [NotificationUserData.questionPosted: question])
+        print("Posting a question notification")
+        NotificationCenter.default.post(name: .questionPosted , object: nil, userInfo: [NotificationUserData.questionPosted.rawValue: question])
         return
     }
     

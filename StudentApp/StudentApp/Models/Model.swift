@@ -16,6 +16,7 @@ class ConnectionData
     private static let SHARED_INSTANCE = ConnectionData()
     static func instance() -> ConnectionData { return SHARED_INSTANCE }
     
+    private let multipeerdriver = MultiPeerDriver.multipeerdriver
     private var isLive: Bool
     private var currentSlide: Int
     private var _teacherSlide: Int
@@ -34,6 +35,8 @@ class ConnectionData
     
     func submitQuestionToTeacher (header: String, desc: String)
     {
+        let question = TeacherQuestion(head: header, body: desc)
+        multipeerdriver.postQuestion(question)
         /* Should transfer this data to the teacher host in a way that the teacher app knows its a question */
     }
     
