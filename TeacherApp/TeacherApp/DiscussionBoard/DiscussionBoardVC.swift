@@ -37,6 +37,17 @@ class DiscussionBoardVC: UIViewController {
         MessageText.keyboardType = .default
         MessageText.isUserInteractionEnabled = true
         
+        
+        let message1 = DiscussionPost(text: "Whoah boy here comes a long one This might have 2 maybe even 3 line breaks it's insane come on man give me extra credit for all this typing", sender: "Boblin")
+        message1.isTeacher = false
+        
+        let message2 = DiscussionPost(text: "A quickie", sender: "Geoff")
+        message2.isTeacher = false
+        
+        let message3 = DiscussionPost(text: "A shorter message but it's from the teaacher so that's cool", sender: "Ayy Lmao")
+        
+        messages = [message1, message2, message3]
+        
         messageTable.loadMessages(messages)
     }
     

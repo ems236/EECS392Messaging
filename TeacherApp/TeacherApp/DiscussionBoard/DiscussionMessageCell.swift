@@ -22,11 +22,6 @@ class DiscussionMessageCell: UITableViewCell {
     {
         NameLabel.text = message.sender
         MessageText.text = message.text
-        
-        if message.isTeacher
-        {
-            backgroundColor = UIColor(red: 252, green: 240, blue: 190, alpha: 1)
-        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -65,6 +65,12 @@ class DiscussionMessagesTableVC: UITableViewController
         cell.setMessage(message)
         cell.contentView.transform = CGAffineTransform(scaleX: 1,y: -1);
         
+        if message.isTeacher
+        {
+            print("Gothere")
+            cell.backgroundColor = UIColor(red: 252, green: 240, blue: 190, alpha: 1)
+        }
+        
         return cell
     }
 
