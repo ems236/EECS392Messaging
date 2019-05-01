@@ -8,4 +8,15 @@
 
 import Foundation
 
-class DiscussionPost : Codable {}
+class DiscussionPost : Codable
+{
+    var text: String
+    var sender: String
+    var isTeacher = true
+    
+    init(text: String, sender: String)
+    {
+        self.text = text
+        self.sender = sender
+    }
+}
