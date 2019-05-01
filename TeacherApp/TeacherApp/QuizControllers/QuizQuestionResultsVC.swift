@@ -40,6 +40,7 @@ class QuizQuestionResultsVC: UIViewController {
             return $0.answerIndex < $1.answerIndex
         }
         answerTable.answers = answers
+        answerTable.correctAnswer = question.answers.firstIndex(where: {$0.isCorrect}) ?? -1
         answerTable.tableView.reloadData()
     }
     

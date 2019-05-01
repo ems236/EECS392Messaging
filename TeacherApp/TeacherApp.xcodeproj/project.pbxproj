@@ -25,6 +25,7 @@
 		6CD82A5E2278AFAF0076E35F /* TableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A5D2278AFAE0076E35F /* TableVC.swift */; };
 		6CD82A602278BC1D0076E35F /* ChildTableSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A5F2278BC1D0076E35F /* ChildTableSelectDelegate.swift */; };
 		6CD82A62227922430076E35F /* QuizAnswerTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A61227922430076E35F /* QuizAnswerTableVC.swift */; };
+		6CD82A642279308E0076E35F /* QuestionAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A632279308E0076E35F /* QuestionAnswerCell.swift */; };
 		7ACF7E7422741168006B8275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF7E7322741168006B8275 /* AppDelegate.swift */; };
 		7ACF7E7622741168006B8275 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF7E7522741168006B8275 /* ViewController.swift */; };
 		7ACF7E7922741168006B8275 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ACF7E7722741168006B8275 /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 		6CD82A5D2278AFAE0076E35F /* TableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableVC.swift; path = ../../../TestContainer/TestContainer/TableVC.swift; sourceTree = "<group>"; };
 		6CD82A5F2278BC1D0076E35F /* ChildTableSelectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildTableSelectDelegate.swift; sourceTree = "<group>"; };
 		6CD82A61227922430076E35F /* QuizAnswerTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAnswerTableVC.swift; sourceTree = "<group>"; };
+		6CD82A632279308E0076E35F /* QuestionAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAnswerCell.swift; sourceTree = "<group>"; };
 		7ACF7E7022741168006B8275 /* TeacherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeacherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ACF7E7322741168006B8275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ACF7E7522741168006B8275 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				6CD82A332277F10E0076E35F /* QuizVC.swift */,
 				6CD82A37227804950076E35F /* QuizQuestionCell.swift */,
 				6CD82A61227922430076E35F /* QuizAnswerTableVC.swift */,
+				6CD82A632279308E0076E35F /* QuestionAnswerCell.swift */,
 			);
 			path = QuizControllers;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CD82A212277A0050076E35F /* DiscussionPostModel.swift in Sources */,
+				6CD82A642279308E0076E35F /* QuestionAnswerCell.swift in Sources */,
 				6CD82A342277F10E0076E35F /* QuizVC.swift in Sources */,
 				6CD82A1D2276A12C0076E35F /* MessegeCoder.swift in Sources */,
 				6CD82A15227684C10076E35F /* QuizModel.swift in Sources */,
