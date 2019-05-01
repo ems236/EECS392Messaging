@@ -172,8 +172,9 @@ class EditQuizQuestionVC: UIViewController
 
 extension EditQuizQuestionVC: UITextFieldDelegate
 {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //textField.resignFirstResponder()  //if desired
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
         return true
     }
     
