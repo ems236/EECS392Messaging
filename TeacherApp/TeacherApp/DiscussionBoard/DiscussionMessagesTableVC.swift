@@ -64,14 +64,17 @@ class DiscussionMessagesTableVC: UITableViewController
         let message = reverseIndex(indexPath.row, list: messages)
         cell.setMessage(message)
         cell.contentView.transform = CGAffineTransform(scaleX: 1,y: -1);
-        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    {
+        let message = reverseIndex(indexPath.row, list: messages)
         if message.isTeacher
         {
             print("Gothere")
-            cell.backgroundColor = UIColor(red: 252, green: 240, blue: 190, alpha: 1)
+            cell.backgroundColor = UIColor(red: 0.988, green: 0.941, blue: 0.745, alpha: 1)
         }
-        
-        return cell
     }
 
     /*
