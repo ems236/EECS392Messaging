@@ -160,6 +160,13 @@ extension MultiPeerDriver : MCSessionDelegate
             //Don't need to do anything with the status bool
             sendDataGenericError(session: session, data: quizData, peers: [peerID])
         }
+        
+        if state == .notConnected && session.connectedPeers.count == 0, let sessionIndex = connectedSessions.firstIndex(of: session)
+        {
+            //If all students in a session leave, delete it.
+            connectedSessions.remove(at: sessionIndex)
+            print("Removing empty session")
+        }
         print("State changed")
     }
     

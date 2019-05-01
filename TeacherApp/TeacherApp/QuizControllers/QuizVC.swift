@@ -71,7 +71,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         
         studentAnswers = [answers1, answers2, answers3]
         
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        ControlsView.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         TitleText.delegate = self
         
         
@@ -228,6 +228,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     }
     @IBOutlet weak var StatusLabel: UILabel!
     @IBOutlet weak var TitleText: UITextField!
+    @IBOutlet weak var ControlsView: UIView!
 }
 
 extension QuizVC: UITextFieldDelegate

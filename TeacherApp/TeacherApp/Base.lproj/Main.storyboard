@@ -229,6 +229,7 @@
                     <connections>
                         <outlet property="ActionButton" destination="xTL-Wp-QAY" id="cDo-kD-t53"/>
                         <outlet property="AddButton" destination="m9A-Ia-Qqe" id="tVX-tn-WQd"/>
+                        <outlet property="ControlsView" destination="HHD-S1-uHQ" id="chp-uR-4Ui"/>
                         <outlet property="StatusLabel" destination="FHI-4d-Hdb" id="dXl-Ul-EdK"/>
                         <outlet property="TitleText" destination="Lj6-ak-3Eq" id="jRQ-es-hDW"/>
                         <segue destination="JeC-t2-EWd" kind="show" identifier="QuizQuestionAnswers" id="0Ru-sq-noU"/>
@@ -490,9 +491,20 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-Aq-8F1" userLabel="Controls">
                                 <rect key="frame" x="0.0" y="64" width="375" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ScC-pD-aiX">
+                                        <rect key="frame" x="10" y="15" width="355" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="ScC-pD-aiX" firstAttribute="top" secondItem="dZR-Aq-8F1" secondAttribute="top" constant="15" id="R9g-uS-T80"/>
+                                    <constraint firstItem="ScC-pD-aiX" firstAttribute="leading" secondItem="dZR-Aq-8F1" secondAttribute="leading" constant="10" id="bVx-at-zRj"/>
                                     <constraint firstAttribute="height" constant="100" id="eUc-tZ-K5S"/>
+                                    <constraint firstAttribute="trailing" secondItem="ScC-pD-aiX" secondAttribute="trailing" constant="10" id="m0b-dh-wiU"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dve-Mg-P99">
@@ -514,6 +526,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="icR-nT-JXE"/>
                     </view>
+                    <connections>
+                        <outlet property="TitleLabel" destination="ScC-pD-aiX" id="2WI-fI-IKy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqy-5j-zgH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

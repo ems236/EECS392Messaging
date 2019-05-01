@@ -11,6 +11,7 @@ import UIKit
 class QuizAnswerTableVC: UITableViewController {
 
     let letters = ["A", "B", "C", "D"]
+    var question: Question!
     var answers = [[QuestionAnswer]]()
     var correctAnswer = -1
     
@@ -29,7 +30,7 @@ class QuizAnswerTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
-        return letters[section]
+        return letters[section] + ": " + question.answers[section].text
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int

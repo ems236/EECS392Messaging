@@ -16,6 +16,8 @@ class QuizQuestionResultsVC: UIViewController {
     var answerTable : QuizAnswerTableVC!
     
     
+    @IBOutlet weak var TitleLabel: UILabel!
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if let id = segue.identifier
@@ -35,8 +37,12 @@ class QuizQuestionResultsVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(answerReceived(_:)), name: .answerSubmitted, object: nil)
         
+        TitleLabel.text = question.name
+        TitleLabel.sizeToFit()
+        
         answerTable.answers = answers
         answerTable.correctAnswer = question.answers.firstIndex(where: {$0.isCorrect}) ?? -1
+        answerTable.question = question
         answerTable.tableView.reloadData()
     }
     
@@ -65,15 +71,4 @@ class QuizQuestionResultsVC: UIViewController {
         }
         answers.insert(answer, at: 0)
     }*/
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
