@@ -14,7 +14,8 @@ class AvailableRoomsTableVC: UITableViewController {
     private let driver = MultiPeerDriver.instance
     var availableRooms = [MCPeerID]()
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
@@ -102,6 +103,9 @@ class AvailableRoomsTableVC: UITableViewController {
         self.performSegue(withIdentifier: "JoinRoom", sender: selectedPeer)
     }
 
+    @IBAction func SettingsBtn(_ sender: Any)
+    {
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
