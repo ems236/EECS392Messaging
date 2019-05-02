@@ -77,7 +77,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XJE-2T-W4w"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Discussions" image="Discussion" selectedImage="Discussion" id="6Ia-Qh-QUc"/>
+                    <tabBarItem key="tabBarItem" title="Discussions" image="Discussion_Shaded" selectedImage="Discussion_Shaded" id="6Ia-Qh-QUc"/>
                     <connections>
                         <outlet property="ControlBottom" destination="zof-O1-48j" id="fC7-y7-gor"/>
                         <outlet property="MessageText" destination="Kcz-ix-nkf" id="jfe-MO-IDd"/>
@@ -312,7 +312,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Ma-c6-dik"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" image="Quiz" selectedImage="Quiz" id="ovA-ed-45M"/>
+                    <tabBarItem key="tabBarItem" title="Item 1" image="Slides" selectedImage="Slides" id="ovA-ed-45M"/>
                     <navigationItem key="navigationItem" title="Quiz" id="O7o-8h-lqy">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="m9A-Ia-Qqe" userLabel="New">
                             <connections>
@@ -421,7 +421,7 @@
         <scene sceneID="67C-gS-aV5">
             <objects>
                 <navigationController id="rYM-js-i8T" userLabel="QuizNav" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Quiz" image="Quiz" selectedImage="Quiz" id="9hc-J4-prY"/>
+                    <tabBarItem key="tabBarItem" title="Quiz" image="Slides" selectedImage="Slides" id="9hc-J4-prY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DIy-pu-V0k">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1004,9 +1004,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Discussion" width="19.200000762939453" height="19.200000762939453"/>
+        <image name="Discussion_Shaded" width="19.200000762939453" height="19.200000762939453"/>
         <image name="Question" width="19.200000762939453" height="21.120000839233398"/>
-        <image name="Quiz" width="19.200000762939453" height="19.200000762939453"/>
+        <image name="Slides" width="19.200000762939453" height="19.200000762939453"/>
         <image name="settings" width="30" height="30"/>
     </resources>
 </document>
