@@ -94,9 +94,11 @@ class MultiPeerDriver : NSObject
     
     private func broadcastData(data: Data, excluding: MCPeerID? = nil) -> Bool
     {
+        print("In broadcast")
         for session in connectedSessions
         {
             let peers = getSessionPeersExcluding(session: session, excluding: excluding)
+            print("In broadcast session")
             if peers.count > 0 && !sendDataGenericError(session: session, data: data, peers: peers)
             {
                 return false
@@ -121,11 +123,14 @@ class MultiPeerDriver : NSObject
     {
         if let encodedQuiz = messagecoder.encodeMessage(quiz, type: .quiz)
         {
+            print("posting quiz")
             //Give up on everything on an error
             if !broadcastData(data: encodedQuiz)
             {
+                print("failed to post quiz")
                 return false
             }
+            print("posted quiz")
             //Reset new peers and current quiz
             newPeers = [MCPeerID]()
             currentQuiz = encodedQuiz
@@ -159,7 +164,7 @@ class MultiPeerDriver : NSObject
         else
         {
             //Make a UI alert or something
-            print("Failed to encode quiz")
+            print("Failed to encode message")
             return false
         }
     }
