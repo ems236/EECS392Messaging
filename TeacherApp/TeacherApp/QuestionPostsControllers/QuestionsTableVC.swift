@@ -18,7 +18,6 @@ class QuestionsTableVC: UITableViewController {
             switch id
             {
             case "ShowQuestion":
-                //print("Gothere")
                 let PostVC = segue.destination as! QuestionPostVC
                 PostVC.question = sender as! TeacherQuestion
             default: break

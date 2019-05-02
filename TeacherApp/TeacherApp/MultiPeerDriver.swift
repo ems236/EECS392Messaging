@@ -184,8 +184,7 @@ extension MultiPeerDriver : MCNearbyServiceAdvertiserDelegate
         //Should be a little smarter and fill the sessions array
         invitationHandler(true, findEmptySession())
         newPeers.append(peerID)
-        NotificationCenter.default.post(name: .studentJoined, object: nil, userInfo: [NotificationUserData.peerChange.rawValue: peerID])
-        print("Connected")
+        print("Invited")
     }
 }
 
@@ -194,18 +193,27 @@ extension MultiPeerDriver : MCSessionDelegate
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState)
     {
         //Send quiz to newly connected peer if possible
-        if state == .connected, let peerIndex = newPeers.firstIndex(of: peerID), let quizData = currentQuiz
+        if state == .connected
         {
-            newPeers.remove(at: peerIndex)
-            //Don't need to do anything with the status bool
-            sendDataGenericError(session: session, data: quizData, peers: [peerID])
+            print("Connected")
+            NotificationCenter.default.post(name: .studentJoined, object: nil, userInfo: [NotificationUserData.peerChange.rawValue: peerID])
+            if let peerIndex = newPeers.firstIndex(of: peerID), let quizData = currentQuiz
+            {
+                newPeers.remove(at: peerIndex)
+                //Don't need to do anything with the status bool
+                sendDataGenericError(session: session, data: quizData, peers: [peerID])
+            }
         }
         
-        if state == .notConnected && session.connectedPeers.count == 0, let sessionIndex = connectedSessions.firstIndex(of: session)
+        if state == .notConnected
         {
-            //If all students in a session leave, delete it.
-            connectedSessions.remove(at: sessionIndex)
-            print("Removing empty session")
+            print("Disconnected")
+            NotificationCenter.default.post(name: .studentDisconnect, object: nil)
+            if session.connectedPeers.count == 0, let sessionIndex = connectedSessions.firstIndex(of: session)
+            {
+                connectedSessions.remove(at: sessionIndex)
+                print("Removing empty session")
+            }
         }
         print("State changed")
     }
@@ -213,7 +221,7 @@ extension MultiPeerDriver : MCSessionDelegate
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID)
     {
         messagecoder.decodeMessage(data, peer: peerID)
-        print("Message received")
+        print("data received")
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -238,7 +246,6 @@ extension MultiPeerDriver : MessegeReceiverDelegate
     
     func receiveDiscussionPost(_ message: DiscussionPost)
     {
-        print("is Teacher: " + String(message.isTeacher))
         NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: [NotificationUserData.messageReceived.rawValue: message])
         return
     }
@@ -251,7 +258,6 @@ extension MultiPeerDriver : MessegeReceiverDelegate
     
     func receiveQuestionPost(_ question: TeacherQuestion)
     {
-        print("Posting a question notification")
         NotificationCenter.default.post(name: .questionPosted , object: nil, userInfo: [NotificationUserData.questionPosted.rawValue: question])
         return
     }

@@ -34,7 +34,6 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
             {
             case "ChildQuizTable":
                 questionTable = segue.destination as! QuizQuestionsTableVC
-                //print("Found embedded")
             case "QuizQuestionEdit":
                 let QuestionEditVC = segue.destination as! EditQuizQuestionVC
                 QuestionEditVC.question = sender as? Question
@@ -88,7 +87,6 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     
     func deleteSelectedQuestion()
     {
-        print("deleting")
         quiz.questions.remove(at: selectedIndex)
         questionTable.quiz = quiz
         questionTable.tableView.reloadData()
@@ -96,7 +94,6 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     
     func addQuestion(_ question: Question)
     {
-        print("Adding")
         quiz.questions.append(question)
         questionTable.quiz = quiz
         questionTable.tableView.reloadData()
@@ -104,7 +101,6 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     
     func editQuestion(_ new: Question)
     {
-        print("Editting")
         quiz.questions[selectedIndex] = new
         questionTable.quiz = quiz
         questionTable.tableView.reloadData()

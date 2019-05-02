@@ -261,11 +261,6 @@
             <objects>
                 <tabBarController definesPresentationContext="YES" id="NCm-oP-OWe" customClass="StudentTabBarController" customModule="StudentApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Y9T-H0-60l">
-                        <barButtonItem key="leftBarButtonItem" title="Test Quiz" id="gBf-1B-ZCt">
-                            <connections>
-                                <action selector="testQuiz:" destination="NCm-oP-OWe" id="hBs-If-mCl"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="Jd4-Ix-oxx">
                             <connections>
                                 <segue destination="Dd4-P5-WF2" kind="show" id="MO6-oB-ogx"/>
@@ -279,7 +274,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="OP0-bE-IPH" kind="relationship" relationship="viewControllers" id="gNq-Nr-Ooj"/>
-                        <segue destination="Wgr-QI-kcz" kind="relationship" relationship="viewControllers" id="X3h-Pe-QVp"/>
                         <segue destination="lgv-K9-CnS" kind="unwind" identifier="TeacherDisconnect" unwindAction="disconnectedFromTeacherWithSegue:" id="dJ2-fG-54d"/>
                         <segue destination="UX7-ZU-E1s" kind="relationship" relationship="viewControllers" id="3u8-Ne-vKl"/>
                     </connections>
@@ -288,22 +282,6 @@
                 <exit id="lgv-K9-CnS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1206" y="-78"/>
-        </scene>
-        <!--Slides-->
-        <scene sceneID="ySZ-1e-rX2">
-            <objects>
-                <viewController id="Wgr-QI-kcz" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="gq0-hS-73E">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="cNw-av-Wca"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Slides" image="Slides" landscapeImage="Slides" id="98a-tQ-bBJ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Lh-TD-nVZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-124" y="304"/>
         </scene>
         <!--Settings-->
         <scene sceneID="QSx-mT-7Lb">
@@ -442,7 +420,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E3e-aH-fjx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-124" y="-1180"/>
+            <point key="canvasLocation" x="-124" y="395"/>
         </scene>
         <!--Discussion Messages TableVC-->
         <scene sceneID="BVk-aY-DGD">
@@ -506,12 +484,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hso-Yw-hgT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="873" y="-1180"/>
+            <point key="canvasLocation" x="950" y="395"/>
         </scene>
     </scenes>
     <resources>
         <image name="Question" width="19.200000762939453" height="21.120000839233398"/>
-        <image name="Slides" width="19.200000762939453" height="19.200000762939453"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="MO6-oB-ogx"/>

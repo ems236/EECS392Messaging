@@ -63,7 +63,6 @@ class DiscussionBoardVC: UIViewController {
         {
             DispatchQueue.main.async
             {
-                print("Is teacher still false? " + String(message.isTeacher))
                 self.addMessage(message)
             }
         }
@@ -78,25 +77,17 @@ class DiscussionBoardVC: UIViewController {
             {
                 self.view.layoutIfNeeded()
                 self.ControlBottom.constant = -1 * rect.height
-                print(self.ControlBottom.constant)
             })
-            print("Expanding")
-        }
-        else
-        {
-            print("Failed to expand")
         }
     }
     
     @objc
     func keyboardHide(_ notification: Notification)
     {
-        print("Shrinking")
         UIView.animate(withDuration: 0.25, animations:
         {
             self.view.layoutIfNeeded()
             self.ControlBottom.constant = self.initialConstant
-            print(self.ControlBottom.constant)
         })
     }
     

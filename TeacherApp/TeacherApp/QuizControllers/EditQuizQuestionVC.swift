@@ -69,7 +69,6 @@ class EditQuizQuestionVC: UIViewController
                 let quizController = segue.destination as! QuizVC
                 if let newQuestion = buildQuestionInForm()
                 {
-                    print(newQuestion.name)
                     if let _ = question
                     {
                         quizController.editQuestion(newQuestion)
@@ -149,7 +148,6 @@ class EditQuizQuestionVC: UIViewController
         
         if isForminValid()
         {
-            print("invalid forms")
             return nil
         }
         newQuestion.name = QuestionText.text!

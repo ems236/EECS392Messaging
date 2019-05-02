@@ -58,29 +58,28 @@ class MessageCoder
         
         switch typeEnum {
         case .message:
-            print("Received message post")
             if let post = try? decoder.decode(DiscussionPost.self, from: messageBody)
             {
                 delegate?.forwardData(message, exclude: peer)
                 delegate?.receiveDiscussionPost(post)
+                print("Received discussuion post")
             }
         case .quiz:
             if let quiz = try? decoder.decode(Quiz.self, from: messageBody)
             {
                 delegate?.receiveQuiz(quiz)
+                print("received quiz")
             }
-            print("received quiz")
         case .answers:
             if let answers = try? decoder.decode(StudentAnswer.self, from: messageBody)
             {
                 delegate?.receiveAnswers(answers)
+                print("received answers")
             }
-            print("answers")
         case .question:
-            print("Question received")
             if let question = try? decoder.decode(TeacherQuestion.self, from: messageBody)
             {
-                print("Decoded question")
+                print("received question post")
                 delegate?.receiveQuestionPost(question)
             }
         default:

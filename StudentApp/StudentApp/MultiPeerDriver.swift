@@ -13,19 +13,18 @@ class MultiPeerDriver : NSObject
 {
     private override init()
     {
-        print("Called init")
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: TEACHERSERVICE)
         
         super.init()
         
         serviceBrowser.delegate = self
-        serviceBrowser.startBrowsingForPeers()
         
         messageCoder.delegate = self
         print("Browsing")
     }
     
-    deinit {
+    deinit
+    {
         serviceBrowser.stopBrowsingForPeers()
     }
     static let instance = MultiPeerDriver()
@@ -40,17 +39,35 @@ class MultiPeerDriver : NSObject
     //Lazy so you don't have to initialize it or make it null
     //student will only ever have 1 session
     lazy var session : MCSession = {
+        return makeSession()
+    }()
+    
+    private func makeSession() -> MCSession
+    {
         let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: .required)
         session.delegate = self
-        print(session.connectedPeers)
         return session
-    }()
+    }
+    
+    func startBrowsing()
+    {
+        teacherPeerId = nil
+        session.disconnect()
+        session = makeSession()
+        serviceBrowser.startBrowsingForPeers()
+    }
+    
+    func stopBrowsing()
+    {
+        serviceBrowser.stopBrowsingForPeers()
+    }
     
     func connectToPeer(_ peer: MCPeerID)
     {
         teacherPeerId = peer
         serviceBrowser.invitePeer(peer, to: session, withContext: nil, timeout: 10)
         print("Attempting to connect to peer")
+        //TODO handle connection failures?
     }
     
     func postQuestion(_ question: TeacherQuestion) -> Bool
@@ -61,7 +78,7 @@ class MultiPeerDriver : NSObject
         }
         else
         {
-            print("Failed to Encode")
+            print("Failed to Encode Question")
             return false
         }
     }
@@ -70,12 +87,11 @@ class MultiPeerDriver : NSObject
     {
         if let messageData = messageCoder.encodeMessage(message, type: .message)
         {
-            print("is teacher: " + String(message.isTeacher))
             return sendDataGenericError(data: messageData)
         }
         else
         {
-            print("Failed to Encode")
+            print("Failed to Encode Discussion Post")
             return false
         }
     }
@@ -90,7 +106,7 @@ class MultiPeerDriver : NSObject
             }
             catch
             {
-                print("Failed to send")
+                print("Failed to send data")
                 return false
             }
             return true
@@ -117,11 +133,6 @@ extension MultiPeerDriver : MCNearbyServiceBrowserDelegate
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?)
     {
         //Found teacher
-        
-        //teacherPeerId = peerID
-        //browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
-        print("Inviting teacher")
-        print("Discovered")
         NotificationCenter.default.post(name: .discoveredTeacher, object: nil, userInfo: [NotificationUserData.peerChange.rawValue: peerID])
         print("discovered teacher")
     }
@@ -132,7 +143,7 @@ extension MultiPeerDriver : MCNearbyServiceBrowserDelegate
         peerInfo["peer"] = peerID
         NotificationCenter.default.post(name: .lostTeacher, object: nil, userInfo: [NotificationUserData.peerChange.rawValue: peerID])
         teacherPeerId = nil
-        print("Lost connection to teacher?")
+        print("Lost non-connected teacher service")
     }
 }
 
@@ -143,21 +154,21 @@ extension MultiPeerDriver : MCSessionDelegate
         {
             if state == .connected
             {
-                serviceBrowser.stopBrowsingForPeers()
-                print("Stopping browsing")
+                stopBrowsing()
+                print("Connected to teacher: stopping browsing")
             }
             else if state == .notConnected
             {
-                print("Posting notification for teacher disconnect")
+                print("Teacher disconnection")
                 NotificationCenter.default.post(name: .teacherDisconnect, object: nil)
                 serviceBrowser.startBrowsingForPeers()
-                print("Browsing for teacher again")
             }
             //Handle teacher connect here
         }
     }
     
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID)
+    {
         // == works intelligently in swift
         if let teacher = teacherPeerId, peerID == teacher
         {
@@ -165,28 +176,19 @@ extension MultiPeerDriver : MCSessionDelegate
         }
     }
     
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        
-        if let teacher = teacherPeerId, peerID == teacher
-        {
-            //Handle message here
-        }
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID)
+    {
+        print("Stream received?")
     }
     
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        
-        if let teacher = teacherPeerId, peerID == teacher
-        {
-            //Handle message here
-        }
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress)
+    {
+        print("resource received?")
     }
     
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        
-        if let teacher = teacherPeerId, peerID == teacher
-        {
-            //Handle message here
-        }
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?)
+    {
+        print("resource received?")
     }
 }
 

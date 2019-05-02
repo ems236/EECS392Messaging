@@ -33,7 +33,6 @@ class QuizQuestionsTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return quiz.questions.count
-        //print("Returning 10")
         //return 10
     }
 

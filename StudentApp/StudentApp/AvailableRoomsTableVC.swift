@@ -36,16 +36,6 @@ class AvailableRoomsTableVC: UITableViewController {
                 }
             }
         }
-        
-        else
-        {
-            if let data = notification.userInfo
-            {
-                print("Failed cast")
-                print(data)
-            }
-            print("No data")
-        }
     }
     
     @objc
@@ -59,11 +49,6 @@ class AvailableRoomsTableVC: UITableViewController {
                     self.tableView.reloadData()
             }
         }
-            
-        else
-        {
-            print("No data")
-        }
     }
     
     override func viewDidLoad()
@@ -73,24 +58,12 @@ class AvailableRoomsTableVC: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(foundRoom(_:)), name: .discoveredTeacher, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(lostRoom(_:)), name: .lostTeacher, object: nil)
-
-        //print("Encoding/Decoding")
-        //var testEncoding = MessageCoder()
-        //var testQuiz = Quiz()
-        
-        //var data = testEncoding.encodeMessage(testQuiz, type: .quiz)?.advanced(by: 1)
-        //let jsonString = String(data: data!, encoding: .utf8)
-        //print(jsonString)
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
+        driver.startBrowsing()
+        availableRooms.removeAll()
         self.tableView.reloadData()
     }
 

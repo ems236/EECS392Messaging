@@ -19,16 +19,27 @@ class StudentTabBarController: UITabBarController {
             switch (id)
             {
             case "TeacherDisconnect":
-                let roomsVC = segue.destination as! AvailableRoomsTableVC
-                roomsVC.availableRooms.removeAll()
+                //I guess there isn't really any setup for this.
+                print("Diconnecting teacher")
             default: break
             }
         }
     }
     
-    required init?(coder aDecoder: NSCoder)
-    {
-        super.init(coder: aDecoder)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+        model = ConnectionData.instance()
+        
+        //Preload all tabs
+        if let viewControllers = self.viewControllers
+        {
+            for viewController in viewControllers
+            {
+                let _ = viewController.view
+            }
+        }
         
         let quizSelector : Selector = #selector(handleNotificationStartNewQuiz(_:))
         NotificationCenter.default.addObserver(self, selector: quizSelector, name: NSNotification.Name(rawValue: "StartNewQuiz"), object: model)
@@ -38,7 +49,6 @@ class StudentTabBarController: UITabBarController {
     @objc
     func teacherDisconnect(_ notification: Notification)
     {
-        print("disconnecting teacher")
         DispatchQueue.main.async
         {
             self.performSegue(withIdentifier: "TeacherDisconnect", sender: nil)
@@ -58,10 +68,10 @@ class StudentTabBarController: UITabBarController {
         }
     }
     
-    @IBAction func testQuiz(_ sender: UIBarButtonItem)
+    /*@IBAction func testQuiz(_ sender: UIBarButtonItem)
     {
         model.displayQuizFromTeacher(quiz: QuizViewModel())
-    }
+    }*/
     
     private func start(quiz: QuizViewModel?)
     {
@@ -69,21 +79,5 @@ class StudentTabBarController: UITabBarController {
         viewController.modalPresentationStyle = UIModalPresentationStyle.custom
         viewController.quiz = quiz
         self.present(viewController, animated: true, completion: nil)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        model = ConnectionData.instance()
-        
-        //Preload all tabs
-        if let viewControllers = self.viewControllers
-        {
-            for viewController in viewControllers
-            {
-                let _ = viewController.view
-            }
-        }
     }
 }
