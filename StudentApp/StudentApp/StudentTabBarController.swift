@@ -42,7 +42,7 @@ class StudentTabBarController: UITabBarController {
         }
         
         let quizSelector : Selector = #selector(handleNotificationStartNewQuiz(_:))
-        NotificationCenter.default.addObserver(self, selector: quizSelector, name: NSNotification.Name(rawValue: "StartNewQuiz"), object: model)
+        NotificationCenter.default.addObserver(self, selector: quizSelector, name: .quizReceived, object: model)
         NotificationCenter.default.addObserver(self, selector: #selector(teacherDisconnect(_:)), name: .teacherDisconnect, object: nil)
     }
     
@@ -58,20 +58,21 @@ class StudentTabBarController: UITabBarController {
     @objc
     func handleNotificationStartNewQuiz(_ notification: Notification)
     {
-        if let userInfo = notification.userInfo, let q = userInfo[NotificationUserData.quizReceived.rawValue] as? QuizViewModel?
+        if let userInfo = notification.userInfo, let q = userInfo[NotificationUserData.quizReceived.rawValue] as? Quiz
         {
+            let quizModel = QuizViewModel.from(quiz: q)
             //let message = (quiz) ? "Dealer Won" : "You Won!"
             let alert = UIAlertController(title: "Quiz!", message: "The instructor has sent you a quiz.", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "Start Quiz", style: .default, handler:({(_: UIAlertAction) -> Void in self.start(quiz: q)}))
+            let alertAction = UIAlertAction(title: "Start Quiz", style: .default, handler:({(_: UIAlertAction) -> Void in self.start(quiz: quizModel)}))
             alert.addAction(alertAction)
             present(alert, animated: true, completion: nil)
         }
     }
     
-    /*@IBAction func testQuiz(_ sender: UIBarButtonItem)
+    @IBAction func testQuiz(_ sender: UIBarButtonItem)
     {
-        model.displayQuizFromTeacher(quiz: QuizViewModel())
-    }*/
+        model.displayQuizFromTeacher(quiz: QuizViewModel.TestQuiz)
+    }
     
     private func start(quiz: QuizViewModel?)
     {

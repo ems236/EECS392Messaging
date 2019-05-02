@@ -40,9 +40,9 @@ class ConnectionData
         /* Should transfer this data to the teacher host in a way that the teacher app knows its a question */
     }
     
-    func displayQuizFromTeacher (quiz: QuizViewModel) {
+    func displayQuizFromTeacher (quiz: Quiz) {
         /* This method should be called by whatever finds out when the teacher gives us info. If it is a quiz, it should create the question objects and overall quiz object to pass in here. */
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "StartNewQuiz"), object: self, userInfo: ["quiz" : quiz])
+        NotificationCenter.default.post(name: .quizReceived, object: self, userInfo: [NotificationUserData.quizReceived.rawValue : quiz])
     }
     
     func submitQuizAnswers (answers: AnswerSheet) {

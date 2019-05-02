@@ -8,21 +8,6 @@
 
 import Foundation
 
-/* Placeholders for now */
-fileprivate class QuizBuilder {
-    private var questions: [Question]
-    init () {
-        questions = [Question]()
-    }
-    func add(question: Question) {
-        questions.append(question)
-    }
-    func build() -> QuizViewModel
-    {
-        return QuizViewModel(self.questions)
-    }
-}
-
 class Quiz : Codable
 {
     var title: String?
@@ -38,6 +23,8 @@ class Quiz : Codable
 }
 
 class QuizViewModel : Codable {
+    static let TestQuiz: Quiz = Quiz(title: "Test Quiz", description: "This quiz should have 1 question.", questions: [Question(name: "Test Question")])
+    
     var title: String?
     var description: String?
     private var questions: [Question]
@@ -46,11 +33,12 @@ class QuizViewModel : Codable {
         self.questions = questions
         self.curr_question = -1 // the index starts at -1 for the initial call to next getting question 1
     }
-    /* for testing */
-    convenience init () {
-        self.init([Question(name: "Test Question")])
-        self.title = "Test Quiz"
-        self.description = "There is 1 question on this quiz"
+    
+    static func from(quiz: Quiz) -> QuizViewModel {
+        let model = QuizViewModel (quiz.questions)
+        model.title = quiz.title
+        model.description = quiz.description
+        return model
     }
     
     // keeps the index from going past count so that it can pong between -1 and count, both represent nil
@@ -111,7 +99,7 @@ class Answer : Codable
     }
 }
 
-//Maintains a list of answer indeces to pass to json
+//Maintains a list of answer indices to pass to json
 class StudentAnswer : Codable
 {
     var displayName = ""
