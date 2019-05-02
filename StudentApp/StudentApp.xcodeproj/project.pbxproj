@@ -15,6 +15,9 @@
 		6CD82A69227964450076E35F /* QuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A68227964450076E35F /* QuizModel.swift */; };
 		6CD82A6B2279656B0076E35F /* QuestionPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A6A2279656B0076E35F /* QuestionPostModel.swift */; };
 		6CD82A6D227967170076E35F /* DiscussionPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A6C227967170076E35F /* DiscussionPostModel.swift */; };
+		6CD82A79227A75780076E35F /* DiscussionMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A76227A75780076E35F /* DiscussionMessageCell.swift */; };
+		6CD82A7A227A75780076E35F /* DiscussionBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A77227A75780076E35F /* DiscussionBoardVC.swift */; };
+		6CD82A7B227A75780076E35F /* DiscussionMessagesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD82A78227A75780076E35F /* DiscussionMessagesTableVC.swift */; };
 		7ACF7E5622741132006B8275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF7E5522741132006B8275 /* AppDelegate.swift */; };
 		7ACF7E5822741132006B8275 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF7E5722741132006B8275 /* ViewController.swift */; };
 		7ACF7E5B22741132006B8275 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ACF7E5922741132006B8275 /* Main.storyboard */; };
@@ -39,6 +42,9 @@
 		6CD82A68227964450076E35F /* QuizModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModel.swift; sourceTree = "<group>"; };
 		6CD82A6A2279656B0076E35F /* QuestionPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPostModel.swift; sourceTree = "<group>"; };
 		6CD82A6C227967170076E35F /* DiscussionPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionPostModel.swift; sourceTree = "<group>"; };
+		6CD82A76227A75780076E35F /* DiscussionMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscussionMessageCell.swift; path = ../../../TeacherApp/TeacherApp/DiscussionBoard/DiscussionMessageCell.swift; sourceTree = "<group>"; };
+		6CD82A77227A75780076E35F /* DiscussionBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscussionBoardVC.swift; path = ../../../TeacherApp/TeacherApp/DiscussionBoard/DiscussionBoardVC.swift; sourceTree = "<group>"; };
+		6CD82A78227A75780076E35F /* DiscussionMessagesTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscussionMessagesTableVC.swift; path = ../../../TeacherApp/TeacherApp/DiscussionBoard/DiscussionMessagesTableVC.swift; sourceTree = "<group>"; };
 		7ACF7E5222741132006B8275 /* StudentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ACF7E5522741132006B8275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ACF7E5722741132006B8275 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +100,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		6CD82A75227A75590076E35F /* DiscussionBoard */ = {
+			isa = PBXGroup;
+			children = (
+				6CD82A77227A75780076E35F /* DiscussionBoardVC.swift */,
+				6CD82A76227A75780076E35F /* DiscussionMessageCell.swift */,
+				6CD82A78227A75780076E35F /* DiscussionMessagesTableVC.swift */,
+			);
+			path = DiscussionBoard;
+			sourceTree = "<group>";
+		};
 		7ACF7E4922741132006B8275 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +129,7 @@
 		7ACF7E5422741132006B8275 /* StudentApp */ = {
 			isa = PBXGroup;
 			children = (
+				6CD82A75227A75590076E35F /* DiscussionBoard */,
 				6CD82A67227964160076E35F /* Models */,
 				6CD82A66227963E60076E35F /* Quizes */,
 				6CD82A65227963530076E35F /* QuestionPosts */,
@@ -214,11 +231,13 @@
 				6CD82A6D227967170076E35F /* DiscussionPostModel.swift in Sources */,
 				6CD82A0F227628050076E35F /* Notifications.swift in Sources */,
 				7AD55CC22274E57C00D20C6E /* StudentTabBarController.swift in Sources */,
+				6CD82A7B227A75780076E35F /* DiscussionMessagesTableVC.swift in Sources */,
 				6CD82A11227629040076E35F /* AvailableRoomsTableVC.swift in Sources */,
 				6CD82A1722769ABC0076E35F /* MessegeCoder.swift in Sources */,
 				7AD55CBE22744DEB00D20C6E /* Model.swift in Sources */,
 				7ACF7E5822741132006B8275 /* ViewController.swift in Sources */,
 				7AD55CC422754F9000D20C6E /* QuizViewController.swift in Sources */,
+				6CD82A7A227A75780076E35F /* DiscussionBoardVC.swift in Sources */,
 				6CD82A69227964450076E35F /* QuizModel.swift in Sources */,
 				7AD55CC0227452AF00D20C6E /* QuestionViewController.swift in Sources */,
 				6CD82A0B22753E1B0076E35F /* MultiPeerDriver.swift in Sources */,
@@ -226,6 +245,7 @@
 				6CD82A1322762FC80076E35F /* RoomCell.swift in Sources */,
 				7ACF7E5622741132006B8275 /* AppDelegate.swift in Sources */,
 				6CD82A6B2279656B0076E35F /* QuestionPostModel.swift in Sources */,
+				6CD82A79227A75780076E35F /* DiscussionMessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

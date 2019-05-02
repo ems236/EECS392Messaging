@@ -11,7 +11,7 @@ import UIKit
 class StudentTabBarController: UITabBarController {
 
     private weak var model: ConnectionData!
-    private var driver = MultiPeerDriver.multipeerdriver
+    private var driver = MultiPeerDriver.instance
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {

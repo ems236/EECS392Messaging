@@ -24,6 +24,7 @@ protocol MessegeReceiverDelegate
     func receiveAnswers(_ answers: StudentAnswer)
     func receiveDiscussionPost(_ message: DiscussionPost)
     func receiveQuestionPost(_ question: TeacherQuestion)
+    func forwardData(_ data: Data, exclude: MCPeerID)
 }
 
 class MessageCoder
@@ -44,7 +45,7 @@ class MessageCoder
         return nil
     }
 
-    func decodeMessage(_ message: Data)
+    func decodeMessage(_ message: Data, peer: MCPeerID)
     {
         //read fist byte
         guard let typeEnum = MessageTypes(rawValue: [UInt8](message).first ?? 0)
@@ -60,6 +61,7 @@ class MessageCoder
             print("Received message post")
             if let post = try? decoder.decode(DiscussionPost.self, from: messageBody)
             {
+                delegate?.forwardData(message, exclude: peer)
                 delegate?.receiveDiscussionPost(post)
             }
         case .quiz:

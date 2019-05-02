@@ -28,7 +28,7 @@ class MultiPeerDriver : NSObject
     deinit {
         serviceBrowser.stopBrowsingForPeers()
     }
-    static let multipeerdriver = MultiPeerDriver()
+    static let instance = MultiPeerDriver()
     
     private let TEACHERSERVICE = "eecs392-final"
     private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
@@ -58,6 +58,19 @@ class MultiPeerDriver : NSObject
         if let questionData = messageCoder.encodeMessage(question, type: .question)
         {
             return sendDataGenericError(data: questionData)
+        }
+        else
+        {
+            print("Failed to Encode")
+            return false
+        }
+    }
+    
+    func postDiscussionMessage(_ message: DiscussionPost) -> Bool
+    {
+        if let messageData = messageCoder.encodeMessage(message, type: .message)
+        {
+            return sendDataGenericError(data: messageData)
         }
         else
         {
@@ -147,7 +160,7 @@ extension MultiPeerDriver : MCSessionDelegate
         // == works intelligently in swift
         if let teacher = teacherPeerId, peerID == teacher
         {
-            messageCoder.decodeMessage(data)
+            messageCoder.decodeMessage(data, peer: peerID)
         }
     }
     
@@ -178,6 +191,12 @@ extension MultiPeerDriver : MCSessionDelegate
 
 extension MultiPeerDriver : MessegeReceiverDelegate
 {
+    func forwardData(_ data: Data, exclude: MCPeerID)
+    {
+        //Student Doesnt do this
+        return
+    }
+    
     func receiveQuiz(_ quiz: Quiz)
     {
         NotificationCenter.default.post(name: .quizReceived, object: nil, userInfo: [NotificationUserData.quizReceived.rawValue : quiz])

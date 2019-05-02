@@ -11,7 +11,7 @@ import MultipeerConnectivity
 
 class AvailableRoomsTableVC: UITableViewController {
 
-    private let driver = MultiPeerDriver.multipeerdriver
+    private let driver = MultiPeerDriver.instance
     var availableRooms = [MCPeerID]()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -119,7 +119,7 @@ class AvailableRoomsTableVC: UITableViewController {
         //Show loading probably
         
         let selectedPeer = availableRooms[indexPath.row]
-        MultiPeerDriver.multipeerdriver.connectToPeer(selectedPeer)
+        driver.connectToPeer(selectedPeer)
         
         self.performSegue(withIdentifier: "JoinRoom", sender: selectedPeer)
     }

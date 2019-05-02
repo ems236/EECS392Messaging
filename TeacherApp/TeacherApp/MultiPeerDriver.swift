@@ -85,16 +85,28 @@ class MultiPeerDriver : NSObject
         return true
     }
     
-    private func broadcastData(data: Data) -> Bool
+    private func broadcastData(data: Data, excluding: MCPeerID? = nil) -> Bool
     {
         for session in connectedSessions
         {
-            if !sendDataGenericError(session: session, data: data, peers: session.connectedPeers)
+            if !sendDataGenericError(session: session, data: data, peers: getSessionPeersExcluding(session: session, excluding: excluding))
             {
                 return false
             }
         }
         return true
+    }
+    
+    private func getSessionPeersExcluding(session: MCSession, excluding: MCPeerID?) -> [MCPeerID]
+    {
+        if let unwrappedExclude = excluding, session.connectedPeers.contains(unwrappedExclude)
+        {
+            return session.connectedPeers.filter({$0 != unwrappedExclude})
+        }
+        else
+        {
+            return session.connectedPeers
+        }
     }
     
     func postQuiz(_ quiz: Quiz) -> Bool
@@ -122,6 +134,26 @@ class MultiPeerDriver : NSObject
     func resetQuiz()
     {
         currentQuiz = nil
+    }
+    
+    func postDiscussionMessage(_ message: DiscussionPost) -> Bool
+    {
+        if let encodedMessage = messagecoder.encodeMessage(message, type: .message)
+        {
+            //Give up on everything on an error
+            if !broadcastData(data: encodedMessage)
+            {
+                print("Failed to send message")
+                return false
+            }
+            return true
+        }
+        else
+        {
+            //Make a UI alert or something
+            print("Failed to encode quiz")
+            return false
+        }
     }
     
     /*
@@ -172,7 +204,7 @@ extension MultiPeerDriver : MCSessionDelegate
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID)
     {
-        messagecoder.decodeMessage(data)
+        messagecoder.decodeMessage(data, peer: peerID)
         print("Message received")
     }
     
@@ -191,6 +223,11 @@ extension MultiPeerDriver : MCSessionDelegate
 
 extension MultiPeerDriver : MessegeReceiverDelegate
 {
+    func forwardData(_ data: Data, exclude: MCPeerID)
+    {
+        broadcastData(data: data, excluding: exclude)
+    }
+    
     func receiveDiscussionPost(_ message: DiscussionPost)
     {
         NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: [NotificationUserData.messageReceived.rawValue: message])

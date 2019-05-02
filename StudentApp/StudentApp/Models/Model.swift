@@ -16,7 +16,7 @@ class ConnectionData
     private static let SHARED_INSTANCE = ConnectionData()
     static func instance() -> ConnectionData { return SHARED_INSTANCE }
     
-    private let multipeerdriver = MultiPeerDriver.multipeerdriver
+    private let multipeerdriver = MultiPeerDriver.instance
     private var isLive: Bool
     private var currentSlide: Int
     private var _teacherSlide: Int

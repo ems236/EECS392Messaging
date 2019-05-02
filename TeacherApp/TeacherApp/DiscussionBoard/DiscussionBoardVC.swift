@@ -72,7 +72,7 @@ class DiscussionBoardVC: UIViewController {
     {
         let message = DiscussionPost(text: MessageText.text, sender: "PLACEHOLDER TEACHER")
         MessageText.text = ""
-        //multipeerdriver.sendDiscussionPost()
+        multipeerdriver.postDiscussionMessage(message)
         addMessage(message)
     }
 }
