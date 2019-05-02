@@ -71,6 +71,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         studentAnswers = [answers1, answers2, answers3]
         
         ControlsView.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+        TitleText.text = "Quiz Title"
         TitleText.delegate = self
         
         

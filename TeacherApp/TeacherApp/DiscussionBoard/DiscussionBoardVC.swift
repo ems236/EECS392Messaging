@@ -16,6 +16,7 @@ class DiscussionBoardVC: UIViewController {
     var hasChanged = false
     var initialConstant : CGFloat = 0
     let multipeerdriver = MultiPeerDriver.instance
+    let defaultMessage = "Message here"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
@@ -109,7 +110,7 @@ class DiscussionBoardVC: UIViewController {
         }
         
         let message = DiscussionPost(text: MessageText.text, sender: displayname)
-        MessageText.text = ""
+        MessageText.text = defaultMessage
         MessageText.resignFirstResponder()
         
         //Returns false on failure if we'd like to check for errors

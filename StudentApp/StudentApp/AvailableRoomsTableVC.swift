@@ -33,6 +33,7 @@ class AvailableRoomsTableVC: UITableViewController {
                 availableRooms.append(peer)
                 DispatchQueue.main.async
                 {
+                    self.setTitle()
                     self.tableView.reloadData()
                 }
             }
@@ -47,6 +48,7 @@ class AvailableRoomsTableVC: UITableViewController {
             availableRooms.remove(at: index)
             DispatchQueue.main.async
             {
+                    self.setTitle()
                     self.tableView.reloadData()
             }
         }
@@ -69,8 +71,6 @@ class AvailableRoomsTableVC: UITableViewController {
         }
     }
     
-    
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -89,10 +89,21 @@ class AvailableRoomsTableVC: UITableViewController {
         restartbrowsing()
     }
     
+    private func setTitle()
+    {
+        var title = "Available Rooms"
+        if availableRooms.count == 0
+        {
+            title = "No Available Rooms"
+        }
+        self.navigationItem.title = title
+    }
+    
     private func restartbrowsing()
     {
         driver.restartBrowsing()
         availableRooms.removeAll()
+        setTitle()
         self.tableView.reloadData()
     }
 
