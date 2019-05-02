@@ -42,7 +42,7 @@ class StudentTabBarController: UITabBarController {
         }
         
         let quizSelector : Selector = #selector(handleNotificationStartNewQuiz(_:))
-        NotificationCenter.default.addObserver(self, selector: quizSelector, name: .quizReceived, object: model)
+        NotificationCenter.default.addObserver(self, selector: quizSelector, name: .quizReceived, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(teacherDisconnect(_:)), name: .teacherDisconnect, object: nil)
     }
     
