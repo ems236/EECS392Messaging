@@ -115,9 +115,13 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     {
         if quizPosted, let dict = notification.userInfo as? [String : StudentAnswer], let answer = dict[NotificationUserData.answersReceived.rawValue]
         {
-            studentAnswers.append(answer)
-            submitted = submitted + 1
-            updateLabel()
+            DispatchQueue.main.async
+            {
+                self.studentAnswers.append(answer)
+                self.submitted = self.submitted + 1
+                self.updateLabel()
+            }
+            
         }
     }
     
@@ -126,9 +130,12 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     {
         if quizPosted, let dict = notification.userInfo as? [String : MCPeerID], let peer = dict[NotificationUserData.peerChange.rawValue], quizPeers.contains(peer)
         {
-            quizPeers.append(peer)
-            totalConnected = quizPeers.count
-            updateLabel()
+            DispatchQueue.main.async
+            {
+                self.quizPeers.append(peer)
+                self.totalConnected = self.quizPeers.count
+                self.updateLabel()
+            }
         }
     }
     

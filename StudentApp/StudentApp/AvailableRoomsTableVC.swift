@@ -22,17 +22,19 @@ class AvailableRoomsTableVC: UITableViewController {
     //An unwind segue for when the teacher disconnects
     @IBAction func disconnectedFromTeacher(segue:UIStoryboardSegue) {}
     
-    @objc func foundRoom(_ notification: Notification)
+    @objc
+    func foundRoom(_ notification: Notification)
     {
         if let data = notification.userInfo as? [String: MCPeerID]/*, let peer = data[.peerChange]*/
         {
             if let peer = data[NotificationUserData.peerChange.rawValue]
             {
                 availableRooms.append(peer)
-                tableView.reloadData()
+                DispatchQueue.main.async
+                {
+                    self.tableView.reloadData()
+                }
             }
-            
-            //print("No peer")
         }
         
         else
@@ -46,13 +48,16 @@ class AvailableRoomsTableVC: UITableViewController {
         }
     }
     
-    @objc func lostRoom(_ notification: Notification)
+    @objc
+    func lostRoom(_ notification: Notification)
     {
         if let data = notification.userInfo as? [String: MCPeerID], let peer = data[NotificationUserData.peerChange.rawValue], let index = availableRooms.lastIndex(of: peer)
         {
             availableRooms.remove(at: index)
-            tableView.reloadData()
-            //Refresh table
+            DispatchQueue.main.async
+            {
+                    self.tableView.reloadData()
+            }
         }
             
         else
@@ -61,7 +66,8 @@ class AvailableRoomsTableVC: UITableViewController {
         }
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(foundRoom(_:)), name: .discoveredTeacher, object: nil)
@@ -86,7 +92,6 @@ class AvailableRoomsTableVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool)
     {
         self.tableView.reloadData()
-        print("Gothere")
     }
 
     // MARK: - Table view data source

@@ -39,7 +39,11 @@ class SettingsVC: UIViewController
     func setConnectionText()
     {
         let count = String(driver.getConnectedPeers().count)
-        ConnectedStudentsLabel.text = count + "Students Connected"
+        DispatchQueue.main.async
+        {
+            self.ConnectedStudentsLabel.text = count + " Students Connected"
+        }
+        
     }
     
     func setDisplayName(_ name: String)

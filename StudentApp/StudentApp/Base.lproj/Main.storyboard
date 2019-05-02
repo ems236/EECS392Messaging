@@ -167,7 +167,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="3Wr-s2-xhe" userLabel="Settings"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="Dd4-P5-WF2" kind="show" id="FjT-lk-NMe"/>
+                        <segue destination="Dd4-P5-WF2" kind="show" identifier="ShowSettings" id="FjT-lk-NMe"/>
                         <segue destination="NCm-oP-OWe" kind="show" identifier="JoinRoom" id="8LB-Yb-tge"/>
                     </connections>
                 </tableViewController>
@@ -517,7 +517,7 @@
         <image name="Slides" width="19.200000762939453" height="19.200000762939453"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MO6-oB-ogx"/>
+        <segue reference="FjT-lk-NMe"/>
         <segue reference="Xak-Q6-h3x"/>
     </inferredMetricsTieBreakers>
 </document>

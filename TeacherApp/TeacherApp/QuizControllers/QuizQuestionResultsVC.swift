@@ -51,11 +51,14 @@ class QuizQuestionResultsVC: UIViewController {
     {
         if let dict = notification.userInfo as? [String : StudentAnswer], let answer = dict[NotificationUserData.answersReceived.rawValue], answer.answers.count > questionIndex
         {
-            let newAnswer = QuestionAnswer(name: answer.displayName, answerIndex: answer.answers[questionIndex])
-            answers[newAnswer.answerIndex].append(newAnswer)
-            answers[newAnswer.answerIndex].sort(by: {$0.name > $1.name})
-            answerTable.answers = answers
-            answerTable.tableView.reloadData()
+            DispatchQueue.main.async
+            {
+                let newAnswer = QuestionAnswer(name: answer.displayName, answerIndex: answer.answers[self.questionIndex])
+                self.answers[newAnswer.answerIndex].append(newAnswer)
+                self.answers[newAnswer.answerIndex].sort(by: {$0.name > $1.name})
+                self.answerTable.answers = self.answers
+                self.answerTable.tableView.reloadData()
+            }
         }
     }
     

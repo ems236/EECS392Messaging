@@ -56,7 +56,11 @@ class DiscussionBoardVC: UIViewController {
     {
         if let dict = notification.userInfo as? [String : DiscussionPost], let message = dict[NotificationUserData.messageReceived.rawValue]
         {
-            addMessage(message)
+            DispatchQueue.main.async
+            {
+                self.addMessage(message)
+            }
+            
         }
     }
     
