@@ -109,7 +109,7 @@ class QuizViewController: UIViewController {
     
     private func loadQuestionDisplay() {
         contentQuestionViews = [QuestionContentTemplate]()
-        contentQuestionViews.append(QuestionShortAnswerTemplate(frame: containerView.bounds))
+        contentQuestionViews.append(QuestionMultipleChoiceTemplate(frame: containerView.bounds))
     }
     
 

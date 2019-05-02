@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChoiceContentTemplate" customModule="StudentApp" customModuleProvider="target">
+            <connections>
+                <outlet property="ChoiceDescription" destination="8D1-JF-wie" id="YVv-4a-POc"/>
+                <outlet property="ChoiceID" destination="OIf-B4-fze" id="FRX-di-25h"/>
+                <outlet property="SelectButton" destination="T13-l4-FQM" id="GPk-s5-3KC"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="433" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="l9h-e9-Aax">
+                    <rect key="frame" x="8" y="52" width="417" height="106"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="r6D-FJ-DkR">
+                            <rect key="frame" x="0.0" y="0.0" width="83.5" height="106"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIf-B4-fze">
+                                    <rect key="frame" x="0.0" y="0.0" width="83.5" height="32"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T13-l4-FQM">
+                                    <rect key="frame" x="0.0" y="40" width="83.5" height="66"/>
+                                    <state key="normal" image="Question"/>
+                                    <connections>
+                                        <action selector="Select:" destination="-1" eventType="touchUpInside" id="s51-MR-08t"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8D1-JF-wie">
+                            <rect key="frame" x="97.5" y="0.0" width="319.5" height="106"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="8D1-JF-wie" firstAttribute="top" secondItem="l9h-e9-Aax" secondAttribute="top" id="8K9-7F-WCn"/>
+                        <constraint firstAttribute="bottom" secondItem="r6D-FJ-DkR" secondAttribute="bottom" id="Joc-O2-pmd"/>
+                        <constraint firstItem="r6D-FJ-DkR" firstAttribute="top" secondItem="l9h-e9-Aax" secondAttribute="top" id="aZz-iD-jzM"/>
+                        <constraint firstItem="r6D-FJ-DkR" firstAttribute="width" secondItem="l9h-e9-Aax" secondAttribute="width" multiplier="0.2" id="boy-5p-IyF"/>
+                        <constraint firstAttribute="bottom" secondItem="8D1-JF-wie" secondAttribute="bottom" id="hGo-8d-mHC"/>
+                        <constraint firstItem="OIf-B4-fze" firstAttribute="height" relation="greaterThanOrEqual" secondItem="8D1-JF-wie" secondAttribute="height" multiplier="0.3" id="j9g-TW-UMU"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="l9h-e9-Aax" secondAttribute="bottom" constant="8" id="Lly-aD-lIt"/>
+                <constraint firstItem="l9h-e9-Aax" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="PLP-3t-4Da"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="l9h-e9-Aax" secondAttribute="trailing" constant="8" id="fkr-QG-ZTB"/>
+                <constraint firstItem="l9h-e9-Aax" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="paC-iD-71z"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="48.550724637681164" y="-66.294642857142861"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Question" width="40" height="44"/>
+    </resources>
+</document>

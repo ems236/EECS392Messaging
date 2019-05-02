@@ -10,7 +10,7 @@ import UIKit
 
 // Referenced code from https://www.youtube.com/watch?v=r5SKUXSuDOw
 
-class ContentTemplate: UIView {
+@IBDesignable class ContentTemplate: UIView {
     
     var view: UIView!
     var nibName: String!
@@ -62,9 +62,83 @@ class QuestionShortAnswerTemplate: QuestionContentTemplate {
     }
 }
 
-class QuestionMultipleChoiceTemplate: QuestionContentTemplate {
+class ChoiceContentTemplate: ContentTemplate {
+    
+    @IBInspectable var offColor: UIColor?
+    @IBInspectable var onColor: UIColor?
+    
+    var delegate: ChoiceContentDelegate?
+    
+    var radius: CGFloat {
+        get { return self.view.layer.cornerRadius }
+        set {
+            self.view.layer.cornerRadius = newValue
+            self.view.clipsToBounds = true
+        }
+    }
+    
+    @IBOutlet weak var ChoiceID: UILabel!
+    @IBOutlet weak var ChoiceDescription: UILabel!
+    @IBOutlet weak var SelectButton: UIButton!
+    
+    override func TemplateNibName() -> String {
+        return "ChoiceContentTemplate"
+    }
+    func loadIn(id: String, desc: String, isEnabled: Bool) {
+        ChoiceID.text = id
+        ChoiceDescription.text = desc
+        SelectButton.isEnabled = isEnabled
+        radius = 5
+    }
+    @IBAction func Select(_ sender: UIButton) {
+        self.backgroundColor = onColor
+        delegate?.hasBeenSelected(self)
+    }
+    func Deselect() {
+        self.backgroundColor = offColor
+    }
+}
+
+protocol ChoiceContentDelegate {
+    func hasBeenSelected(_ sender: ChoiceContentTemplate)
+}
+
+class QuestionMultipleChoiceTemplate: QuestionContentTemplate, ChoiceContentDelegate {
+    
+    @IBOutlet weak var choiceA: ChoiceContentTemplate! {
+        didSet { choiceA.delegate = self } }
+    @IBOutlet weak var choiceB: ChoiceContentTemplate! {
+        didSet { choiceB.delegate = self } }
+    @IBOutlet weak var choiceC: ChoiceContentTemplate! {
+        didSet { choiceC.delegate = self } }
+    @IBOutlet weak var choiceD: ChoiceContentTemplate! {
+        didSet { choiceD.delegate = self } }
     
     override func TemplateNibName() -> String {
         return "QuestionMultipleChoiceTemplate"
+    }
+    
+    private func Templates() -> [ChoiceContentTemplate] {
+        return [choiceA, choiceB, choiceC, choiceD]
+    }
+    
+    func loadChoices(_ choices: [(desc: String, isEnabled: Bool)]) {
+        var i = 0
+        for template in Templates() {
+            if i < choices.count {
+                template.loadIn(id: i.description, desc: choices[i].desc, isEnabled: choices[i].isEnabled)
+            } else {
+                template.loadIn(id: "?", desc: "", isEnabled: false)
+            }
+            i += 1
+        }
+    }
+    
+    func hasBeenSelected(_ sender: ChoiceContentTemplate) {
+        for template in Templates() {
+            if template != sender {
+                template.Deselect()
+            }
+        }
     }
 }
