@@ -49,12 +49,23 @@ class MultiPeerDriver : NSObject
         return session
     }
     
-    func startBrowsing()
+    func clearSession()
     {
-        teacherPeerId = nil
         session.disconnect()
         session = makeSession()
+    }
+    
+    func restartBrowsing()
+    {
+        teacherPeerId = nil
+        clearSession()
         serviceBrowser.startBrowsingForPeers()
+    }
+    
+    func fullStop()
+    {
+        clearSession()
+        stopBrowsing()
     }
     
     func stopBrowsing()

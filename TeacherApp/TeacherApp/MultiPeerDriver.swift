@@ -41,7 +41,8 @@ class MultiPeerDriver : NSObject
         messagecoder.delegate = self
         
         serviceAdvertiser.delegate = self
-        serviceAdvertiser.startAdvertisingPeer()
+        start()
+        
         print("Advertising")
     }
     
@@ -65,6 +66,21 @@ class MultiPeerDriver : NSObject
         let newSession = MCSession(peer: self.myPeerID, securityIdentity: nil, encryptionPreference: .required)
         newSession.delegate = self
         return newSession
+    }
+    
+    func stop()
+    {
+        for session in connectedSessions
+        {
+            session.disconnect()
+        }
+        connectedSessions.removeAll()
+        serviceAdvertiser.stopAdvertisingPeer()
+    }
+    
+    func start()
+    {
+        serviceAdvertiser.startAdvertisingPeer()
     }
     
     func getConnectedPeers() -> [MCPeerID]

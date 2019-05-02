@@ -8,12 +8,15 @@
 
 import UIKit
 
-class TeacherTabBarVC: UITabBarController {
-
+class TeacherTabBarVC: UITabBarController
+{
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         //Preload all tabs
         if let viewControllers = self.viewControllers
         {
@@ -22,5 +25,19 @@ class TeacherTabBarVC: UITabBarController {
                 let _ = viewController.view
             }
         }
+    }
+    
+    @objc
+    func willResignActive()
+    {
+        print("resigning active")
+        MultiPeerDriver.instance.stop()
+    }
+    
+    @objc
+    func willBecomeActive()
+    {
+        print("Becoming active")
+        MultiPeerDriver.instance.start()
     }
 }

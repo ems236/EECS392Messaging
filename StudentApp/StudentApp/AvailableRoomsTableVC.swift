@@ -52,6 +52,21 @@ class AvailableRoomsTableVC: UITableViewController {
         }
     }
     
+    @objc
+    func willResignActive()
+    {
+        MultiPeerDriver.instance.fullStop()
+    }
+    
+    
+    @objc
+    func willBecomeActive()
+    {
+        restartbrowsing()
+    }
+    
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -59,11 +74,20 @@ class AvailableRoomsTableVC: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(foundRoom(_:)), name: .discoveredTeacher, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(lostRoom(_:)), name: .lostTeacher, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
-        driver.startBrowsing()
+        restartbrowsing()
+    }
+    
+    private func restartbrowsing()
+    {
+        driver.restartBrowsing()
         availableRooms.removeAll()
         self.tableView.reloadData()
     }
