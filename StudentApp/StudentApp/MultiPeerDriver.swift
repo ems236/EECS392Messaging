@@ -20,7 +20,6 @@ class MultiPeerDriver : NSObject
         serviceBrowser.delegate = self
         
         messageCoder.delegate = self
-        print("Browsing")
     }
     
     deinit

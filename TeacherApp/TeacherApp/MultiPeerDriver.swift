@@ -41,7 +41,6 @@ class MultiPeerDriver : NSObject
         messagecoder.delegate = self
         
         serviceAdvertiser.delegate = self
-        start()
         
         print("Advertising")
     }

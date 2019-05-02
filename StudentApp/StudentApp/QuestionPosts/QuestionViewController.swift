@@ -34,6 +34,16 @@ class QuestionViewController: UIViewController, UITextFieldDelegate, UITextViewD
         textField.resignFirstResponder()
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+    {
+        if(text == "\n")
+        {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
