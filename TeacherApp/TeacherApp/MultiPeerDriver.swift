@@ -16,7 +16,7 @@ class MultiPeerDriver : NSObject
     private let SESSIONMAX = 8
     
     private let TEACHERSERVICE = "eecs392-final"
-    private let myPeerID = MCPeerID(displayName: "teacher")
+    private let myPeerID : MCPeerID
     private let serviceAdvertiser : MCNearbyServiceAdvertiser
     
     private var connectedSessions = [MCSession]()
@@ -28,7 +28,14 @@ class MultiPeerDriver : NSObject
     
     private override init()
     {
+        var displayname = "Teacher"
+        if let name = UserDefaults.standard.object(forKey: "DisplayName") as? String
+        {
+            displayname = name
+        }
+        myPeerID = MCPeerID(displayName: displayname)
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerID, discoveryInfo: nil, serviceType: TEACHERSERVICE)
+        
         super.init()
         
         messagecoder.delegate = self
