@@ -28,10 +28,12 @@ class QuizViewModel : Codable {
     var title: String?
     var description: String?
     private var questions: [Question]
+    private var answers: StudentAnswer
     private var curr_question: Int
     fileprivate init (_ questions: [Question]) {
         self.questions = questions
         self.curr_question = -1 // the index starts at -1 for the initial call to next getting question 1
+        self.answers = StudentAnswer(answerIndeces: [Int]())
     }
     
     static func from(quiz: Quiz) -> QuizViewModel {
@@ -54,11 +56,41 @@ class QuizViewModel : Codable {
     }
     
     private func peek(at index: Int) -> Question? {
-        return 0 <= index && index < questions.count ? questions[curr_question] : nil
+        return 0 <= index && index < questions.count ? questions[index] : nil
+    }
+    
+    func currentAnswer () -> Int? {
+        if 0 <= curr_question && curr_question < answers.answers.count {
+            return answers.answers[curr_question]
+        }
+        return nil
+    }
+    
+    func answer (current i: Int) {
+        if 0 <= curr_question {
+            if curr_question < answers.answers.count  {
+                answers.answers[curr_question] = i
+            } else {
+                answers.answers.append(i)
+            }
+        }
+    }
+    
+    // you can't go to the next question if the current question isn't answered yet
+    func canGoToNext () -> Bool {
+        return curr_question < answers.answers.count
+    }
+    
+    func peekNext () -> Question? {
+        return peek(at: curr_question+1)
     }
     
     func next () -> Question? {
-        return peek(at: incrementIndex())
+        return canGoToNext () ? peek(at: incrementIndex()) : nil
+    }
+    
+    func peekPrev () -> Question? {
+        return peek(at: curr_question-1)
     }
     
     func prev () -> Question? {

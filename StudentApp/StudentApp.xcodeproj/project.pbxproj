@@ -32,6 +32,7 @@
 		7AD55CD6227662A900D20C6E /* QuestionShortAnswerTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD55CD5227662A900D20C6E /* QuestionShortAnswerTemplate.xib */; };
 		7AD55CD8227662B000D20C6E /* QuizContentTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD55CD7227662B000D20C6E /* QuizContentTemplate.xib */; };
 		7AD55CDA2276F41400D20C6E /* QuestionMultipleChoiceTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD55CD92276F41300D20C6E /* QuestionMultipleChoiceTemplate.xib */; };
+		7AD55CDE227B984600D20C6E /* ChoiceContentTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AD55CDD227B984600D20C6E /* ChoiceContentTemplate.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		7AD55CD5227662A900D20C6E /* QuestionShortAnswerTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionShortAnswerTemplate.xib; sourceTree = "<group>"; };
 		7AD55CD7227662B000D20C6E /* QuizContentTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuizContentTemplate.xib; sourceTree = "<group>"; };
 		7AD55CD92276F41300D20C6E /* QuestionMultipleChoiceTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionMultipleChoiceTemplate.xib; sourceTree = "<group>"; };
+		7AD55CDD227B984600D20C6E /* ChoiceContentTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceContentTemplate.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				7ACF7E5722741132006B8275 /* ViewController.swift */,
 				7ACF7E5922741132006B8275 /* Main.storyboard */,
 				7AD55CD7227662B000D20C6E /* QuizContentTemplate.xib */,
+				7AD55CDD227B984600D20C6E /* ChoiceContentTemplate.xib */,
 				7AD55CD5227662A900D20C6E /* QuestionShortAnswerTemplate.xib */,
 				7AD55CD92276F41300D20C6E /* QuestionMultipleChoiceTemplate.xib */,
 				7AD55CD3227662A100D20C6E /* ContentTemplates.swift */,
@@ -220,6 +223,7 @@
 				7AD55CD8227662B000D20C6E /* QuizContentTemplate.xib in Resources */,
 				7ACF7E6022741134006B8275 /* LaunchScreen.storyboard in Resources */,
 				7ACF7E5D22741134006B8275 /* Assets.xcassets in Resources */,
+				7AD55CDE227B984600D20C6E /* ChoiceContentTemplate.xib in Resources */,
 				7ACF7E5B22741132006B8275 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,14 +400,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 23C8WG7Q9K;
+				DEVELOPMENT_TEAM = XZ2V8R9892;
 				INFOPLIST_FILE = StudentApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.jjn58.ems236.StudentApp12;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.jjn58.ems236.StudentApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -415,14 +419,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 23C8WG7Q9K;
+				DEVELOPMENT_TEAM = XZ2V8R9892;
 				INFOPLIST_FILE = StudentApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.jjn58.ems236.StudentApp12;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.jjn58.ems236.StudentApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -17,7 +17,7 @@ class QuizViewController: UIViewController {
     private weak var next_question: Question?
     
     private var contentQuizView: QuizContentTemplate!
-    private var contentQuestionViews: [QuestionContentTemplate]!
+    private var contentQuestionView: QuestionContentTemplate!
     
     // Content in content view
     @IBOutlet weak var titleCard: UILabel!
@@ -39,7 +39,6 @@ class QuizViewController: UIViewController {
         loadQuizDisplay()
         loadQuestionDisplay()
         loadNextQuestion() // Put first question in next question slot ready for user to start quiz
-        updateDisplay()
     }
     
     @IBAction func buttonClick(_ sender: UIButton) {
@@ -47,7 +46,6 @@ class QuizViewController: UIViewController {
         case submitButton:
             if let _ = next_question {
                 loadNextQuestion()
-                updateDisplay()
             } else {
                 // Quiz is done
                 quiz = nil
@@ -59,12 +57,13 @@ class QuizViewController: UIViewController {
     }
     
     private func loadNextQuestion() {
-        if let q = quiz {
+        if let q = quiz, q.canGoToNext() {
             if next_question != nil {
                 prev_question = curr_question
-                curr_question = next_question
+                curr_question = q.next()
             }
-            next_question = q.next()
+            next_question = q.peekNext()
+            updateDisplay()
         }
     }
     
@@ -72,19 +71,22 @@ class QuizViewController: UIViewController {
         if let q = quiz {
             if curr_question != nil {
                 next_question = curr_question
-                curr_question = prev_question
+                curr_question = q.prev()
             }
-            prev_question = q.prev()
+            prev_question = q.peekPrev()
+            updateDisplay()
         }
     }
     
     private func updateDisplay() {
-        if let _ = curr_question {
+        if let curr = curr_question {
             // display a question
             for view in containerView.subviews {
                 view.removeFromSuperview()
             }
-            containerView.addSubview(contentQuestionViews[0].view)
+            containerView.addSubview(contentQuestionView.view)
+            (contentQuestionView as! QuestionMultipleChoiceTemplate).question = curr
+            submitButton.setTitle(next_question == nil ? "Submit" : "Next", for: .normal)
         } else {
             // display the quiz description
             if let q = quiz {
@@ -108,8 +110,8 @@ class QuizViewController: UIViewController {
     }
     
     private func loadQuestionDisplay() {
-        contentQuestionViews = [QuestionContentTemplate]()
-        contentQuestionViews.append(QuestionMultipleChoiceTemplate(frame: containerView.bounds))
+        //contentQuestionViews = [QuestionContentTemplate]()
+        contentQuestionView = QuestionMultipleChoiceTemplate(frame: containerView.frame)
     }
     
 
