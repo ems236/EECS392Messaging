@@ -77,7 +77,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XJE-2T-W4w"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="6Ia-Qh-QUc"/>
+                    <tabBarItem key="tabBarItem" title="Discussions" image="Discussion" selectedImage="Discussion" id="6Ia-Qh-QUc"/>
                     <connections>
                         <outlet property="ControlBottom" destination="zof-O1-48j" id="fC7-y7-gor"/>
                         <outlet property="MessageText" destination="Kcz-ix-nkf" id="jfe-MO-IDd"/>
@@ -211,7 +211,7 @@
                             <outlet property="delegate" destination="crG-WO-Xot" id="MMT-U0-45k"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="Cnn-Uv-X4i"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="Question" selectedImage="Question" id="Cnn-Uv-X4i"/>
                     <navigationItem key="navigationItem" id="nkW-oE-zEc"/>
                     <connections>
                         <segue destination="6pG-ay-8XY" kind="show" identifier="ShowQuestion" id="bgP-Pz-fwc"/>
@@ -312,7 +312,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Ma-c6-dik"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="ovA-ed-45M"/>
+                    <tabBarItem key="tabBarItem" title="Item 1" image="Quiz" selectedImage="Quiz" id="ovA-ed-45M"/>
                     <navigationItem key="navigationItem" title="Quiz" id="O7o-8h-lqy">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="m9A-Ia-Qqe" userLabel="New">
                             <connections>
@@ -359,7 +359,7 @@
         <scene sceneID="gtT-rv-CGs">
             <objects>
                 <navigationController id="zqr-cz-1KN" userLabel="QuestionNav" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="9ta-wT-Erw"/>
+                    <tabBarItem key="tabBarItem" title="Questions" image="Question" selectedImage="Question" id="9ta-wT-Erw"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="J72-GS-0Q2">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -421,7 +421,7 @@
         <scene sceneID="67C-gS-aV5">
             <objects>
                 <navigationController id="rYM-js-i8T" userLabel="QuizNav" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="9hc-J4-prY"/>
+                    <tabBarItem key="tabBarItem" title="Quiz" image="Quiz" selectedImage="Quiz" id="9hc-J4-prY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DIy-pu-V0k">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -487,7 +487,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9ED-HA-4Rt"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="kNW-U8-trN"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" selectedImage="settings" id="kNW-U8-trN"/>
                     <connections>
                         <outlet property="ConnectedStudentsLabel" destination="XNc-OL-iaT" id="uYr-fo-bMd"/>
                         <outlet property="NameField" destination="hHV-f3-mwD" id="98M-4b-cZQ"/>
@@ -1003,4 +1003,10 @@
             <point key="canvasLocation" x="3209" y="1630"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Discussion" width="19.200000762939453" height="19.200000762939453"/>
+        <image name="Question" width="19.200000762939453" height="21.120000839233398"/>
+        <image name="Quiz" width="19.200000762939453" height="19.200000762939453"/>
+        <image name="settings" width="30" height="30"/>
+    </resources>
 </document>
