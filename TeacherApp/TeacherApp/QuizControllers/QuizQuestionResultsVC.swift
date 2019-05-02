@@ -25,7 +25,7 @@ class QuizQuestionResultsVC: UIViewController {
             switch (id)
             {
             case "QuestionAnswerTable":
-                answerTable = segue.destination as! QuizAnswerTableVC
+                answerTable = (segue.destination as! QuizAnswerTableVC)
             default: break
             }
         }

@@ -23,7 +23,7 @@ class DiscussionBoardVC: UIViewController {
             switch (id)
             {
             case "ChildMessageTable":
-                messageTable = segue.destination as! DiscussionMessagesTableVC
+                messageTable = (segue.destination as! DiscussionMessagesTableVC)
             default: break
             }
         }
@@ -113,7 +113,7 @@ class DiscussionBoardVC: UIViewController {
         MessageText.resignFirstResponder()
         
         //Returns false on failure if we'd like to check for errors
-        multipeerdriver.postDiscussionMessage(message)
+        let _ = multipeerdriver.postDiscussionMessage(message)
         addMessage(message)
     }
 }

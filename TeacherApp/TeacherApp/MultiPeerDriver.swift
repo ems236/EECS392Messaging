@@ -201,7 +201,7 @@ extension MultiPeerDriver : MCSessionDelegate
             {
                 newPeers.remove(at: peerIndex)
                 //Don't need to do anything with the status bool
-                sendDataGenericError(session: session, data: quizData, peers: [peerID])
+                let _ = sendDataGenericError(session: session, data: quizData, peers: [peerID])
             }
         }
         
@@ -241,7 +241,7 @@ extension MultiPeerDriver : MessegeReceiverDelegate
 {
     func forwardData(_ data: Data, exclude: MCPeerID)
     {
-        broadcastData(data: data, excluding: exclude)
+        let _ = broadcastData(data: data, excluding: exclude)
     }
     
     func receiveDiscussionPost(_ message: DiscussionPost)

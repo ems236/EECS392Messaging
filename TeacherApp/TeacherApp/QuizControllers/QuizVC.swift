@@ -33,13 +33,13 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
             switch (id)
             {
             case "ChildQuizTable":
-                questionTable = segue.destination as! QuizQuestionsTableVC
+                questionTable = segue.destination as? QuizQuestionsTableVC
             case "QuizQuestionEdit":
                 let QuestionEditVC = segue.destination as! EditQuizQuestionVC
-                QuestionEditVC.question = sender as? Question
+                QuestionEditVC.question = (sender as! Question)
             case "QuizQuestionAnswers":
                 let QuestionResultsVC = segue.destination as! QuizQuestionResultsVC
-                QuestionResultsVC.question = sender as! Question
+                QuestionResultsVC.question = (sender as! Question)
                 QuestionResultsVC.answers = makeAnswersArray(questionIndex: selectedIndex)
                 QuestionResultsVC.questionIndex = selectedIndex
             default: break
@@ -156,7 +156,10 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         
         for answer in answers
         {
-            sortedanswers[answer.answerIndex].append(answer)
+            if 0 <= answer.answerIndex && answer.answerIndex < sortedanswers.count
+            {
+                sortedanswers[answer.answerIndex].append(answer)
+            }
         }
         
         for i in 0 ..< sortedanswers.count
