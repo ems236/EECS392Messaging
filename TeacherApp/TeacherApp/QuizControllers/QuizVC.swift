@@ -145,7 +145,9 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     func makeAnswersArray(questionIndex: Int) -> [[QuestionAnswer]]
     {
         var sortedanswers = [[QuestionAnswer]]()
-        let answers = studentAnswers.map({QuestionAnswer(name: $0.displayName, answerIndex: $0.answers[questionIndex])})
+        let answers = studentAnswers
+                        .filter({$0.answers.count > questionIndex})
+                        .map({QuestionAnswer(name: $0.displayName, answerIndex: $0.answers[questionIndex])})
         
         for _ in 0 ..< quiz.questions[questionIndex].answers.count
         {

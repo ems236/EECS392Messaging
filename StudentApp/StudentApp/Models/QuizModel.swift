@@ -114,12 +114,11 @@ class Answer : Codable
 //Maintains a list of answer indeces to pass to json
 class StudentAnswer : Codable
 {
-    var displayName : String
+    var displayName = ""
     var answers = [Int]()
     
-    init(name: String, answerIndeces: [Int])
+    init(answerIndeces: [Int])
     {
-        self.displayName = name
         answers = answerIndeces
     }
 }

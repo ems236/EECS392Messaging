@@ -96,6 +96,25 @@ class MultiPeerDriver : NSObject
         }
     }
     
+    func submitQuizAnswers(_ answers: StudentAnswer) -> Bool
+    {
+        var displayname = "No name set"
+        if let name = UserDefaults.standard.object(forKey: "DisplayName") as? String
+        {
+            displayname = name
+        }
+        answers.displayName = displayname
+        if let answerData = messageCoder.encodeMessage(answers, type: .answers)
+        {
+            return sendDataGenericError(data: answerData)
+        }
+        else
+        {
+            print("Failed to encode quiz answers")
+            return false
+        }
+    }
+    
     private func sendDataGenericError(data: Data) -> Bool
     {
         if let teacherPeer = teacherPeerId
