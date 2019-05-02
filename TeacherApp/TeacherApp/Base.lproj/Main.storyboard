@@ -19,25 +19,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXS-DZ-wii">
-                                <rect key="frame" x="0.0" y="20" width="375" height="506.5"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="511.5"/>
                                 <connections>
                                     <segue destination="d67-RU-87d" kind="embed" identifier="ChildMessageTable" id="TMG-0e-0eY"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7RY-K1-Esx" userLabel="Controls">
-                                <rect key="frame" x="0.0" y="526.5" width="375" height="101.5"/>
+                                <rect key="frame" x="0.0" y="531.5" width="375" height="76.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Hqu-8b-m5v">
-                                        <rect key="frame" x="8" y="5" width="359" height="91.5"/>
+                                        <rect key="frame" x="8" y="5" width="359" height="66.5"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Message here" translatesAutoresizingMaskIntoConstraints="NO" id="Kcz-ix-nkf">
-                                                <rect key="frame" x="0.0" y="0.0" width="276" height="91.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="276" height="66.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6v-cK-3SZ">
-                                                <rect key="frame" x="279" y="0.0" width="80" height="91.5"/>
+                                                <rect key="frame" x="279" y="0.0" width="80" height="66.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="80" id="xuN-VU-hSs"/>
                                                 </constraints>
@@ -66,18 +66,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="KXS-DZ-wii" firstAttribute="top" secondItem="XJE-2T-W4w" secondAttribute="top" id="00X-sG-uFQ"/>
-                            <constraint firstItem="7RY-K1-Esx" firstAttribute="height" secondItem="KXS-DZ-wii" secondAttribute="height" multiplier="0.2" priority="999" id="Abf-I9-2sV"/>
+                            <constraint firstItem="7RY-K1-Esx" firstAttribute="height" secondItem="KXS-DZ-wii" secondAttribute="height" multiplier="0.15" priority="999" id="Abf-I9-2sV"/>
                             <constraint firstItem="KXS-DZ-wii" firstAttribute="bottom" secondItem="7RY-K1-Esx" secondAttribute="top" id="Oth-IY-dr5"/>
                             <constraint firstItem="KXS-DZ-wii" firstAttribute="leading" secondItem="XJE-2T-W4w" secondAttribute="leading" id="fjc-rg-yUn"/>
                             <constraint firstItem="7RY-K1-Esx" firstAttribute="leading" secondItem="XJE-2T-W4w" secondAttribute="leading" id="m5s-Ai-6E0"/>
                             <constraint firstItem="XJE-2T-W4w" firstAttribute="trailing" secondItem="KXS-DZ-wii" secondAttribute="trailing" id="mq5-Iw-1lJ"/>
                             <constraint firstItem="XJE-2T-W4w" firstAttribute="trailing" secondItem="7RY-K1-Esx" secondAttribute="trailing" id="poS-YL-4Uq"/>
-                            <constraint firstItem="7RY-K1-Esx" firstAttribute="bottom" secondItem="XJE-2T-W4w" secondAttribute="bottom" constant="10" id="zof-O1-48j"/>
+                            <constraint firstItem="7RY-K1-Esx" firstAttribute="bottom" secondItem="XJE-2T-W4w" secondAttribute="bottom" constant="-10" id="zof-O1-48j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XJE-2T-W4w"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="6Ia-Qh-QUc"/>
                     <connections>
+                        <outlet property="ControlBottom" destination="zof-O1-48j" id="fC7-y7-gor"/>
                         <outlet property="MessageText" destination="Kcz-ix-nkf" id="jfe-MO-IDd"/>
                     </connections>
                 </viewController>
@@ -90,7 +91,7 @@
             <objects>
                 <tableViewController id="d67-RU-87d" customClass="DiscussionMessagesTableVC" customModule="TeacherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="L1j-f1-hZI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="506.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="511.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>

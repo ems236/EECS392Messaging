@@ -13,6 +13,8 @@ class DiscussionBoardVC: UIViewController {
     var messageTable: DiscussionMessagesTableVC!
     var messages = [DiscussionPost]()
     
+    var hasChanged = false
+    var initialConstant : CGFloat = 0
     let multipeerdriver = MultiPeerDriver.instance
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -31,12 +33,15 @@ class DiscussionBoardVC: UIViewController {
     {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(receivedNewMessage(_:)), name: .messageReceived, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         // Do any additional setup after loading the view.
         
         MessageText.delegate = self
         MessageText.keyboardType = .default
         MessageText.isUserInteractionEnabled = true
         
+        initialConstant = ControlBottom.constant
         
         let message1 = DiscussionPost(text: "Whoah boy here comes a long one This might have 2 maybe even 3 line breaks it's insane come on man give me extra credit for all this typing", sender: "Boblin")
         message1.isTeacher = false
@@ -64,6 +69,37 @@ class DiscussionBoardVC: UIViewController {
         }
     }
     
+    @objc
+    func keyboardShow(_ notification: Notification)
+    {
+        if let info = notification.userInfo, let rect = info[UIWindow.keyboardFrameEndUserInfoKey] as? CGRect
+        {
+            UIView.animate(withDuration: 0.25, animations:
+            {
+                self.view.layoutIfNeeded()
+                self.ControlBottom.constant = -1 * rect.height
+                print(self.ControlBottom.constant)
+            })
+            print("Expanding")
+        }
+        else
+        {
+            print("Failed to expand")
+        }
+    }
+    
+    @objc
+    func keyboardHide(_ notification: Notification)
+    {
+        print("Shrinking")
+        UIView.animate(withDuration: 0.25, animations:
+        {
+            self.view.layoutIfNeeded()
+            self.ControlBottom.constant = self.initialConstant
+            print(self.ControlBottom.constant)
+        })
+    }
+    
     func addMessage(_ message: DiscussionPost)
     {
         messages.append(message)
@@ -72,6 +108,7 @@ class DiscussionBoardVC: UIViewController {
     
     @IBOutlet weak var MessageText: UITextView!
     
+    @IBOutlet weak var ControlBottom: NSLayoutConstraint!
     @IBAction func SendBtn(_ sender: Any)
     {
         var displayname = "No name set"
@@ -82,6 +119,7 @@ class DiscussionBoardVC: UIViewController {
         
         let message = DiscussionPost(text: MessageText.text, sender: displayname)
         MessageText.text = ""
+        MessageText.resignFirstResponder()
         
         //Returns false on failure if we'd like to check for errors
         multipeerdriver.postDiscussionMessage(message)
@@ -91,13 +129,23 @@ class DiscussionBoardVC: UIViewController {
 
 extension DiscussionBoardVC: UITextViewDelegate
 {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+    {
         if(text == "\n")
         {
-            textView.resignFirstResponder()
+            SendBtn(self)
             return false
         }
         return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView)
+    {
+        if !hasChanged
+        {
+            hasChanged = true
+            textView.text = ""
+        }
     }
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
