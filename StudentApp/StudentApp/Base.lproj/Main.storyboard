@@ -312,13 +312,46 @@
         <!--Settings-->
         <scene sceneID="QSx-mT-7Lb">
             <objects>
-                <viewController id="Dd4-P5-WF2" userLabel="Settings" sceneMemberID="viewController">
+                <viewController id="Dd4-P5-WF2" userLabel="Settings" customClass="SettingsVC" customModule="StudentApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZPq-5E-kXU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jle-hC-85E">
+                                <rect key="frame" x="10" y="103" width="355" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9E-v7-Ua7">
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="105" id="kDD-EK-8oQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sKC-OZ-aCE" userLabel="NameField">
+                                        <rect key="frame" x="115" y="0.0" width="240" height="50"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Yfw-jh-L1j"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jle-hC-85E" firstAttribute="top" secondItem="rEv-Mb-B4Z" secondAttribute="top" constant="15" id="GDz-qg-tVr"/>
+                            <constraint firstItem="jle-hC-85E" firstAttribute="leading" secondItem="rEv-Mb-B4Z" secondAttribute="leading" constant="10" id="dFS-xe-iz7"/>
+                            <constraint firstItem="rEv-Mb-B4Z" firstAttribute="trailing" secondItem="jle-hC-85E" secondAttribute="trailing" constant="10" id="mqI-5N-f63"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="rEv-Mb-B4Z"/>
                     </view>
+                    <connections>
+                        <outlet property="NameField" destination="sKC-OZ-aCE" id="TUs-om-cOY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLP-g0-rao" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -342,7 +375,7 @@
         <!--DiscussionBoard-->
         <scene sceneID="B0e-dd-Xls">
             <objects>
-                <viewController id="jZ1-Ue-Olb" userLabel="DiscussionBoard" customClass="DiscussionBoardVC" customModule="TeacherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jZ1-Ue-Olb" userLabel="DiscussionBoard" customClass="DiscussionBoardVC" customModule="StudentApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MXE-Dx-FBv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -417,13 +450,13 @@
         <!--Discussion Messages TableVC-->
         <scene sceneID="7XN-TI-7bU">
             <objects>
-                <tableViewController id="h7O-6f-mcM" customClass="DiscussionMessagesTableVC" customModule="TeacherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="h7O-6f-mcM" customClass="DiscussionMessagesTableVC" customModule="StudentApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PAf-sF-HIa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="542.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DiscussionCell" id="lnz-ei-ZeF" customClass="DiscussionMessageCell" customModule="TeacherApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DiscussionCell" id="lnz-ei-ZeF" customClass="DiscussionMessageCell" customModule="StudentApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lnz-ei-ZeF" id="hNf-8x-77p">
