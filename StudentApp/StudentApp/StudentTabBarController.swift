@@ -63,7 +63,8 @@ class StudentTabBarController: UITabBarController {
         model.displayQuizFromTeacher(quiz: QuizViewModel())
     }
     
-    private func start(quiz: QuizViewModel?) {
+    private func start(quiz: QuizViewModel?)
+    {
         let viewController:QuizViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuizViewController") as! QuizViewController
         viewController.modalPresentationStyle = UIModalPresentationStyle.custom
         viewController.quiz = quiz
@@ -75,5 +76,14 @@ class StudentTabBarController: UITabBarController {
         
         // Do any additional setup after loading the view.
         model = ConnectionData.instance()
+        
+        //Preload all tabs
+        if let viewControllers = self.viewControllers
+        {
+            for viewController in viewControllers
+            {
+                let _ = viewController.view
+            }
+        }
     }
 }

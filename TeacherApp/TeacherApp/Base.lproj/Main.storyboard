@@ -333,10 +333,10 @@
             </objects>
             <point key="canvasLocation" x="2104.8000000000002" y="834.33283358320841"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Teacher Tab BarVC-->
         <scene sceneID="7Vx-pz-Oos">
             <objects>
-                <tabBarController id="TGe-CE-djM" sceneMemberID="viewController">
+                <tabBarController id="TGe-CE-djM" customClass="TeacherTabBarVC" customModule="TeacherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="9Ey-a6-jhh"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nER-Xu-wz9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
