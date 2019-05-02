@@ -36,7 +36,7 @@ class ConnectionData
     func submitQuestionToTeacher (header: String, desc: String)
     {
         let question = TeacherQuestion(head: header, body: desc)
-        multipeerdriver.postQuestion(question)
+        let _ = multipeerdriver.postQuestion(question)
         /* Should transfer this data to the teacher host in a way that the teacher app knows its a question */
     }
     
