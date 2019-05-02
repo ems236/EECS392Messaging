@@ -62,7 +62,11 @@ class AvailableRoomsTableVC: UITableViewController {
     @objc
     func willBecomeActive()
     {
-        restartbrowsing()
+        if self.viewIfLoaded?.window != nil
+        {
+            print("Current view")
+            restartbrowsing()
+        }
     }
     
     
