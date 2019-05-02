@@ -504,6 +504,10 @@
                         <viewLayoutGuide key="safeArea" id="9ED-HA-4Rt"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="kNW-U8-trN"/>
+                    <connections>
+                        <outlet property="ConnectedStudentsLabel" destination="XNc-OL-iaT" id="uYr-fo-bMd"/>
+                        <outlet property="NameField" destination="hHV-f3-mwD" id="98M-4b-cZQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Di-i1-ikQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
