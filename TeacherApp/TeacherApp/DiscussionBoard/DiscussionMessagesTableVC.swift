@@ -72,8 +72,11 @@ class DiscussionMessagesTableVC: UITableViewController
         let message = reverseIndex(indexPath.row, list: messages)
         if message.isTeacher
         {
-            print("Gothere")
             cell.backgroundColor = UIColor(red: 0.988, green: 0.941, blue: 0.745, alpha: 1)
+        }
+        else
+        {
+            cell.backgroundColor = .white
         }
     }
 

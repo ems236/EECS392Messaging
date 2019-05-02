@@ -89,7 +89,8 @@ class MultiPeerDriver : NSObject
     {
         for session in connectedSessions
         {
-            if !sendDataGenericError(session: session, data: data, peers: getSessionPeersExcluding(session: session, excluding: excluding))
+            let peers = getSessionPeersExcluding(session: session, excluding: excluding)
+            if peers.count > 0 && !sendDataGenericError(session: session, data: data, peers: peers)
             {
                 return false
             }
@@ -230,6 +231,7 @@ extension MultiPeerDriver : MessegeReceiverDelegate
     
     func receiveDiscussionPost(_ message: DiscussionPost)
     {
+        print("is Teacher: " + String(message.isTeacher))
         NotificationCenter.default.post(name: .messageReceived, object: nil, userInfo: [NotificationUserData.messageReceived.rawValue: message])
         return
     }

@@ -70,6 +70,7 @@ class MultiPeerDriver : NSObject
     {
         if let messageData = messageCoder.encodeMessage(message, type: .message)
         {
+            print("is teacher: " + String(message.isTeacher))
             return sendDataGenericError(data: messageData)
         }
         else

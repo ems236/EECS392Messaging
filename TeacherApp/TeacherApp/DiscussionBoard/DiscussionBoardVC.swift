@@ -58,9 +58,9 @@ class DiscussionBoardVC: UIViewController {
         {
             DispatchQueue.main.async
             {
+                print("Is teacher still false? " + String(message.isTeacher))
                 self.addMessage(message)
             }
-            
         }
     }
     

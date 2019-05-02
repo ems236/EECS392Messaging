@@ -35,12 +35,18 @@ class StudentTabBarController: UITabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(teacherDisconnect(_:)), name: .teacherDisconnect, object: nil)
     }
     
-    @objc func teacherDisconnect(_ notification: Notification)
+    @objc
+    func teacherDisconnect(_ notification: Notification)
     {
-        self.performSegue(withIdentifier: "TeacherDisconnect", sender: nil)
+        print("disconnecting teacher")
+        DispatchQueue.main.async
+        {
+            self.performSegue(withIdentifier: "TeacherDisconnect", sender: nil)
+        }
     }
     
-    @objc func handleNotificationStartNewQuiz(_ notification: Notification)
+    @objc
+    func handleNotificationStartNewQuiz(_ notification: Notification)
     {
         if let userInfo = notification.userInfo, let q = userInfo[NotificationUserData.quizReceived.rawValue] as? QuizViewModel?
         {
@@ -52,7 +58,8 @@ class StudentTabBarController: UITabBarController {
         }
     }
     
-    @IBAction func testQuiz(_ sender: UIBarButtonItem) {
+    @IBAction func testQuiz(_ sender: UIBarButtonItem)
+    {
         model.displayQuizFromTeacher(quiz: QuizViewModel())
     }
     
