@@ -70,8 +70,16 @@ class DiscussionBoardVC: UIViewController {
     
     @IBAction func SendBtn(_ sender: Any)
     {
-        let message = DiscussionPost(text: MessageText.text, sender: "PLACEHOLDER TEACHER")
+        var displayname = "No name set"
+        if let name = UserDefaults.standard.object(forKey: "DisplayName") as? String
+        {
+            displayname = name
+        }
+        
+        let message = DiscussionPost(text: MessageText.text, sender: displayname)
         MessageText.text = ""
+        
+        //Returns false on failure if we'd like to check for errors
         multipeerdriver.postDiscussionMessage(message)
         addMessage(message)
     }

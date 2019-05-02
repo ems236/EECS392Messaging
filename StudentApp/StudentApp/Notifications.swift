@@ -12,6 +12,7 @@ extension Notification.Name {
     static let discoveredTeacher = Notification.Name("discoveredTeacher")
     static let lostTeacher = Notification.Name("lostTeacher")
     static let teacherDisconnect = Notification.Name("teacherDC")
+    static let studentDisconnect = Notification.Name("studentDC")
     static let quizReceived = Notification.Name("quizReceived")
     static let answerSubmitted = Notification.Name("answerReceived")
     static let messageReceived = Notification.Name("messageReceived")
