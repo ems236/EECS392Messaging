@@ -50,7 +50,7 @@ class QuizPageController: UIPageViewController {
     private var answers = [Int?]()
     private var quizQuestionVCs = [QuizQuestionPage]()
     
-    @IBOutlet weak var SubmitBtn: UIBarButtonItem!
+    @IBOutlet var SubmitBtn: UIBarButtonItem!
     @IBAction func SubmitBtnClick(_ sender: Any)
     {
         submitQuiz()
@@ -75,6 +75,8 @@ class QuizPageController: UIPageViewController {
         {
             answers.append(nil)
         }
+        print(answers.count)
+        print(quiz.questions.count)
     }
     
     func setAnswer(_ answer: Int, atIndex index: Int)
@@ -88,7 +90,10 @@ class QuizPageController: UIPageViewController {
         
         if allItemsSet(answers)
         {
+            print("Adding button")
+            print(SubmitBtn)
             self.navigationItem.rightBarButtonItem = SubmitBtn
+            //self.navigationItem.rightBarButtonItem = AddButton
         }
     }
     

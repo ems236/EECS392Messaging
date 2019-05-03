@@ -127,7 +127,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="SubmitBtn" destination="iqR-q2-I1h" id="RyS-ON-L2i"/>
+                        <outlet property="SubmitBtn" destination="iqR-q2-I1h" id="nR6-qF-3ZZ"/>
                         <segue destination="Rua-Fz-QSn" kind="unwind" identifier="SubmitQuiz" unwindAction="submitQuizSegueWithSegue:" id="uqJ-IX-Vdv"/>
                     </connections>
                 </pageViewController>
