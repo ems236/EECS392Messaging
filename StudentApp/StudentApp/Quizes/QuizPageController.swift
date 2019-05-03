@@ -12,8 +12,15 @@ class QuizPageController: UIPageViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let id = segue.identifier
+        {
+            switch (id)
+            {
+            case "SubmitQuiz":
+                print("submitted quiz")
+            default: break
+            }
+        }
     }
     
     override func viewDidLoad()
@@ -27,11 +34,50 @@ class QuizPageController: UIPageViewController {
             print("Controllers loaded")
             self.setViewControllers([first], direction: .forward, animated: false, completion: nil)
         }
+        //Initialize answers array
+        initAnswers()
         dataSource = self
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        self.navigationItem.hidesBackButton = true
+    }
+    
     var quiz: Quiz!
+    private var answers = [Int?]()
     private var quizQuestionVCs = [QuizQuestionPage]()
+    
+    private func initAnswers()
+    {
+        for _ in quiz.questions
+        {
+            answers.append(nil)
+        }
+    }
+    
+    func setAnswer(_ answer: Int, atIndex index: Int)
+    {
+        if inRange(index: index, list: quiz.questions) && inRange(index: answer, list: quiz.questions[index].answers)
+        {
+            answers[index] = answer
+        }
+        
+        if allItemsSet(answers)
+        {
+            //Show a button or something
+        }
+    }
+    
+    private func allItemsSet(_ list: [Any?]) -> Bool
+    {
+        return list.filter({$0 == nil}).count == 0
+    }
+    
+    private func inRange(index: Int, list: [Any]) -> Bool
+    {
+        return 0 < index && index < list.count
+    }
     
     private func makeControllersForQuiz() -> [QuizQuestionPage]
     {

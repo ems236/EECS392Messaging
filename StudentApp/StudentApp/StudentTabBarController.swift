@@ -13,6 +13,10 @@ class StudentTabBarController: UITabBarController {
     private weak var model: ConnectionData!
     private var driver = MultiPeerDriver.instance
     
+    
+    //An unwind segue for submission
+    @IBAction func submitQuizSegue(segue:UIStoryboardSegue) {}
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if let id = segue.identifier{
