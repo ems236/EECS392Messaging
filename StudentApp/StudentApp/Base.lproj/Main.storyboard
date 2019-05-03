@@ -481,11 +481,6 @@
             <objects>
                 <tabBarController definesPresentationContext="YES" id="NCm-oP-OWe" customClass="StudentTabBarController" customModule="StudentApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Y9T-H0-60l">
-                        <barButtonItem key="leftBarButtonItem" title="Test Quiz" id="Io8-d1-WAL">
-                            <connections>
-                                <action selector="testQuiz:" destination="NCm-oP-OWe" id="W2z-Cz-Iap"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="Jd4-Ix-oxx">
                             <connections>
                                 <segue destination="Dd4-P5-WF2" kind="show" id="MO6-oB-ogx"/>

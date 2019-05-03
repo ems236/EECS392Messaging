@@ -144,17 +144,12 @@ class MultiPeerDriver : NSObject
         return false
             
     }
-    
-    class TempQuestion : Codable
+
+    func deliverOldMessages(_ messages: [DiscussionPost], to: MCPeerID)
     {
-        var text : String
-        init(_ text : String)
-        {
-            self.text = text;
-        }
+        //Needs to exist because teacher and student share an otherwise identical view controller.
+        return
     }
-    
-    
 }
 
 //SERVICE BROWSER DELEGATE

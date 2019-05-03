@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class DiscussionBoardVC: UIViewController {
 
@@ -34,6 +35,7 @@ class DiscussionBoardVC: UIViewController {
     {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(receivedNewMessage(_:)), name: .messageReceived, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sendOldData(_:)), name: .studentJoined, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         // Do any additional setup after loading the view.
@@ -66,6 +68,17 @@ class DiscussionBoardVC: UIViewController {
             {
                 self.addMessage(message)
             }
+        }
+    }
+    
+    @objc
+    func sendOldData(_ notification: Notification)
+    {
+        print("Received a request for old messages")
+        if let dict = notification.userInfo as? [String : MCPeerID], let newUser = dict[NotificationUserData.peerChange.rawValue]
+        {
+            //Only affects teacher side
+            multipeerdriver.deliverOldMessages(messages, to: newUser)
         }
     }
     

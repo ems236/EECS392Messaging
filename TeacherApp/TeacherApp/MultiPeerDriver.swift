@@ -134,6 +134,39 @@ class MultiPeerDriver : NSObject
         }
     }
     
+    func deliverOldMessages(_ messages: [DiscussionPost], to: MCPeerID)
+    {
+        let messageData = messages.map({
+            (post) -> Data? in
+            return messagecoder.encodeMessage(post, type: .message)
+        })
+        
+        if let session = findSessionWithPeer(to)
+        {
+            for dataMaybe in messageData
+            {
+                if let data = dataMaybe
+                {
+                    let _ = sendDataGenericError(session: session, data: data, peers: [to])
+                }
+            }
+        }
+        
+        print("Delivered old messages to peer")
+    }
+    
+    private func findSessionWithPeer(_ peer: MCPeerID) -> MCSession?
+    {
+        for session in connectedSessions
+        {
+            if session.connectedPeers.contains(peer)
+            {
+                return session
+            }
+        }
+        return nil
+    }
+    
     func postQuiz(_ quiz: Quiz) -> Bool
     {
         if let encodedQuiz = messagecoder.encodeMessage(quiz, type: .quiz)
