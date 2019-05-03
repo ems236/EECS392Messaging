@@ -36,7 +36,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
                 questionTable = segue.destination as? QuizQuestionsTableVC
             case "QuizQuestionEdit":
                 let QuestionEditVC = segue.destination as! EditQuizQuestionVC
-                QuestionEditVC.question = (sender as! Question)
+                QuestionEditVC.question = sender as? Question
             case "QuizQuestionAnswers":
                 let QuestionResultsVC = segue.destination as! QuizQuestionResultsVC
                 QuestionResultsVC.question = (sender as! Question)
