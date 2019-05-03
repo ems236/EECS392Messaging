@@ -79,8 +79,6 @@ class DiscussionBoardVC: UIViewController {
         {
             DispatchQueue.main.async
             {
-                print(self.tabBarController?.selectedIndex)
-                print(self.myTabIndex)
                 if self.tabBarController?.selectedIndex != self.myTabIndex
                 {
                     self.navigationController?.tabBarItem.badgeValue = " "

@@ -1,6 +1,12 @@
 # EECS 392 - Final Project
 # Ellis Saupe, Jackson Nelson-Gal
 ## Localized Classroom Messaging
+
+### Notes:
+There are a bunch of ICE connection errors in the debugger at the beginning of any connection.  Those have no effect on performance.
+There are occasional random disconnects.  Reconnection should work cleanly from inside the app, but closing and reopening the app might help.
+Immediately after our presentation, XCode / IOS simulator failed to join any services (student app can't connect, teacher app runs fine).  We cannot identify the cause of this or find a solution.  We have not tried a full reboot yet because we have enough phone's to test with.
+
 ### Frameworks/Structures Used
 1. Multipeer connectivity
 

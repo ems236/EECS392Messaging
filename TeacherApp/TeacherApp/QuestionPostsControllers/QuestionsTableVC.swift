@@ -40,8 +40,6 @@ class QuestionsTableVC: UITableViewController {
             {
                 self.tableView.reloadData()
                 
-                print(self.tabBarController?.selectedIndex)
-                print(self.myTabIndex)
                 if self.tabBarController?.selectedIndex != self.myTabIndex
                 {
                     print("Setting badge")
