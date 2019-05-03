@@ -14,6 +14,9 @@ class QuizQuestionPage: UIViewController
     var questionIndex: Int!
     var pageController: QuizPageController!
     
+    var hideNext = false
+    var hidePrev = false
+    
     var answerPicker = UIPickerView()
     @IBOutlet weak var QuestionTitle: UILabel!
     @IBOutlet weak var AnswerPickerField: UITextField!
@@ -26,13 +29,26 @@ class QuizQuestionPage: UIViewController
     @IBOutlet weak var CView: UIStackView!
     @IBOutlet weak var DView: UIStackView!
     
+    @IBOutlet weak var LastBtn: UIButton!
+    @IBOutlet weak var NextBtn: UIButton!
+    
+    @IBAction func Last(_ sender: Any)
+    {
+        pageController.moveLast()
+    }
+    
+    @IBAction func Next(_ sender: Any)
+    {
+        pageController.moveNext()
+    }
+    
     let letters = ["A", "B", "C", "D"]
     var answerFields = [UILabel]()
     var answerBoxes = [UIStackView]()
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        QuestionTitle.text = question.name
+        QuestionTitle.text = String(questionIndex + 1) + ": " + question.name
         answerFields = [AText, BText, CText, DText]
         answerBoxes = [AView, BView, CView, DView]
         
@@ -48,8 +64,21 @@ class QuizQuestionPage: UIViewController
         }
         
         hideExtraAnswers()
+        hideButtons()
         setAnswerText()
         // Do any additional setup after loading the view.
+    }
+    
+    func hideButtons()
+    {
+        if hideNext
+        {
+            NextBtn.isHidden = true
+        }
+        if hidePrev
+        {
+            LastBtn.isHidden = true
+        }
     }
     
     func hideExtraAnswers()

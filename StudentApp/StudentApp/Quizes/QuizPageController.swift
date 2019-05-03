@@ -64,9 +64,34 @@ class QuizPageController: UIPageViewController {
             newVC.question = quiz.questions[index]
             newVC.questionIndex = index
             newVC.pageController = self
+            
+            if index == 0
+            {
+                newVC.hidePrev = true
+            }
+            if index == quiz.questions.count - 1
+            {
+                newVC.hideNext = true
+            }
             quizes.append(newVC)
         }
         return quizes
+    }
+    
+    func moveNext()
+    {
+        if let currentPage = self.viewControllers?.first, let next = dataSource?.pageViewController(self, viewControllerAfter: currentPage)
+        {
+            self.setViewControllers([next], direction: .forward, animated: true, completion: nil)
+        }
+    }
+    
+    func moveLast()
+    {
+        if let currentPage = self.viewControllers?.first, let last = dataSource?.pageViewController(self, viewControllerBefore: currentPage)
+        {
+            self.setViewControllers([last], direction: .reverse, animated: true, completion: nil)
+        }
     }
     
     private func initAnswers()
@@ -174,9 +199,4 @@ extension QuizPageController: UIPageViewControllerDataSource
     {
         return 0
     }
-}
-
-extension QuizPageController: UIPageViewControllerDelegate
-{
-    
 }
