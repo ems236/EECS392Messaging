@@ -120,7 +120,6 @@
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="jSj-RX-ORN" userLabel="QuizPageController" customClass="QuizPageController" customModule="StudentApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Title" id="nah-zi-AfV">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Lfa-gr-5to"/>
                         <barButtonItem key="rightBarButtonItem" title="Submit" id="iqR-q2-I1h">
                             <connections>
                                 <action selector="SubmitBtnClick:" destination="jSj-RX-ORN" id="dq5-uH-GKv"/>
@@ -166,7 +165,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lu8-SU-tbn">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lu8-SU-tbn">
                                                 <rect key="frame" x="76" y="0.0" width="269" height="60"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -293,10 +292,14 @@
                     </view>
                     <connections>
                         <outlet property="AText" destination="uG4-Cc-iTP" id="Auf-Qv-evt"/>
+                        <outlet property="AView" destination="Xpa-4h-uU2" id="25Y-Ek-iHH"/>
                         <outlet property="AnswerPickerField" destination="Lu8-SU-tbn" id="IbU-Id-xY3"/>
                         <outlet property="BText" destination="yws-uj-4MJ" id="HgB-Xe-BOm"/>
+                        <outlet property="BView" destination="Z4x-Ac-Qlg" id="c2W-hS-8hR"/>
                         <outlet property="CText" destination="kWz-L7-5r1" id="UdL-xo-jWN"/>
+                        <outlet property="CView" destination="5j9-ta-v7M" id="6aK-6V-Dj8"/>
                         <outlet property="DText" destination="wZB-xc-E2r" id="tpo-Co-TR6"/>
+                        <outlet property="DView" destination="fhl-iK-mex" id="RiD-fc-7yL"/>
                         <outlet property="QuestionTitle" destination="9CY-ul-6R9" id="Jyx-PQ-EbP"/>
                     </connections>
                 </viewController>

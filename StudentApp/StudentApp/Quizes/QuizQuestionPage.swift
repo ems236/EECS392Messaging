@@ -21,20 +21,31 @@ class QuizQuestionPage: UIViewController
     @IBOutlet weak var BText: UILabel!
     @IBOutlet weak var CText: UILabel!
     @IBOutlet weak var DText: UILabel!
+    @IBOutlet weak var AView: UIStackView!
+    @IBOutlet weak var BView: UIStackView!
+    @IBOutlet weak var CView: UIStackView!
+    @IBOutlet weak var DView: UIStackView!
     
     let letters = ["A", "B", "C", "D"]
     var answerFields = [UILabel]()
+    var answerBoxes = [UIStackView]()
     override func viewDidLoad()
     {
         super.viewDidLoad()
         QuestionTitle.text = question.name
         answerFields = [AText, BText, CText, DText]
+        answerBoxes = [AView, BView, CView, DView]
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         
         AnswerPickerField.inputView = answerPicker
         answerPicker.delegate = self
         answerPicker.dataSource = self
+        
+        for answer in question.answers
+        {
+            print(answer.text)
+        }
         
         hideExtraAnswers()
         setAnswerText()
@@ -43,9 +54,9 @@ class QuizQuestionPage: UIViewController
     
     func hideExtraAnswers()
     {
-        for i in question.answers.count - 1 ..< answerFields.count
+        for i in question.answers.count ..< answerBoxes.count
         {
-            answerFields[i].isHidden = true
+            answerBoxes[i].isHidden = true
         }
     }
     

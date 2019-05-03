@@ -63,6 +63,7 @@ class QuizPageController: UIPageViewController {
             let newVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuizQuestionPage") as! QuizQuestionPage
             newVC.question = quiz.questions[index]
             newVC.questionIndex = index
+            newVC.pageController = self
             quizes.append(newVC)
         }
         return quizes
@@ -78,8 +79,10 @@ class QuizPageController: UIPageViewController {
     
     func setAnswer(_ answer: Int, atIndex index: Int)
     {
+        print("Setting answer to " + String(index) + " as " + String(answer))
         if inRange(index: index, list: quiz.questions) && inRange(index: answer, list: quiz.questions[index].answers)
         {
+            print("Setting answer to " + String(index) + " as " + String(answer))
             answers[index] = answer
         }
         
@@ -117,7 +120,7 @@ class QuizPageController: UIPageViewController {
     
     private func inRange(index: Int, list: [Any]) -> Bool
     {
-        return 0 < index && index < list.count
+        return 0 <= index && index < list.count
     }
 }
 
