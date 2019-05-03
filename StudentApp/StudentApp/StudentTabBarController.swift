@@ -21,6 +21,9 @@ class StudentTabBarController: UITabBarController {
             case "TeacherDisconnect":
                 //I guess there isn't really any setup for this.
                 print("Diconnecting teacher or app becoming active")
+            case "ShowQuizPages":
+                let quizPages = segue.destination as! QuizPageController
+                quizPages.quiz = (sender as! Quiz)
             default: break
             }
         }
@@ -63,12 +66,16 @@ class StudentTabBarController: UITabBarController {
     {
         if let userInfo = notification.userInfo, let q = userInfo[NotificationUserData.quizReceived.rawValue] as? Quiz
         {
-            let quizModel = QuizViewModel.from(quiz: q)
+            /*let quizModel = QuizViewModel.from(quiz: q)
             //let message = (quiz) ? "Dealer Won" : "You Won!"
             let alert = UIAlertController(title: "Quiz!", message: "The instructor has sent you a quiz.", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "Start Quiz", style: .default, handler:({(_: UIAlertAction) -> Void in self.start(quiz: quizModel)}))
             alert.addAction(alertAction)
-            present(alert, animated: true, completion: nil)
+            present(alert, animated: true, completion: nil)*/
+            DispatchQueue.main.async
+            {
+                self.performSegue(withIdentifier: "ShowQuizPages", sender: q)
+            }
         }
     }
     
