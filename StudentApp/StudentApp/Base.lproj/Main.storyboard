@@ -118,7 +118,7 @@
         <!--QuizPageController-->
         <scene sceneID="cQV-UO-Qm6">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="jSj-RX-ORN" userLabel="QuizPageController" customClass="QuizPageController" customModule="StudentApp" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="jSj-RX-ORN" userLabel="QuizPageController" customClass="QuizPageController" customModule="StudentApp" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="Rua-Fz-QSn" kind="unwind" identifier="SubmitQuiz" unwindAction="submitQuizSegueWithSegue:" id="uqJ-IX-Vdv"/>
                     </connections>
@@ -135,9 +135,21 @@
                     <view key="view" contentMode="scaleToFill" id="SsD-wC-pcB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CY-ul-6R9">
+                                <rect key="frame" x="166" y="193" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iOG-Tf-a4a"/>
                     </view>
+                    <connections>
+                        <outlet property="QuestionTitle" destination="9CY-ul-6R9" id="Jyx-PQ-EbP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFE-6B-7JX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

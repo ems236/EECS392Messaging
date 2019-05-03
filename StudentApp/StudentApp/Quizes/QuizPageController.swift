@@ -36,6 +36,7 @@ class QuizPageController: UIPageViewController {
         }
         //Initialize answers array
         initAnswers()
+        self.title = quiz.title
         dataSource = self
     }
     
@@ -47,6 +48,19 @@ class QuizPageController: UIPageViewController {
     var quiz: Quiz!
     private var answers = [Int?]()
     private var quizQuestionVCs = [QuizQuestionPage]()
+    
+    private func makeControllersForQuiz() -> [QuizQuestionPage]
+    {
+        var quizes = [QuizQuestionPage]()
+        for index in 0 ..< quiz.questions.count
+        {
+            let newVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuizQuestionPage") as! QuizQuestionPage
+            newVC.question = quiz.questions[index]
+            newVC.questionIndex = index
+            quizes.append(newVC)
+        }
+        return quizes
+    }
     
     private func initAnswers()
     {
@@ -69,6 +83,27 @@ class QuizPageController: UIPageViewController {
         }
     }
     
+    func submitQuiz()
+    {
+        let _ = MultiPeerDriver.instance.submitQuizAnswers(StudentAnswer(answerIndeces: unwrapAnswers()))
+        self.performSegue(withIdentifier: "SubmitQuiz", sender: nil)
+    }
+    
+    private func unwrapAnswers() -> [Int]
+    {
+        return answers.map({ (num) -> Int in
+            if let val = num
+            {
+                return val
+                
+            }
+            else
+            {
+                return 0
+            }
+        })
+    }
+    
     private func allItemsSet(_ list: [Any?]) -> Bool
     {
         return list.filter({$0 == nil}).count == 0
@@ -78,21 +113,6 @@ class QuizPageController: UIPageViewController {
     {
         return 0 < index && index < list.count
     }
-    
-    private func makeControllersForQuiz() -> [QuizQuestionPage]
-    {
-        var quizes = [QuizQuestionPage]()
-        for index in 0 ..< quiz.questions.count
-        {
-            let newVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuizQuestionPage") as! QuizQuestionPage
-            newVC.question = quiz.questions[index]
-            newVC.questionIndex = index
-            newVC.quizTitle = quiz.title
-            quizes.append(newVC)
-        }
-        return quizes
-    }
-    
 }
 
 extension QuizPageController: UIPageViewControllerDataSource
@@ -107,6 +127,7 @@ extension QuizPageController: UIPageViewControllerDataSource
         
         return index
     }
+
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?
     {
         if let index = getIndexOfVC(viewController), 0 <= index - 1 && index - 1 < quizQuestionVCs.count
@@ -129,6 +150,16 @@ extension QuizPageController: UIPageViewControllerDataSource
         {
             return nil
         }
+    }
+    
+    func presentationCount(for pageViewController: UIPageViewController) -> Int
+    {
+        return quizQuestionVCs.count
+    }
+    
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int
+    {
+        return 0
     }
 }
 

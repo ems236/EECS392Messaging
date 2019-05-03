@@ -13,10 +13,11 @@ class QuizQuestionPage: UIViewController
     var question: Question!
     var questionIndex: Int!
     var pageController: QuizPageController!
-    var quizTitle: String?
-    override func viewDidLoad() {
+    @IBOutlet weak var QuestionTitle: UILabel!
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
+        QuestionTitle.text = question.name
         // Do any additional setup after loading the view.
     }
     
