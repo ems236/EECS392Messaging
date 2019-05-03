@@ -13,6 +13,9 @@ Immediately after our presentation, XCode / IOS simulator failed to join any ser
 
 ### Features
 
+## Overall Design
+Each app transfers JSON encoded data using the multipeer connectivity framework. Connection, disconnection, and data reception events are all handled by the NotificationCenter.
+
 ## Student App (Client app)
 This application is for students. They can connect to a teacher's host and take part in a multitude of interactions with the classroom.
 1. Session selection: A table of available classrooms is displayed for the student to choose from.  On exiting the app or if the teacher disconnects, the student will be returned to this room.
