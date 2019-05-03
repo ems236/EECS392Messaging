@@ -66,7 +66,6 @@ class AvailableRoomsTableVC: UITableViewController {
     {
         if self.viewIfLoaded?.window != nil
         {
-            print("Current view")
             restartbrowsing()
         }
     }

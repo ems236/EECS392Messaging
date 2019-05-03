@@ -51,6 +51,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     {
         super.viewDidLoad()
         
+        /*
         let testQuestion1 = Question(name: "A question")
         testQuestion1.answers.append(Answer(isCorrect: false, text: "You idiot"))
         testQuestion1.answers.append(Answer(isCorrect: true, text: "Smartboi"))
@@ -69,7 +70,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         let answers3 = StudentAnswer(name: "alan", answerIndeces: [1, 0])
         
         studentAnswers = [answers1, answers2, answers3]
-        
+        */
         ControlsView.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         TitleText.text = "Quiz Title"
         TitleText.delegate = self
@@ -178,27 +179,38 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     
     func postQuiz()
     {
-        ActionButton.setTitle("Reset Quiz", for: .normal)
-        self.navigationItem.rightBarButtonItem = nil
-        submitted = 0
-        quizPeers = multipeerdriver.getConnectedPeers()
-        totalConnected = quizPeers.count
-        TitleText.isEnabled = false
-        
-        
-        if let title = TitleText.text, title != ""
+        if quiz.questions.count > 0
         {
-            quiz.title = title
+            ActionButton.setTitle("Reset Quiz", for: .normal)
+            self.navigationItem.rightBarButtonItem = nil
+            submitted = 0
+            quizPeers = multipeerdriver.getConnectedPeers()
+            totalConnected = quizPeers.count
+            TitleText.isEnabled = false
+            
+            
+            if let title = TitleText.text, title != ""
+            {
+                quiz.title = title
+            }
+            else
+            {
+                quiz.title = "New Quiz"
+            }
+            
+            //Reset quiz on error
+            if !multipeerdriver.postQuiz(quiz)
+            {
+                resetQuiz()
+            }
         }
         else
         {
-            quiz.title = "New Quiz"
-        }
-        
-        //Reset quiz on error
-        if !multipeerdriver.postQuiz(quiz)
-        {
-            resetQuiz()
+            let alertController = UIAlertController(title: "Error", message:
+                "You need questions to post a quiz. Nothing was posted.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+            self.present(alertController, animated: true, completion: nil)
+            quizPosted = false
         }
     }
     
@@ -208,6 +220,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         self.navigationItem.rightBarButtonItem = AddButton
         submitted = 0
         quizPeers = [MCPeerID]()
+        studentAnswers.removeAll()
         totalConnected = 0
         
         multipeerdriver.resetQuiz()

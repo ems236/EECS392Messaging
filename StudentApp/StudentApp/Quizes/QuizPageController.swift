@@ -17,6 +17,7 @@ class QuizPageController: UIPageViewController {
             switch (id)
             {
             case "SubmitQuiz":
+                //Don't really need to do anytinh
                 print("submitted quiz")
             default: break
             }
@@ -31,7 +32,6 @@ class QuizPageController: UIPageViewController {
         
         if let first = quizQuestionVCs.first
         {
-            print("Controllers loaded")
             self.setViewControllers([first], direction: .forward, animated: false, completion: nil)
         }
         //Initialize answers array
@@ -100,23 +100,17 @@ class QuizPageController: UIPageViewController {
         {
             answers.append(nil)
         }
-        print(answers.count)
-        print(quiz.questions.count)
     }
     
     func setAnswer(_ answer: Int, atIndex index: Int)
     {
-        print("Setting answer to " + String(index) + " as " + String(answer))
         if inRange(index: index, list: quiz.questions) && inRange(index: answer, list: quiz.questions[index].answers)
         {
-            print("Setting answer to " + String(index) + " as " + String(answer))
             answers[index] = answer
         }
         
         if allItemsSet(answers)
         {
-            print("Adding button")
-            print(SubmitBtn)
             self.navigationItem.rightBarButtonItem = SubmitBtn
             //self.navigationItem.rightBarButtonItem = AddButton
         }

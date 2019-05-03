@@ -78,7 +78,7 @@ class MultiPeerDriver : NSObject
         teacherPeerId = peer
         serviceBrowser.invitePeer(peer, to: session, withContext: nil, timeout: 10)
         print("Attempting to connect to peer")
-        //TODO handle connection failures?
+        //handle connection failures? For now we just ignore that.
     }
     
     func postQuestion(_ question: TeacherQuestion) -> Bool

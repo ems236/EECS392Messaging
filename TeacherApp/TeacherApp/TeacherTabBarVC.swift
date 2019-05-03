@@ -30,14 +30,12 @@ class TeacherTabBarVC: UITabBarController
     @objc
     func willResignActive()
     {
-        print("resigning active")
         MultiPeerDriver.instance.stop()
     }
     
     @objc
     func willBecomeActive()
     {
-        print("Becoming active")
         MultiPeerDriver.instance.start()
     }
 }

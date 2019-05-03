@@ -58,11 +58,6 @@ class QuizQuestionPage: UIViewController
         answerPicker.delegate = self
         answerPicker.dataSource = self
         
-        for answer in question.answers
-        {
-            print(answer.text)
-        }
-        
         hideExtraAnswers()
         hideButtons()
         setAnswerText()

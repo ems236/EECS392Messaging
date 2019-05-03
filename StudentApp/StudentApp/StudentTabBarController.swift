@@ -24,7 +24,7 @@ class StudentTabBarController: UITabBarController {
             {
             case "TeacherDisconnect":
                 //I guess there isn't really any setup for this.
-                print("Diconnecting teacher or app becoming active")
+                print("Diconnecting teacher or app becoming inactive")
             case "ShowQuizPages":
                 let quizPages = segue.destination as! QuizPageController
                 quizPages.quiz = (sender as! Quiz)

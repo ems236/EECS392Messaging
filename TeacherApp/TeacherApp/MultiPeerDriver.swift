@@ -109,11 +109,9 @@ class MultiPeerDriver : NSObject
     
     private func broadcastData(data: Data, excluding: MCPeerID? = nil) -> Bool
     {
-        print("In broadcast")
         for session in connectedSessions
         {
             let peers = getSessionPeersExcluding(session: session, excluding: excluding)
-            print("In broadcast session")
             if peers.count > 0 && !sendDataGenericError(session: session, data: data, peers: peers)
             {
                 return false
@@ -178,7 +176,6 @@ class MultiPeerDriver : NSObject
                 print("failed to post quiz")
                 return false
             }
-            print("posted quiz")
             //Reset new peers and current quiz
             newPeers = [MCPeerID]()
             currentQuiz = encodedQuiz
@@ -268,7 +265,6 @@ extension MultiPeerDriver : MCSessionDelegate
                 print("Removing empty session")
             }
         }
-        print("State changed")
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID)

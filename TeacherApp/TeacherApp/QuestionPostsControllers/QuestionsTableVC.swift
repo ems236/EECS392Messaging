@@ -10,8 +10,8 @@ import UIKit
 
 class QuestionsTableVC: UITableViewController {
 
-    //var questions = [TeacherQuestion]()
-    var questions = [TeacherQuestion.testQuestion(), TeacherQuestion.testQuestion(), TeacherQuestion.testQuestion()]
+    var questions = [TeacherQuestion]()
+    //var questions = [TeacherQuestion.testQuestion(), TeacherQuestion.testQuestion(), TeacherQuestion.testQuestion()]
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let id = segue.identifier
         {
