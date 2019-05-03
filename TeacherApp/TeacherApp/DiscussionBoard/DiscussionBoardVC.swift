@@ -19,6 +19,8 @@ class DiscussionBoardVC: UIViewController {
     let multipeerdriver = MultiPeerDriver.instance
     let defaultMessage = "Message here"
     
+    var myTabIndex = -1
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if let id = segue.identifier{
@@ -60,6 +62,16 @@ class DiscussionBoardVC: UIViewController {
         messageTable.loadMessages(messages)
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        myTabIndex = self.tabBarController?.selectedIndex ??  -1
+    }
+    override func viewWillAppear(_ animated: Bool)
+    {
+        self.navigationController?.tabBarItem.badgeValue = nil
+        self.tabBarItem.badgeValue = nil
+    }
+    
     @objc
     func receivedNewMessage(_ notification: Notification)
     {
@@ -67,6 +79,13 @@ class DiscussionBoardVC: UIViewController {
         {
             DispatchQueue.main.async
             {
+                print(self.tabBarController?.selectedIndex)
+                print(self.myTabIndex)
+                if self.tabBarController?.selectedIndex != self.myTabIndex
+                {
+                    self.navigationController?.tabBarItem.badgeValue = " "
+                    self.tabBarItem.badgeValue = " "
+                }
                 self.addMessage(message)
             }
         }
@@ -116,20 +135,23 @@ class DiscussionBoardVC: UIViewController {
     @IBOutlet weak var ControlBottom: NSLayoutConstraint!
     @IBAction func SendBtn(_ sender: Any)
     {
-        var displayname = "No name set"
-        if let name = UserDefaults.standard.object(forKey: "DisplayName") as? String
+        if MessageText.text != "" && MessageText.text != defaultMessage
         {
-            displayname = name
+            var displayname = "No name set"
+            if let name = UserDefaults.standard.object(forKey: "DisplayName") as? String
+            {
+                displayname = name
+            }
+            
+            let message = DiscussionPost(text: MessageText.text, sender: displayname)
+            MessageText.text = defaultMessage
+            hasChanged = false
+            MessageText.resignFirstResponder()
+            
+            //Returns false on failure if we'd like to check for errors
+            let _ = multipeerdriver.postDiscussionMessage(message)
+            addMessage(message)
         }
-        
-        let message = DiscussionPost(text: MessageText.text, sender: displayname)
-        MessageText.text = defaultMessage
-        hasChanged = false
-        MessageText.resignFirstResponder()
-        
-        //Returns false on failure if we'd like to check for errors
-        let _ = multipeerdriver.postDiscussionMessage(message)
-        addMessage(message)
     }
 }
 

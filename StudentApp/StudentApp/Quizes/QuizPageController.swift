@@ -49,6 +49,7 @@ class QuizPageController: UIPageViewController {
     var quiz: Quiz!
     private var answers = [Int?]()
     private var quizQuestionVCs = [QuizQuestionPage]()
+    private var currentIndex = 0
     
     @IBOutlet var SubmitBtn: UIBarButtonItem!
     @IBAction func SubmitBtnClick(_ sender: Any)
@@ -164,6 +165,7 @@ extension QuizPageController: UIPageViewControllerDataSource
     {
         if let index = getIndexOfVC(viewController), 0 <= index - 1 && index - 1 < quizQuestionVCs.count
         {
+            currentIndex = index - 1
             return quizQuestionVCs[index - 1]
         }
         else
@@ -176,6 +178,7 @@ extension QuizPageController: UIPageViewControllerDataSource
     {
         if let index = getIndexOfVC(viewController), 0 <= index + 1 && index + 1 < quizQuestionVCs.count
         {
+            currentIndex = index + 1
             return quizQuestionVCs[index + 1]
         }
         else
@@ -191,6 +194,6 @@ extension QuizPageController: UIPageViewControllerDataSource
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int
     {
-        return 0
+        return currentIndex
     }
 }

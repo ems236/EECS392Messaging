@@ -12,6 +12,8 @@ import MultipeerConnectivity
 class QuizVC: UIViewController, ChildTableSelectDelegate {
     
     var quiz = Quiz.emptyQuiz()
+    
+    var myTabIndex = -1
     //var results = [Answer]()
     var studentAnswers = [StudentAnswer]()
     var questionTable : QuizQuestionsTableVC!
@@ -87,6 +89,51 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(newPeer(_:)), name: .studentJoined, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        self.navigationController?.tabBarItem.badgeValue = nil
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        myTabIndex = self.tabBarController?.selectedIndex ??  -1
+    }
+    
+    @objc
+    func answerReceived(_ notification:Notification)
+    {
+        if quizPosted, let dict = notification.userInfo as? [String : StudentAnswer], let answer = dict[NotificationUserData.answersReceived.rawValue]
+        {
+            DispatchQueue.main.async
+            {
+                self.studentAnswers.append(answer)
+                self.submitted = self.submitted + 1
+                self.updateLabel()
+                
+                print(self.tabBarController?.selectedIndex)
+                print(self.myTabIndex)
+                if self.tabBarController?.selectedIndex != self.myTabIndex
+                {
+                    self.navigationController?.tabBarItem.badgeValue = " "
+                }
+            }
+        }
+    }
+    
+    @objc
+    func newPeer(_ notification: Notification)
+    {
+        if quizPosted, let dict = notification.userInfo as? [String : MCPeerID], let peer = dict[NotificationUserData.peerChange.rawValue], !quizPeers.contains(peer)
+        {
+            DispatchQueue.main.async
+            {
+                self.quizPeers.append(peer)
+                self.totalConnected = self.quizPeers.count
+                self.updateLabel()
+            }
+        }
+    }
+    
     func deleteSelectedQuestion()
     {
         quiz.questions.remove(at: selectedIndex)
@@ -106,35 +153,6 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
         quiz.questions[selectedIndex] = new
         questionTable.quiz = quiz
         questionTable.tableView.reloadData()
-    }
-    
-    @objc
-    func answerReceived(_ notification:Notification)
-    {
-        if quizPosted, let dict = notification.userInfo as? [String : StudentAnswer], let answer = dict[NotificationUserData.answersReceived.rawValue]
-        {
-            DispatchQueue.main.async
-            {
-                self.studentAnswers.append(answer)
-                self.submitted = self.submitted + 1
-                self.updateLabel()
-            }
-            
-        }
-    }
-    
-    @objc
-    func newPeer(_ notification: Notification)
-    {
-        if quizPosted, let dict = notification.userInfo as? [String : MCPeerID], let peer = dict[NotificationUserData.peerChange.rawValue], !quizPeers.contains(peer)
-        {
-            DispatchQueue.main.async
-            {
-                self.quizPeers.append(peer)
-                self.totalConnected = self.quizPeers.count
-                self.updateLabel()
-            }
-        }
     }
     
     func selectedRow(data: Any, index: Int)

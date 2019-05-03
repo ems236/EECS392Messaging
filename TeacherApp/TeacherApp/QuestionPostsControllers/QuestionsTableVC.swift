@@ -11,6 +11,7 @@ import UIKit
 class QuestionsTableVC: UITableViewController {
 
     var questions = [TeacherQuestion]()
+    var myTabIndex = -1
     //var questions = [TeacherQuestion.testQuestion(), TeacherQuestion.testQuestion(), TeacherQuestion.testQuestion()]
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let id = segue.identifier
@@ -38,6 +39,14 @@ class QuestionsTableVC: UITableViewController {
             DispatchQueue.main.async
             {
                 self.tableView.reloadData()
+                
+                print(self.tabBarController?.selectedIndex)
+                print(self.myTabIndex)
+                if self.tabBarController?.selectedIndex != self.myTabIndex
+                {
+                    print("Setting badge")
+                    self.navigationController?.tabBarItem.badgeValue = " "
+                }
             }
         }
     }
@@ -55,6 +64,16 @@ class QuestionsTableVC: UITableViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(questionPosted(_:)), name: .questionPosted, object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        myTabIndex = self.tabBarController?.selectedIndex ??  -1
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        self.navigationController?.tabBarItem.badgeValue = nil
     }
 
     // MARK: - Table view data source

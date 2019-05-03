@@ -61,7 +61,13 @@ class StudentTabBarController: UITabBarController {
     {
         DispatchQueue.main.async
         {
-            self.performSegue(withIdentifier: "TeacherDisconnect", sender: nil)
+            let alertController = UIAlertController(title: "Error", message:
+                "You have been disconnected from the teacher.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default){
+                (action) in
+                self.performSegue(withIdentifier: "TeacherDisconnect", sender: nil) //executing the segue on dismiss
+            })
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -78,7 +84,14 @@ class StudentTabBarController: UITabBarController {
             present(alert, animated: true, completion: nil)*/
             DispatchQueue.main.async
             {
-                self.performSegue(withIdentifier: "ShowQuizPages", sender: q)
+                let alertController = UIAlertController(title: "Quiz", message:
+                    "the teacher has posted a new quiz", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Begin", style: .default) {
+                    (action) in
+                    self.performSegue(withIdentifier: "ShowQuizPages", sender: q) //executing the segue on dismiss
+                })
+                self.present(alertController, animated: true, completion: nil)
+                //self.performSegue(withIdentifier: "ShowQuizPages", sender: q)
             }
         }
     }
