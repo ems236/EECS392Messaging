@@ -125,7 +125,7 @@ class QuizVC: UIViewController, ChildTableSelectDelegate {
     @objc
     func newPeer(_ notification: Notification)
     {
-        if quizPosted, let dict = notification.userInfo as? [String : MCPeerID], let peer = dict[NotificationUserData.peerChange.rawValue], quizPeers.contains(peer)
+        if quizPosted, let dict = notification.userInfo as? [String : MCPeerID], let peer = dict[NotificationUserData.peerChange.rawValue], !quizPeers.contains(peer)
         {
             DispatchQueue.main.async
             {

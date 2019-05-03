@@ -186,7 +186,7 @@
                                 <rect key="frame" x="24" y="76" width="327" height="670"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hXF-Fx-evJ">
-                                        <rect key="frame" x="16" y="24" width="295" height="630"/>
+                                        <rect key="frame" x="16" y="16" width="295" height="638"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="titleCard" text="Title Card" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nte-Qk-bwX">
                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="36"/>
@@ -195,14 +195,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qPl-DM-Kcz">
-                                                <rect key="frame" x="0.0" y="44" width="295" height="519"/>
+                                                <rect key="frame" x="0.0" y="44" width="295" height="527"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <segue destination="jtv-tU-YUo" kind="embed" id="0YD-Sp-RyN"/>
                                                 </connections>
                                             </containerView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Wd-xV-kD6">
-                                                <rect key="frame" x="0.0" y="571" width="295" height="59"/>
+                                                <rect key="frame" x="0.0" y="579" width="295" height="59"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="3Wd-xV-kD6" secondAttribute="height" multiplier="5:1" id="Kfr-X9-gYB"/>
@@ -233,7 +233,7 @@
                                     <constraint firstItem="hXF-Fx-evJ" firstAttribute="leading" secondItem="hEO-d9-fkc" secondAttribute="leading" constant="16" id="S26-VR-1Da"/>
                                     <constraint firstAttribute="trailing" secondItem="hXF-Fx-evJ" secondAttribute="trailing" constant="16" id="YgN-7a-U9x"/>
                                     <constraint firstAttribute="bottom" secondItem="hXF-Fx-evJ" secondAttribute="bottom" constant="16" id="pQ1-MJ-qP9"/>
-                                    <constraint firstItem="hXF-Fx-evJ" firstAttribute="top" secondItem="hEO-d9-fkc" secondAttribute="top" constant="24" id="tII-Zc-BJE"/>
+                                    <constraint firstItem="hXF-Fx-evJ" firstAttribute="top" secondItem="hEO-d9-fkc" secondAttribute="top" constant="16" id="tII-Zc-BJE"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -346,7 +346,7 @@
             <objects>
                 <viewController id="jtv-tU-YUo" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PmO-Sd-wag">
-                        <rect key="frame" x="0.0" y="0.0" width="295" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="295" height="527"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="rA5-9q-BcJ"/>
@@ -354,7 +354,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tDY-96-5v7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2057" y="-773"/>
+            <point key="canvasLocation" x="-407" y="-1011"/>
         </scene>
         <!--DiscussionBoard-->
         <scene sceneID="jCB-uA-hXZ">

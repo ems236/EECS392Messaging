@@ -56,6 +56,7 @@ class MultiPeerDriver : NSObject
     
     func restartBrowsing()
     {
+        serviceBrowser.stopBrowsingForPeers()
         teacherPeerId = nil
         clearSession()
         serviceBrowser.startBrowsingForPeers()

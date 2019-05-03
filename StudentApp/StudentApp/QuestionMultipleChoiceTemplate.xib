@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,14 +28,14 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4yf-SS-PdW">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="263"/>
+                            <rect key="frame" x="5" y="0.0" width="404" height="140.5"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S45-qA-SoJ" customClass="ChoiceContentTemplate" customModule="StudentApp" customModuleProvider="target">
-                            <rect key="frame" x="16" y="279" width="382" height="123"/>
+                            <rect key="frame" x="16" y="156.5" width="382" height="245.5"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="offColor">
@@ -93,10 +93,12 @@
                         <constraint firstItem="9Fs-sx-hs2" firstAttribute="centerX" secondItem="vHD-p0-kCp" secondAttribute="centerX" id="KL6-BG-Itm"/>
                         <constraint firstItem="vL4-2f-hIc" firstAttribute="centerX" secondItem="vHD-p0-kCp" secondAttribute="centerX" id="PPE-Se-lrH"/>
                         <constraint firstItem="8LX-kc-ya6" firstAttribute="centerX" secondItem="vHD-p0-kCp" secondAttribute="centerX" id="jK4-zJ-pNh"/>
-                        <constraint firstItem="S45-qA-SoJ" firstAttribute="height" secondItem="vHD-p0-kCp" secondAttribute="height" multiplier="0.15" id="m6F-uj-3b5"/>
+                        <constraint firstItem="4yf-SS-PdW" firstAttribute="leading" secondItem="vHD-p0-kCp" secondAttribute="leading" constant="5" id="l8I-LZ-c6m"/>
+                        <constraint firstItem="S45-qA-SoJ" firstAttribute="height" secondItem="vHD-p0-kCp" secondAttribute="height" multiplier="0.3" id="m6F-uj-3b5"/>
                         <constraint firstItem="vL4-2f-hIc" firstAttribute="height" secondItem="vHD-p0-kCp" secondAttribute="height" multiplier="0.15" id="mTI-by-G2n"/>
                         <constraint firstItem="9Fs-sx-hs2" firstAttribute="height" secondItem="vHD-p0-kCp" secondAttribute="height" multiplier="0.15" id="pVp-T3-F4K"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8LX-kc-ya6" secondAttribute="trailing" constant="16" id="qTq-fA-7xi"/>
+                        <constraint firstAttribute="trailing" secondItem="4yf-SS-PdW" secondAttribute="trailing" constant="5" id="t6H-b2-HKj"/>
                         <constraint firstItem="8LX-kc-ya6" firstAttribute="height" secondItem="vHD-p0-kCp" secondAttribute="height" multiplier="0.15" id="usb-6Q-OQ8"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Fs-sx-hs2" secondAttribute="trailing" constant="16" id="uy1-En-9bW"/>
                         <constraint firstItem="vL4-2f-hIc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vHD-p0-kCp" secondAttribute="leading" constant="16" id="yjI-x8-CKx"/>
