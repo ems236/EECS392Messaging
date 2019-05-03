@@ -37,6 +37,7 @@ class QuizPageController: UIPageViewController {
         //Initialize answers array
         initAnswers()
         self.title = quiz.title
+        self.navigationItem.rightBarButtonItem = nil
         dataSource = self
     }
     
@@ -49,6 +50,11 @@ class QuizPageController: UIPageViewController {
     private var answers = [Int?]()
     private var quizQuestionVCs = [QuizQuestionPage]()
     
+    @IBOutlet weak var SubmitBtn: UIBarButtonItem!
+    @IBAction func SubmitBtnClick(_ sender: Any)
+    {
+        submitQuiz()
+    }
     private func makeControllersForQuiz() -> [QuizQuestionPage]
     {
         var quizes = [QuizQuestionPage]()
@@ -79,7 +85,7 @@ class QuizPageController: UIPageViewController {
         
         if allItemsSet(answers)
         {
-            //Show a button or something
+            self.navigationItem.rightBarButtonItem = SubmitBtn
         }
     }
     
@@ -124,7 +130,6 @@ extension QuizPageController: UIPageViewControllerDataSource
         {
             return nil
         }
-        
         return index
     }
 
